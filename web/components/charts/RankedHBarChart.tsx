@@ -17,10 +17,27 @@ export interface RankedBarDatum {
   color?: string;
 }
 
+/** Serializable axis/tooltip formatting (no functions from Server Components). */
+export type RankedValueFormat = "integer" | "percent0" | "percent1" | "minutes1";
+
+function formatByPreset(v: number, preset: RankedValueFormat): string {
+  switch (preset) {
+    case "percent0":
+      return `${v.toFixed(0)}%`;
+    case "percent1":
+      return `${v.toFixed(1)}%`;
+    case "minutes1":
+      return `${v.toFixed(1)}m`;
+    case "integer":
+    default:
+      return String(Math.round(v));
+  }
+}
+
 interface RankedHBarChartProps {
   data: RankedBarDatum[];
   maxValue?: number;
-  formatValue?: (v: number) => string;
+  valueFormat?: RankedValueFormat;
   chartTitle?: string;
   /** Used when a row has no `color` */
   accentColor?: string;
@@ -52,12 +69,14 @@ function RankedTooltip({
 export default function RankedHBarChart({
   data,
   maxValue,
-  formatValue = (v) => String(v),
+  valueFormat = "integer",
   chartTitle,
   accentColor = "var(--color-chart-2)",
   barSize = 22,
   caption,
 }: RankedHBarChartProps) {
+  const formatValue = (v: number) => formatByPreset(v, valueFormat);
+
   if (data.length === 0) {
     return (
       <p className="text-fluid-sm text-muted px-1 py-8 text-center">
@@ -105,13 +124,14 @@ export default function RankedHBarChart({
             }
           />
           <Tooltip
-            content={(props: {
-              active?: boolean;
-              payload?: Array<{ payload: RankedBarDatum; value: number }>;
-            }) => (
+            content={(props: Record<string, unknown>) => (
               <RankedTooltip
-                active={props.active}
-                payload={props.payload}
+                active={props.active as boolean | undefined}
+                payload={
+                  props.payload as
+                    | Array<{ payload: RankedBarDatum; value: number }>
+                    | undefined
+                }
                 formatValue={formatValue}
               />
             )}

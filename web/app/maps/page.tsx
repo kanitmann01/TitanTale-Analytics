@@ -218,7 +218,7 @@ export default async function MapsPage() {
             <div className="panel-flush p-5 overflow-x-auto min-w-0">
               <RankedHBarChart
                 data={gamesBars}
-                formatValue={(v) => `${v}`}
+                valueFormat="integer"
                 accentColor="var(--color-chart-2)"
                 caption="Teal bars match Analysis-style volume encoding (games in match log)."
               />
@@ -257,7 +257,7 @@ export default async function MapsPage() {
           <div className="panel overflow-x-auto min-w-0">
             <RankedHBarChart
               data={durationBars}
-              formatValue={(v) => `${v.toFixed(1)}m`}
+              valueFormat="minutes1"
               accentColor="var(--color-chart-2)"
               caption="Same horizontal Recharts layout as the Analysis duration distribution."
             />

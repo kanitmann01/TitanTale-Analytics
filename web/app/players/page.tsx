@@ -87,13 +87,13 @@ export default async function PlayersPage() {
                 xLabel="ELO Rating"
                 yLabel="Win Rate"
                 chartTitle="Skill vs results"
-                formatTooltipX={(v) => `ELO: ${Math.round(v)}`}
-                formatTooltipY={(v) => `Win rate: ${(v * 100).toFixed(1)}%`}
+                mode="eloWinRate"
               />
             </div>
             <p className="callout mt-4 text-fluid-xs text-secondary">
-              Same Recharts layer as Analysis: grid, axes, and tooltips. Color
-              encodes win rate tier; point size scales with games played.
+              Hover points for full stats. Gold / teal / purple encode win-rate
+              tier; larger points mean more games (same chart system as
+              Analysis).
             </p>
           </section>
 
@@ -103,7 +103,7 @@ export default async function PlayersPage() {
               <RankedHBarChart
                 data={barData}
                 maxValue={100}
-                formatValue={(v) => `${v.toFixed(0)}%`}
+                valueFormat="percent0"
                 accentColor="var(--color-chart-2)"
                 caption="Gold: 60%+ win rate. Teal: 50-59%. Muted: under 50%."
               />

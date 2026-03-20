@@ -103,10 +103,7 @@ export default async function CivilizationsPage() {
               xLabel="Pick rate (%)"
               yLabel="Win rate"
               chartTitle="Meta popularity vs effectiveness"
-              xTickFormatter={(v) => `${v.toFixed(0)}%`}
-              yTickFormatter={(v) => `${(v * 100).toFixed(0)}%`}
-              formatTooltipX={(v) => `Pick rate: ${v.toFixed(1)}%`}
-              formatTooltipY={(v) => `Win rate: ${(v * 100).toFixed(1)}%`}
+              mode="pickWinRate100"
             />
           </div>
           <p className="callout mt-4 text-fluid-xs text-secondary">
@@ -122,7 +119,7 @@ export default async function CivilizationsPage() {
             <div className="panel overflow-x-auto min-w-0">
               <RankedHBarChart
                 data={pickBars}
-                formatValue={(v) => `${v.toFixed(1)}%`}
+                valueFormat="percent1"
                 accentColor="var(--color-chart-2)"
                 caption="Teal bars = pick share (neutral volume), same palette as Analysis duration bars."
               />
@@ -135,7 +132,7 @@ export default async function CivilizationsPage() {
               <RankedHBarChart
                 data={winBars}
                 maxValue={100}
-                formatValue={(v) => `${v.toFixed(0)}%`}
+                valueFormat="percent0"
                 caption="Gold: 55%+ win rate. Teal: 45-54%. Muted red: under 45%."
               />
             </div>

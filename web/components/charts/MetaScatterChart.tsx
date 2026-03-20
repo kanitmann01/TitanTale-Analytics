@@ -22,16 +22,19 @@ export interface MetaScatterDatum {
   fill?: string;
 }
 
+/**
+ * Serializable formatting mode (Server Components cannot pass formatter functions).
+ * - eloWinRate: x = ELO, y = win rate in 0..1
+ * - pickWinRate100: x = pick rate already as 0..100, y = win rate 0..1
+ */
+export type MetaScatterMode = "eloWinRate" | "pickWinRate100";
+
 interface MetaScatterChartProps {
   data: MetaScatterDatum[];
   xLabel: string;
   yLabel: string;
   chartTitle?: string;
-  xTickFormatter?: (v: number) => string;
-  yTickFormatter?: (v: number) => string;
-  /** Tooltip / detail strings for the hovered point */
-  formatTooltipX?: (v: number) => string;
-  formatTooltipY?: (v: number) => string;
+  mode: MetaScatterMode;
 }
 
 function MetaScatterTooltip({
@@ -61,18 +64,40 @@ function MetaScatterTooltip({
 
 const defaultYPercent = (v: number) => `${(v * 100).toFixed(0)}%`;
 
+function formattersForMode(mode: MetaScatterMode): {
+  xTickFormatter: (v: number) => string;
+  yTickFormatter: (v: number) => string;
+  formatTooltipX: (v: number) => string;
+  formatTooltipY: (v: number) => string;
+} {
+  if (mode === "pickWinRate100") {
+    const xTick = (v: number) => `${v.toFixed(0)}%`;
+    const yTick = (v: number) => `${(v * 100).toFixed(0)}%`;
+    return {
+      xTickFormatter: xTick,
+      yTickFormatter: yTick,
+      formatTooltipX: (v: number) => `Pick rate: ${v.toFixed(1)}%`,
+      formatTooltipY: (v: number) => `Win rate: ${(v * 100).toFixed(1)}%`,
+    };
+  }
+  const xTick = (v: number) => String(Math.round(v));
+  return {
+    xTickFormatter: xTick,
+    yTickFormatter: defaultYPercent,
+    formatTooltipX: (v: number) => `ELO: ${Math.round(v)}`,
+    formatTooltipY: (v: number) => `Win rate: ${(v * 100).toFixed(1)}%`,
+  };
+}
+
 export default function MetaScatterChart({
   data,
   xLabel,
   yLabel,
   chartTitle,
-  xTickFormatter = (v: number) => String(Math.round(v)),
-  yTickFormatter = defaultYPercent,
-  formatTooltipX,
-  formatTooltipY,
+  mode,
 }: MetaScatterChartProps) {
-  const fmtX = formatTooltipX ?? ((v: number) => `${xLabel}: ${xTickFormatter(v)}`);
-  const fmtY = formatTooltipY ?? ((v: number) => `${yLabel}: ${yTickFormatter(v)}`);
+  const { xTickFormatter, yTickFormatter, formatTooltipX, formatTooltipY } =
+    formattersForMode(mode);
 
   if (data.length === 0) {
     return (
@@ -140,15 +165,14 @@ export default function MetaScatterChart({
             />
           )}
           <Tooltip
-            content={(props: {
-              active?: boolean;
-              payload?: Array<{ payload: MetaScatterDatum }>;
-            }) => (
+            content={(props: Record<string, unknown>) => (
               <MetaScatterTooltip
-                active={props.active}
-                payload={props.payload}
-                formatTooltipX={fmtX}
-                formatTooltipY={fmtY}
+                active={props.active as boolean | undefined}
+                payload={
+                  props.payload as Array<{ payload: MetaScatterDatum }> | undefined
+                }
+                formatTooltipX={formatTooltipX}
+                formatTooltipY={formatTooltipY}
               />
             )}
           />

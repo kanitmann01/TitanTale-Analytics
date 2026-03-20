@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   getPlayerStats,
@@ -9,31 +10,58 @@ import {
   getPlayerProfile,
 } from "@/lib/data";
 import RadarCompare from "@/components/charts/RadarCompare";
+import GroupedBarChart from "@/components/charts/GroupedBarChart";
 import MiniBar from "@/components/charts/MiniBar";
+import ComparePickers from "@/components/ComparePickers";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
 
 interface Props {
   searchParams: { a?: string; b?: string };
 }
 
-export default function ComparePage({ searchParams }: Props) {
-  const playerStats = getPlayerStats().sort((a, b) => b.win_rate - a.win_rate);
+export async function generateMetadata(): Promise<Metadata> {
+  const seasonId = await getSeasonId();
+  return { title: pageTitle("Compare", seasonId) };
+}
+
+type WinSide = "a" | "b" | "tie";
+
+function winnerForStat(
+  label: string,
+  aVal: number,
+  bVal: number,
+): WinSide {
+  if (label === "Games") {
+    return "tie";
+  }
+  if (Math.abs(aVal - bVal) < 1e-9) {
+    return "tie";
+  }
+  return aVal > bVal ? "a" : "b";
+}
+
+export default async function ComparePage({ searchParams }: Props) {
+  const seasonId = await getSeasonId();
+  const playerStats = getPlayerStats(seasonId).sort(
+    (a, b) => b.win_rate - a.win_rate,
+  );
   const allPlayers = playerStats.map((p) => p.player);
   const nameA = searchParams.a ?? allPlayers[0];
   const nameB = searchParams.b ?? allPlayers[1];
 
-  const advAll = getAdvancedMetrics();
+  const advAll = getAdvancedMetrics(seasonId);
   const advA = advAll.find((m) => m.player === nameA);
   const advB = advAll.find((m) => m.player === nameB);
-  const h2h = getPlayerH2HPair(nameA, nameB);
-  const scout = getScoutingReportFor(nameA, nameB);
-  const affinities = getPlayerMapAffinities();
-  const clutchAll = getClutchFactors();
+  const h2h = getPlayerH2HPair(seasonId, nameA, nameB);
+  const scout = getScoutingReportFor(seasonId, nameA, nameB);
+  const affinities = getPlayerMapAffinities(seasonId);
+  const clutchAll = getClutchFactors(seasonId);
   const clutchA = clutchAll.find((c) => c.player === nameA);
   const clutchB = clutchAll.find((c) => c.player === nameB);
-  const profileA = getPlayerProfile(nameA);
-  const profileB = getPlayerProfile(nameB);
+  const profileA = getPlayerProfile(seasonId, nameA);
+  const profileB = getPlayerProfile(seasonId, nameB);
 
-  // Radar data: maps where both players have data
   const affsA = affinities.filter((a) => a.player === nameA);
   const affsB = affinities.filter((a) => a.player === nameB);
   const sharedMaps = affsA
@@ -50,7 +78,18 @@ export default function ComparePage({ searchParams }: Props) {
     };
   });
 
-  // Civ overlap
+  const mapBarRows = sharedMaps.map((map) => {
+    const aff = affsA.find((a) => a.map === map);
+    const bff = affsB.find((b) => b.map === map);
+    const short =
+      map.length > 16 ? `${map.slice(0, 15)}..` : map;
+    return {
+      map: short,
+      wrA: aff ? Math.round(aff.map_wr * 1000) / 10 : 0,
+      wrB: bff ? Math.round(bff.map_wr * 1000) / 10 : 0,
+    };
+  });
+
   const aCivs = profileA
     ? new Set(profileA.civ_preferences.map((c) => c.civilization))
     : new Set<string>();
@@ -61,12 +100,69 @@ export default function ComparePage({ searchParams }: Props) {
   const aOnly = Array.from(aCivs).filter((c) => !bCivs.has(c));
   const bOnly = Array.from(bCivs).filter((c) => !aCivs.has(c));
 
-  // H2H details
   const isAFirst = h2h && h2h.player_a === nameA;
+
+  const statRows: {
+    label: string;
+    a: string;
+    b: string;
+    aVal: number;
+    bVal: number;
+  }[] = [];
+
+  if (advA && advB) {
+    statRows.push(
+      {
+        label: "Win Rate",
+        a: `${(advA.win_rate * 100).toFixed(1)}%`,
+        b: `${(advB.win_rate * 100).toFixed(1)}%`,
+        aVal: advA.win_rate,
+        bVal: advB.win_rate,
+      },
+      {
+        label: "Games",
+        a: String(advA.total_games),
+        b: String(advB.total_games),
+        aVal: advA.total_games,
+        bVal: advB.total_games,
+      },
+      {
+        label: "Civ Diversity",
+        a: `${(advA.civ_diversity * 100).toFixed(0)}%`,
+        b: `${(advB.civ_diversity * 100).toFixed(0)}%`,
+        aVal: advA.civ_diversity,
+        bVal: advB.civ_diversity,
+      },
+      {
+        label: "vs. ELO expected",
+        a: `${advA.performance_residual >= 0 ? "+" : ""}${(
+          advA.performance_residual * 100
+        ).toFixed(1)}%`,
+        b: `${advB.performance_residual >= 0 ? "+" : ""}${(
+          advB.performance_residual * 100
+        ).toFixed(1)}%`,
+        aVal: advA.performance_residual,
+        bVal: advB.performance_residual,
+      },
+    );
+    if (clutchA && clutchB) {
+      statRows.push({
+        label: "Clutch Delta",
+        a: `${clutchA.delta >= 0 ? "+" : ""}${(clutchA.delta * 100).toFixed(
+          1,
+        )}%`,
+        b: `${clutchB.delta >= 0 ? "+" : ""}${(clutchB.delta * 100).toFixed(
+          1,
+        )}%`,
+        aVal: clutchA.delta,
+        bVal: clutchB.delta,
+      });
+    }
+  }
 
   return (
     <main className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-14">
         <header className="mb-8 anim-fade-up">
           <p className="section-label-gold mb-3">Side by Side</p>
           <h1 className="font-display text-fluid-2xl font-bold text-primary">
@@ -74,44 +170,12 @@ export default function ComparePage({ searchParams }: Props) {
           </h1>
         </header>
 
-        {/* Player picker */}
-        <div className="flex flex-wrap items-center gap-4 mb-10">
-          <div className="flex flex-wrap gap-2">
-            {allPlayers.map((p) => (
-              <Link
-                key={`a-${p}`}
-                href={`/compare?a=${encodeURIComponent(p)}&b=${encodeURIComponent(nameB)}`}
-                className={`text-fluid-xs px-2.5 py-1 rounded transition-colors ${
-                  p === nameA
-                    ? "bg-ttl-gold/20 text-ttl-gold border border-ttl-gold/30 font-bold"
-                    : "text-muted hover:text-secondary border border-transparent"
-                }`}
-              >
-                {p}
-              </Link>
-            ))}
-          </div>
-          <span className="text-fluid-lg text-muted font-display font-bold">
-            vs
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {allPlayers.map((p) => (
-              <Link
-                key={`b-${p}`}
-                href={`/compare?a=${encodeURIComponent(nameA)}&b=${encodeURIComponent(p)}`}
-                className={`text-fluid-xs px-2.5 py-1 rounded transition-colors ${
-                  p === nameB
-                    ? "bg-ttl-accent/20 text-ttl-accent border border-ttl-accent/30 font-bold"
-                    : "text-muted hover:text-secondary border border-transparent"
-                }`}
-              >
-                {p}
-              </Link>
-            ))}
-          </div>
-        </div>
+        <ComparePickers
+          allPlayers={allPlayers}
+          nameA={nameA}
+          nameB={nameB}
+        />
 
-        {/* Stat comparison */}
         <div className="grid grid-cols-3 gap-4 mb-10 anim-slide-in d1">
           <div className="text-right">
             <Link
@@ -122,7 +186,7 @@ export default function ComparePage({ searchParams }: Props) {
             </Link>
             {advA && (
               <p className="text-fluid-xs text-muted mt-1">
-                {advA.performance_tier} -- {Math.round(advA.elo)} ELO
+                {advA.performance_tier} - {Math.round(advA.elo)} ELO
               </p>
             )}
           </div>
@@ -138,93 +202,54 @@ export default function ComparePage({ searchParams }: Props) {
             </Link>
             {advB && (
               <p className="text-fluid-xs text-muted mt-1">
-                {advB.performance_tier} -- {Math.round(advB.elo)} ELO
+                {advB.performance_tier} - {Math.round(advB.elo)} ELO
               </p>
             )}
           </div>
         </div>
 
-        {/* Side by side stats */}
-        {advA && advB && (
-          <div className="panel mb-10 anim-fade-up d2">
-            {[
-              {
-                label: "Win Rate",
-                a: `${(advA.win_rate * 100).toFixed(1)}%`,
-                b: `${(advB.win_rate * 100).toFixed(1)}%`,
-                aVal: advA.win_rate,
-                bVal: advB.win_rate,
-              },
-              {
-                label: "Games",
-                a: String(advA.total_games),
-                b: String(advB.total_games),
-                aVal: advA.total_games,
-                bVal: advB.total_games,
-              },
-              {
-                label: "Civ Diversity",
-                a: `${(advA.civ_diversity * 100).toFixed(0)}%`,
-                b: `${(advB.civ_diversity * 100).toFixed(0)}%`,
-                aVal: advA.civ_diversity,
-                bVal: advB.civ_diversity,
-              },
-              {
-                label: "ELO Residual",
-                a: `${advA.performance_residual >= 0 ? "+" : ""}${(
-                  advA.performance_residual * 100
-                ).toFixed(1)}%`,
-                b: `${advB.performance_residual >= 0 ? "+" : ""}${(
-                  advB.performance_residual * 100
-                ).toFixed(1)}%`,
-                aVal: advA.performance_residual,
-                bVal: advB.performance_residual,
-              },
-              ...(clutchA && clutchB
-                ? [
-                    {
-                      label: "Clutch Delta",
-                      a: `${clutchA.delta >= 0 ? "+" : ""}${(
-                        clutchA.delta * 100
-                      ).toFixed(1)}%`,
-                      b: `${clutchB.delta >= 0 ? "+" : ""}${(
-                        clutchB.delta * 100
-                      ).toFixed(1)}%`,
-                      aVal: clutchA.delta,
-                      bVal: clutchB.delta,
-                    },
-                  ]
-                : []),
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="flex items-center py-3 border-b border-ttl-border-subtle/60 last:border-0"
-              >
-                <span
-                  className={`w-1/3 text-right text-fluid-sm font-bold ${
-                    stat.aVal > stat.bVal ? "text-ttl-gold" : "text-secondary"
-                  }`}
+        {statRows.length > 0 && (
+          <div className="panel mb-10 anim-fade-up d2 border border-ttl-border-subtle/60">
+            {statRows.map((stat) => {
+              const w = winnerForStat(stat.label, stat.aVal, stat.bVal);
+              return (
+                <div
+                  key={stat.label}
+                  className="flex items-center py-3 border-b border-ttl-border-subtle/60 last:border-0"
                 >
-                  {stat.a}
-                </span>
-                <span className="w-1/3 text-center text-fluid-xs text-muted uppercase tracking-wider">
-                  {stat.label}
-                </span>
-                <span
-                  className={`w-1/3 text-fluid-sm font-bold ${
-                    stat.bVal > stat.aVal ? "text-ttl-accent" : "text-secondary"
-                  }`}
-                >
-                  {stat.b}
-                </span>
-              </div>
-            ))}
+                  <span
+                    className={`w-1/3 text-right text-fluid-sm font-bold ${
+                      w === "a"
+                        ? "text-ttl-gold"
+                        : w === "tie"
+                          ? "text-secondary"
+                          : "text-muted"
+                    }`}
+                  >
+                    {stat.a}
+                  </span>
+                  <span className="w-1/3 text-center text-fluid-xs text-muted uppercase tracking-wider px-1">
+                    {stat.label}
+                  </span>
+                  <span
+                    className={`w-1/3 text-fluid-sm font-bold ${
+                      w === "b"
+                        ? "text-ttl-gold"
+                        : w === "tie"
+                          ? "text-secondary"
+                          : "text-muted"
+                    }`}
+                  >
+                    {stat.b}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         )}
 
-        {/* H2H record */}
         {h2h && (
-          <section className="panel mb-10 anim-fade-up d3">
+          <section className="panel mb-10 anim-fade-up d3 border border-ttl-border-subtle/60">
             <h2 className="section-label mb-4">Head-to-Head Record</h2>
             <div className="flex items-center justify-between mb-3">
               <span className="text-fluid-lg font-display font-bold text-ttl-gold">
@@ -251,21 +276,16 @@ export default function ComparePage({ searchParams }: Props) {
             />
             <div className="flex justify-between text-fluid-xs text-muted mt-3">
               <span>Avg: {h2h.avg_duration}m</span>
-              <span>
-                Maps: {h2h.maps_played.split(";").join(", ")}
-              </span>
+              <span>Maps: {h2h.maps_played.split(";").join(", ")}</span>
             </div>
           </section>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
-          {/* Map affinity radar */}
+        <div className="space-y-10 mb-14">
           {radarData.length > 2 && (
-            <section className="anim-fade-up d4">
-              <h2 className="section-label mb-4">
-                Map Win Rates (shared maps)
-              </h2>
-              <div className="panel p-4">
+            <section className="anim-fade-up d4 max-w-xl">
+              <h2 className="section-label mb-4">Map Win Rates (shared maps)</h2>
+              <div className="panel p-4 border border-ttl-border-subtle/60">
                 <RadarCompare
                   data={radarData}
                   players={[
@@ -285,10 +305,37 @@ export default function ComparePage({ searchParams }: Props) {
             </section>
           )}
 
-          {/* Civ overlap */}
+          {mapBarRows.length > 0 && (
+            <section className="anim-fade-up d4">
+              <h2 className="section-label mb-4">
+                Shared maps (bar view, % WR)
+              </h2>
+              <div className="panel p-4 overflow-x-auto border border-ttl-border-subtle/60">
+                <GroupedBarChart
+                  data={mapBarRows}
+                  categoryKey="map"
+                  series={[
+                    {
+                      dataKey: "wrA",
+                      name: nameA,
+                      color: "var(--color-chart-1)",
+                    },
+                    {
+                      dataKey: "wrB",
+                      name: nameB,
+                      color: "var(--color-chart-5)",
+                    },
+                  ]}
+                  height={Math.min(520, 120 + mapBarRows.length * 28)}
+                  layout="vertical"
+                />
+              </div>
+            </section>
+          )}
+
           <section className="anim-fade-up d5">
             <h2 className="section-label mb-4">Civilization Pools</h2>
-            <div className="panel p-5">
+            <div className="panel p-5 border border-ttl-border-subtle/60">
               <div className="mb-4">
                 <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2">
                   Shared ({overlap.length})
@@ -340,9 +387,8 @@ export default function ComparePage({ searchParams }: Props) {
           </section>
         </div>
 
-        {/* Scouting report */}
         {scout && (
-          <section className="panel anim-fade-up d6 mb-14">
+          <section className="panel anim-fade-up d6 mb-14 border border-ttl-border-subtle/60">
             <h2 className="section-label mb-4">Scouting Report</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

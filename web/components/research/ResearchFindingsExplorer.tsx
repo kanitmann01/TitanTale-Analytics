@@ -128,17 +128,22 @@ export default function ResearchFindingsExplorer({
       </div>
 
       <div className="space-y-4">
-        {filtered.map((f) => {
+        {filtered.map((f, displayIndex) => {
           const expanded = expandedId === f.id;
           return (
-            <article key={f.id} className="panel">
+            <article key={f.id} className="panel border border-ttl-border-subtle/60">
               <button
                 type="button"
                 onClick={() => setExpandedId(expanded ? null : f.id)}
                 className="w-full text-left"
               >
                 <div className="flex flex-wrap items-start gap-3">
-                  <span className="text-fluid-xs text-muted font-mono">#{f.id}</span>
+                  <span className="text-fluid-xs text-ttl-gold font-mono font-bold">
+                    #{displayIndex + 1}
+                  </span>
+                  <span className="text-fluid-xs text-muted font-mono">
+                    (id {f.id})
+                  </span>
                   <h3 className="font-display text-fluid-lg font-bold text-primary flex-1">
                     {f.title}
                   </h3>
@@ -148,6 +153,11 @@ export default function ResearchFindingsExplorer({
                     {f.verdict}
                   </span>
                 </div>
+                {!expanded && (
+                  <p className="text-fluid-sm text-secondary mt-3 leading-relaxed line-clamp-2">
+                    {f.finding}
+                  </p>
+                )}
                 <div className="flex flex-wrap items-center gap-4 mt-3 text-fluid-xs">
                   <span className="text-muted">
                     Confidence: <span className="text-primary font-medium">{f.confidence}%</span>

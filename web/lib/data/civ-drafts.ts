@@ -1,9 +1,10 @@
 import type { CivDraft } from "@/lib/types";
+import type { SeasonId } from "@/lib/season-types";
 import { parseCSV } from "./csv";
 import { dataFilePath } from "./paths";
 
-export function getCivDrafts(): CivDraft[] {
-  const rows = parseCSV(dataFilePath("civ_drafts.csv"));
+export function getCivDrafts(seasonId: SeasonId): CivDraft[] {
+  const rows = parseCSV(dataFilePath("civ_drafts.csv", seasonId));
   return rows.map((row) => ({
     match_id: row.match_id,
     game_number: Number(row.game_number),

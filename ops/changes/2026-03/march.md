@@ -29,3 +29,4 @@
 2026-03-20 | CEO | Project phase complete: Analytics pipeline (14 CSVs, 12 viz, Spirit_of_the_Law analysis) and Full-stack web app (9 pages, 11 adapters, 11 chart components) both delivered. Next phase: production deployment and real data integration.
 2026-03-20 | Technical Writer | Audited task list and all README files; corrected TASK-005/TASK-006 completion state and refreshed README metadata to current routes/data outputs.
 2026-03-20 | Architect | Committed remaining delivery tree: web app, spirit analysis outputs, ops ADRs/reports/runbooks, docs/schema updates, LICENSE; gitignore local impeccable-style-universal vendor copy.
+2026-03-20 | Full-stack | Full-site web audit: multi-season `data/seasons/{id}/` resolution, middleware cookie, per-route metadata and global SiteFooter, loading/not-found, chart and page UX fixes; DATA_SCHEMA multi-season + CURRENT snapshot updated.

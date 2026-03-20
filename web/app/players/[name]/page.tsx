@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
@@ -11,6 +12,11 @@ import {
 } from "@/lib/data";
 import MiniBar from "@/components/charts/MiniBar";
 import HBarChart from "@/components/charts/HBarChart";
+import StatHelp from "@/components/StatHelp";
+import CompareShortcut from "@/components/CompareShortcut";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
+import { displayTeamName } from "@/lib/team-display";
 
 export const dynamic = "force-dynamic";
 
@@ -18,37 +24,58 @@ interface Props {
   params: { name: string };
 }
 
-export default function PlayerProfilePage({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const seasonId = await getSeasonId();
   const playerName = decodeURIComponent(params.name);
-  const profile = getPlayerProfile(playerName);
-  if (!profile) notFound();
+  const profile = getPlayerProfile(seasonId, playerName);
+  if (!profile) {
+    return { title: "Player | TTL Stats" };
+  }
+  return { title: pageTitle(profile.player_name, seasonId) };
+}
 
-  const roster = getPlayers().find(
-    (p) => p.player_name === playerName,
+export default async function PlayerProfilePage({ params }: Props) {
+  const seasonId = await getSeasonId();
+  const playerName = decodeURIComponent(params.name);
+  const profile = getPlayerProfile(seasonId, playerName);
+  if (!profile) {
+    notFound();
+  }
+
+  const roster = getPlayers(seasonId).find((p) => p.player_name === playerName);
+  const advanced = getAdvancedMetricsFor(seasonId, playerName);
+  const h2hRecords = getPlayerH2HFor(seasonId, playerName);
+  const mapAffinities = getPlayerMapAffinityFor(seasonId, playerName).sort(
+    (a, b) => b.delta - a.delta,
   );
-  const advanced = getAdvancedMetricsFor(playerName);
-  const h2hRecords = getPlayerH2HFor(playerName);
-  const mapAffinities = getPlayerMapAffinityFor(playerName)
-    .sort((a, b) => b.delta - a.delta);
-  const clutch = getClutchFactors().find((c) => c.player === playerName);
+  const clutch = getClutchFactors(seasonId).find((c) => c.player === playerName);
 
   const civBars = profile.civ_preferences.slice(0, 12).map((c) => ({
     label: c.civilization,
     value: c.win_rate * 100,
     color:
-      c.win_rate >= 0.6
-        ? "var(--color-chart-1)"
-        : c.win_rate >= 0.5
-        ? "var(--color-chart-2)"
-        : "var(--color-text-muted)",
+      c.win_rate >= 0.8
+        ? "var(--color-chart-4)"
+        : c.win_rate >= 0.6
+          ? "var(--color-chart-1)"
+          : c.win_rate >= 0.5
+            ? "var(--color-chart-3)"
+            : "var(--color-text-muted)",
   }));
 
   const bestMaps = mapAffinities.filter((a) => a.delta > 0).slice(0, 5);
-  const worstMaps = mapAffinities.filter((a) => a.delta < -0.10).slice(-5).reverse();
+  const worstMaps = mapAffinities
+    .filter((a) => a.delta < -0.1)
+    .slice(-5)
+    .reverse();
+
+  const teamShown = displayTeamName(roster?.team ?? null);
+  const allPlayers = getPlayerStats(seasonId).map((p) => p.player);
+  const compareOthers = allPlayers.filter((p) => p !== playerName).sort();
 
   return (
     <main className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-14">
         <Link
           href="/players"
           className="text-fluid-xs text-ttl-accent hover:text-ttl-gold transition-colors mb-6 inline-block"
@@ -56,7 +83,6 @@ export default function PlayerProfilePage({ params }: Props) {
           &larr; All players
         </Link>
 
-        {/* Header */}
         <header className="mb-10 anim-fade-up">
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
             <h1 className="font-display text-fluid-2xl font-bold text-primary">
@@ -65,8 +91,8 @@ export default function PlayerProfilePage({ params }: Props) {
             {roster?.country && (
               <span className="text-fluid-sm text-muted">{roster.country}</span>
             )}
-            {roster?.team && (
-              <span className="text-fluid-sm text-ttl-accent">{roster.team}</span>
+            {teamShown && (
+              <span className="text-fluid-sm text-ttl-accent">{teamShown}</span>
             )}
           </div>
           {advanced && (
@@ -75,18 +101,18 @@ export default function PlayerProfilePage({ params }: Props) {
                 advanced.performance_tier === "Elite"
                   ? "bg-ttl-gold/10 text-ttl-gold border-ttl-gold/30"
                   : advanced.performance_tier === "Strong"
-                  ? "bg-ttl-win/10 text-ttl-win border-ttl-win/30"
-                  : advanced.performance_tier === "Struggling"
-                  ? "bg-ttl-loss/10 text-ttl-loss border-ttl-loss/30"
-                  : "bg-ttl-slate/40 text-secondary border-ttl-border-subtle"
+                    ? "bg-ttl-win/10 text-ttl-win border-ttl-win/30"
+                    : advanced.performance_tier === "Struggling"
+                      ? "bg-ttl-loss/10 text-ttl-loss border-ttl-loss/30"
+                      : "bg-ttl-slate/40 text-secondary border-ttl-border-subtle"
               }`}
             >
               {advanced.performance_tier}
             </span>
           )}
+          <CompareShortcut selfName={playerName} opponents={compareOthers} />
         </header>
 
-        {/* Stat strip */}
         <div className="flex flex-wrap gap-x-10 gap-y-4 mb-10 anim-slide-in d1">
           <div>
             <p className="text-fluid-xl font-display font-bold text-ttl-gold leading-none">
@@ -126,7 +152,10 @@ export default function PlayerProfilePage({ params }: Props) {
                 {clutch.delta >= 0 ? "+" : ""}
                 {(clutch.delta * 100).toFixed(1)}%
               </p>
-              <p className="text-fluid-xs text-muted mt-1">clutch delta</p>
+              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center">
+                clutch delta
+                <StatHelp text="Win rate in deciding games minus overall win rate. Negative means you underperform when the series is on the line." />
+              </p>
             </div>
           )}
           {advanced && (
@@ -141,7 +170,10 @@ export default function PlayerProfilePage({ params }: Props) {
                 {advanced.performance_residual >= 0 ? "+" : ""}
                 {(advanced.performance_residual * 100).toFixed(1)}%
               </p>
-              <p className="text-fluid-xs text-muted mt-1">ELO residual</p>
+              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center">
+                vs. ELO expected
+                <StatHelp text="Positive = actual results better than ELO-implied expectation for this field; negative = below expectation. Not the same as ladder rating." />
+              </p>
             </div>
           )}
         </div>
@@ -149,12 +181,11 @@ export default function PlayerProfilePage({ params }: Props) {
         <div className="divider mb-10" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
-          {/* Civ preferences */}
           <section className="anim-fade-up d2">
             <h2 className="section-label mb-4">
               Civilization Performance (top 12)
             </h2>
-            <div className="panel-flush p-5">
+            <div className="panel-flush p-5 overflow-x-auto border border-ttl-border-subtle/60">
               <HBarChart
                 data={civBars}
                 maxValue={100}
@@ -163,7 +194,6 @@ export default function PlayerProfilePage({ params }: Props) {
             </div>
           </section>
 
-          {/* Map affinity */}
           <section className="anim-fade-up d3">
             <h2 className="section-label mb-4">Map Affinities</h2>
             <div className="space-y-1">
@@ -173,7 +203,7 @@ export default function PlayerProfilePage({ params }: Props) {
               {bestMaps.map((a) => (
                 <div
                   key={a.map}
-                  className="flex items-center justify-between panel-inset"
+                  className="flex items-center justify-between panel-inset bg-ttl-win/5 border-ttl-win/15"
                 >
                   <span className="text-fluid-sm text-primary font-medium">
                     {a.map}
@@ -196,7 +226,7 @@ export default function PlayerProfilePage({ params }: Props) {
                   {worstMaps.map((a) => (
                     <div
                       key={a.map}
-                      className="flex items-center justify-between panel-inset"
+                      className="flex items-center justify-between panel-inset bg-ttl-loss/5 border-ttl-loss/15"
                     >
                       <span className="text-fluid-sm text-primary font-medium">
                         {a.map}
@@ -217,7 +247,6 @@ export default function PlayerProfilePage({ params }: Props) {
           </section>
         </div>
 
-        {/* H2H Records */}
         <section className="mb-14 anim-fade-up d4">
           <h2 className="section-label mb-5">Head-to-Head Records</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -225,13 +254,13 @@ export default function PlayerProfilePage({ params }: Props) {
               const isA = h.player_a === playerName;
               const opponent = isA ? h.player_b : h.player_a;
               const myWins = isA ? h.a_game_wins : h.b_game_wins;
-              const theirWins = isA ? h.b_game_wins : h.a_game_wins;
               const won = h.series_winner === playerName;
+              const share = myWins / h.total_games;
               return (
                 <Link
                   key={opponent}
                   href={`/compare?a=${encodeURIComponent(playerName)}&b=${encodeURIComponent(opponent)}`}
-                  className="lift panel hover:border-ttl-border transition-colors"
+                  className="lift panel hover:border-ttl-border transition-colors border border-ttl-border-subtle/60"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-fluid-sm text-muted">vs</span>
@@ -243,13 +272,17 @@ export default function PlayerProfilePage({ params }: Props) {
                         won ? "text-ttl-win" : "text-ttl-loss"
                       }`}
                     >
-                      {myWins}-{theirWins}
+                      {myWins}-{isA ? h.b_game_wins : h.a_game_wins}
                     </span>
                   </div>
                   <MiniBar
-                    value={myWins / h.total_games}
+                    value={share}
                     color={
-                      won ? "var(--color-chart-4)" : "var(--color-chart-5)"
+                      share >= 0.55
+                        ? "var(--color-chart-4)"
+                        : share >= 0.45
+                          ? "var(--color-chart-3)"
+                          : "var(--color-chart-5)"
                     }
                   />
                   <div className="flex justify-between text-fluid-xs text-muted mt-1.5">
@@ -262,13 +295,13 @@ export default function PlayerProfilePage({ params }: Props) {
           </div>
         </section>
 
-        {/* Match history */}
         <section className="anim-fade-up d5">
           <h2 className="section-label mb-5">Recent Matches</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-fluid-sm">
+          <div className="overflow-x-auto min-w-0">
+            <table className="w-full text-fluid-sm min-w-[520px]">
               <thead>
                 <tr className="border-b border-ttl-border text-left text-muted uppercase tracking-wider text-fluid-xs">
+                  <th className="py-2.5 pr-3">Series</th>
                   <th className="py-2.5 pr-3">Result</th>
                   <th className="py-2.5 pr-3">Opponent</th>
                   <th className="py-2.5 pr-3">Civ</th>
@@ -278,11 +311,14 @@ export default function PlayerProfilePage({ params }: Props) {
                 </tr>
               </thead>
               <tbody>
-                {profile.match_history.slice(0, 20).map((m, i) => (
+                {profile.match_history.slice(0, 20).map((m) => (
                   <tr
                     key={`${m.match_id}-${m.game_number}`}
                     className="border-b border-ttl-border-subtle/60 hover:bg-ttl-slate/40 transition-colors"
                   >
+                    <td className="py-2.5 pr-3 text-muted tabular-nums">
+                      #{m.match_id}
+                    </td>
                     <td className="py-2.5 pr-3">
                       <span
                         className={`font-bold ${
@@ -308,6 +344,9 @@ export default function PlayerProfilePage({ params }: Props) {
               </tbody>
             </table>
           </div>
+          <p className="text-fluid-xs text-muted mt-2">
+            Rows with the same series id are games from the same series.
+          </p>
         </section>
       </div>
     </main>

@@ -50,9 +50,20 @@ export default function GroupedBarChart({
   if (layout === "horizontal") {
     return (
       <ResponsiveContainer width="100%" height={height}>
-        <BarChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 5 }}>
+        <BarChart
+          data={data}
+          margin={{ top: 8, right: 16, bottom: 48, left: 8 }}
+        >
           <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border-subtle)" />
-          <XAxis dataKey={categoryKey} stroke="var(--color-text-muted)" fontSize={11} />
+          <XAxis
+            dataKey={categoryKey}
+            stroke="var(--color-text-muted)"
+            fontSize={10}
+            interval={0}
+            angle={-28}
+            textAnchor="end"
+            height={44}
+          />
           <YAxis stroke="var(--color-text-muted)" fontSize={11} />
           <Tooltip content={<BarTooltip />} />
           <Legend

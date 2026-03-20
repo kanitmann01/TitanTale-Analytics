@@ -3,6 +3,18 @@
 ## Overview
 This document defines the data schema for T90 Titans League Season 5 analytics. Data is extracted from Liquipedia and local tournament sources.
 
+## Multi-season layout and web resolution
+
+The Next.js app in `web/` loads CSV/JSON via `web/lib/data/paths.ts`.
+
+- **Season folders**: Put the same filenames the adapters expect under `data/seasons/{seasonId}/`, for example `data/seasons/s5/ttl_s5_matches.csv`, `players.csv`, `tournament_info.json`, etc. Optional per-season Spirit outputs: `data/seasons/{seasonId}/spirit/*.csv`.
+- **Slug**: Season IDs are lowercase slugs such as `s5`. Default season is `s5` when a folder or cookie is missing.
+- **Fallback chain**: For a file `F` and season `S`, resolution tries `data/seasons/S/F`, then `data/seasons/s5/F`, then `data/F` (repo root `data/`).
+- **DATA_DIR**: Set the `DATA_DIR` environment variable to point at the directory that contains `seasons/` (or flat CSVs). If unset, the app resolves from the repo: parent of `web/` (`../data`) when present, else `web/data`.
+- **URL and cookie**: `?season=s5` sets the `ttl-season` cookie (see `web/middleware.ts`). Adapters receive `seasonId` from server helpers (`getSeasonId()`).
+
+Python ETL should write per-season outputs into `data/seasons/{id}/` using the same column layouts as documented below so the web layer can switch seasons without code changes.
+
 ## Data Files
 
 ### 1. ttl_s5_matches.csv

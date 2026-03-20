@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   getMatches,
   getStandings,
@@ -11,6 +12,8 @@ import {
   getMapOutcomes,
   getTournamentInfo,
 } from "@/lib/data";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
 
 interface AdapterResult {
   name: string;
@@ -21,7 +24,7 @@ interface AdapterResult {
 
 function tryAdapter(
   name: string,
-  fn: () => unknown[]
+  fn: () => unknown[],
 ): AdapterResult {
   try {
     const data = fn();
@@ -41,10 +44,17 @@ function tryAdapter(
   }
 }
 
-export default function TestDataPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const seasonId = await getSeasonId();
+  return { title: pageTitle("Test Data", seasonId) };
+}
+
+export default async function TestDataPage() {
+  const seasonId = await getSeasonId();
+
   const tournament = (() => {
     try {
-      return { data: getTournamentInfo(), error: null };
+      return { data: getTournamentInfo(seasonId), error: null };
     } catch (err) {
       return {
         data: null,
@@ -54,23 +64,39 @@ export default function TestDataPage() {
   })();
 
   const adapters: AdapterResult[] = [
-    tryAdapter("getMatches (ttl_s5_matches.csv)", getMatches),
-    tryAdapter("getStandings (matches.csv)", getStandings),
-    tryAdapter("getPlayers (players.csv)", getPlayers),
-    tryAdapter("getPlayerStats (player_statistics.csv)", getPlayerStats),
-    tryAdapter("getPlayerCivs (player_civs.csv)", getPlayerCivs),
-    tryAdapter("getCivStats (civilization_statistics.csv)", getCivStats),
-    tryAdapter("getCivDrafts (civ_drafts.csv)", getCivDrafts),
-    tryAdapter("getMapStats (map_statistics.csv)", getMapStats),
-    tryAdapter("getMapResults (map_results.csv)", getMapResults),
-    tryAdapter("getMapOutcomes (map_outcomes.csv)", getMapOutcomes),
+    tryAdapter("getMatches (ttl_s5_matches.csv)", () =>
+      getMatches(seasonId),
+    ),
+    tryAdapter("getStandings (matches.csv)", () => getStandings(seasonId)),
+    tryAdapter("getPlayers (players.csv)", () => getPlayers(seasonId)),
+    tryAdapter("getPlayerStats (player_statistics.csv)", () =>
+      getPlayerStats(seasonId),
+    ),
+    tryAdapter("getPlayerCivs (player_civs.csv)", () =>
+      getPlayerCivs(seasonId),
+    ),
+    tryAdapter("getCivStats (civilization_statistics.csv)", () =>
+      getCivStats(seasonId),
+    ),
+    tryAdapter("getCivDrafts (civ_drafts.csv)", () => getCivDrafts(seasonId)),
+    tryAdapter("getMapStats (map_statistics.csv)", () =>
+      getMapStats(seasonId),
+    ),
+    tryAdapter("getMapResults (map_results.csv)", () =>
+      getMapResults(seasonId),
+    ),
+    tryAdapter("getMapOutcomes (map_outcomes.csv)", () =>
+      getMapOutcomes(seasonId),
+    ),
   ];
 
-  const allPassed = adapters.every((a) => a.error === null) && !tournament.error;
+  const allPassed =
+    adapters.every((a) => a.error === null) && !tournament.error;
 
   return (
     <main className="min-h-screen bg-gray-950 text-gray-100 p-8 font-mono">
-      <h1 className="text-2xl font-bold mb-6">Data Adapter Verification</h1>
+      <h1 className="text-2xl font-bold mb-2">Data Adapter Verification</h1>
+      <p className="text-gray-400 text-sm mb-6">Season: {seasonId}</p>
 
       <section className="mb-8 p-4 rounded border border-gray-700 bg-gray-900">
         <h2 className="text-lg font-semibold mb-2">Tournament Info</h2>

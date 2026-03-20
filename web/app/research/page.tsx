@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   getClutchFactors,
   getUpsetProbabilities,
@@ -8,6 +9,8 @@ import GroupedBarChart from "@/components/charts/GroupedBarChart";
 import ResearchFindingsExplorer, {
   type ResearchFinding,
 } from "@/components/research/ResearchFindingsExplorer";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
 
 const FINDINGS: ResearchFinding[] = [
   {
@@ -173,11 +176,19 @@ const FINDINGS: ResearchFinding[] = [
   },
 ];
 
-export default function ResearchPage() {
-  const upsetProbs = getUpsetProbabilities();
-  const clutchFactors = getClutchFactors().sort((a, b) => b.delta - a.delta);
-  const affinities = getPlayerMapAffinities();
-  const matches = getMatches();
+export async function generateMetadata(): Promise<Metadata> {
+  const seasonId = await getSeasonId();
+  return { title: pageTitle("Research", seasonId) };
+}
+
+export default async function ResearchPage() {
+  const seasonId = await getSeasonId();
+  const upsetProbs = getUpsetProbabilities(seasonId);
+  const clutchFactors = getClutchFactors(seasonId).sort(
+    (a, b) => b.delta - a.delta,
+  );
+  const affinities = getPlayerMapAffinities(seasonId);
+  const matches = getMatches(seasonId);
 
   const confirmed = FINDINGS.filter((f) => f.verdict === "CONFIRMED").length;
   const busted = FINDINGS.filter((f) => f.verdict === "BUSTED").length;
@@ -265,6 +276,10 @@ export default function ResearchPage() {
             <h2 className="section-label mb-4">
               Top Map Specialists (delta &gt; 30%)
             </h2>
+            <p className="text-fluid-xs text-muted mb-3">
+              Minimum 3 games in source filter; entries with 3-4 games are
+              anecdotal. Prefer cells with higher n when scouting.
+            </p>
             <div className="space-y-2">
               {topSpecialists.map((a) => (
                 <div
@@ -297,8 +312,13 @@ export default function ResearchPage() {
         {/* Clutch leaders */}
         <section className="anim-fade-up mb-14">
           <h2 className="section-label mb-4">
-            Clutch Leaderboard (deciding game WR delta)
+            Clutch Leaderboard (research deep dive)
           </h2>
+          <p className="text-fluid-xs text-muted mb-3 max-w-2xl leading-relaxed">
+            Full methodology lives in the findings explorer above. This table
+            adds baseline clutch WR vs overall WR for context (unlike the
+            Analysis page delta-only summary).
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {clutchFactors.slice(0, 10).map((cf) => {
               const isPos = cf.delta >= 0;

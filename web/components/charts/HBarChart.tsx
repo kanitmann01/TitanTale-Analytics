@@ -20,6 +20,8 @@ interface HBarChartProps {
   formatValue?: (v: number) => string;
   /** Accent color when no per-bar color is set. */
   accentColor?: string;
+  /** Legend or threshold note below chart */
+  caption?: string;
 }
 
 export default function HBarChart({
@@ -28,6 +30,7 @@ export default function HBarChart({
   barHeight = 24,
   formatValue = (v) => String(v),
   accentColor = "var(--color-chart-1)",
+  caption,
 }: HBarChartProps) {
   const max = maxValue ?? Math.max(...data.map((d) => d.value), 1);
   const gap = 6;
@@ -37,6 +40,7 @@ export default function HBarChart({
   const totalHeight = data.length * (barHeight + gap) - gap;
 
   return (
+    <div className="w-full">
     <svg
       viewBox={`0 0 ${chartWidth} ${totalHeight}`}
       className="w-full"
@@ -96,5 +100,9 @@ export default function HBarChart({
         );
       })}
     </svg>
+    {caption && (
+      <p className="text-fluid-xs text-muted mt-2 leading-relaxed">{caption}</p>
+    )}
+    </div>
   );
 }

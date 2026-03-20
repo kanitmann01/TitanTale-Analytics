@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   getMatches,
   getPlayerStats,
@@ -16,26 +17,38 @@ import DonutChart from "@/components/charts/DonutChart";
 import ResidualChart from "@/components/charts/ResidualChart";
 import GroupedBarChart from "@/components/charts/GroupedBarChart";
 import MiniBar from "@/components/charts/MiniBar";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
 
 const LEAGUE_COLORS: Record<string, string> = {
-  Platinum: "var(--color-chart-1)",
-  Gold: "var(--color-chart-3)",
-  Silver: "var(--color-chart-2)",
-  Bronze: "var(--color-chart-5)",
+  Platinum: "#5eead4",
+  Gold: "#d4af37",
+  Silver: "#94a3b8",
+  Bronze: "#a0522d",
 };
 
-export default function AnalysisPage() {
-  const matches = getMatches();
-  const playerStats = getPlayerStats().sort((a, b) => b.win_rate - a.win_rate);
-  const civStats = getCivStats();
-  const mapStats = getMapStats();
-  const standings = getStandings();
-  const playerCivs = getPlayerCivs();
-  const clutchFactors = getClutchFactors().sort((a, b) => b.delta - a.delta);
-  const upsetProbs = getUpsetProbabilities();
-  const advancedMetrics = getAdvancedMetrics();
-  const civMatchups = getCivMatchups().slice(0, 15);
-  const draftOutcomes = getDraftPositionOutcomes();
+export async function generateMetadata(): Promise<Metadata> {
+  const seasonId = await getSeasonId();
+  return { title: pageTitle("Analysis", seasonId) };
+}
+
+export default async function AnalysisPage() {
+  const seasonId = await getSeasonId();
+  const matches = getMatches(seasonId);
+  const playerStats = getPlayerStats(seasonId).sort(
+    (a, b) => b.win_rate - a.win_rate,
+  );
+  const civStats = getCivStats(seasonId);
+  const mapStats = getMapStats(seasonId);
+  const standings = getStandings(seasonId);
+  const playerCivs = getPlayerCivs(seasonId);
+  const clutchFactors = getClutchFactors(seasonId).sort(
+    (a, b) => b.delta - a.delta,
+  );
+  const upsetProbs = getUpsetProbabilities(seasonId);
+  const advancedMetrics = getAdvancedMetrics(seasonId);
+  const civMatchups = getCivMatchups(seasonId).slice(0, 15);
+  const draftOutcomes = getDraftPositionOutcomes(seasonId);
 
   // Duration histogram
   const durationBuckets: Record<string, number> = {};
@@ -207,7 +220,10 @@ export default function AnalysisPage() {
               Performance vs ELO Expectation
             </h2>
             <div className="panel">
-              <ResidualChart data={residualData} />
+              <ResidualChart
+                data={residualData}
+                chartTitle="Who Is Over/Underperforming Their ELO?"
+              />
             </div>
             <p className="callout mt-4 text-fluid-xs text-secondary">
               Points above zero are overperforming their ELO rating; below zero
@@ -281,14 +297,19 @@ export default function AnalysisPage() {
                           </span>
                         </td>
                         <td className="py-2.5 pr-3">
-                          <MiniBar
-                            value={1 - balance * 2}
-                            color={
-                              balance < 0.1
-                                ? "var(--color-chart-4)"
-                                : "var(--color-chart-5)"
-                            }
-                          />
+                          <div className="flex flex-col gap-1 min-w-[5.5rem]">
+                            <span className="text-fluid-xs text-muted tabular-nums">
+                              skew {(balance * 200).toFixed(0)}
+                            </span>
+                            <MiniBar
+                              value={1 - balance * 2}
+                              color={
+                                balance < 0.1
+                                  ? "var(--color-chart-4)"
+                                  : "var(--color-chart-5)"
+                              }
+                            />
+                          </div>
                         </td>
                         <td className="py-2.5 text-right text-muted">
                           {cm.avg_duration.toFixed(0)}m
@@ -342,7 +363,7 @@ export default function AnalysisPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           <section className="anim-slide-in d6">
             <h2 className="section-label mb-5">
-              Clutch Factor -- Deciding Game Performance
+              Clutch Factor - Deciding Game Performance
             </h2>
             <div className="space-y-2">
               {clutchFactors.map((cf, i) => {
@@ -409,9 +430,11 @@ export default function AnalysisPage() {
                   </div>
                 );
               })}
-              <p className="text-fluid-xs text-muted mt-3">
-                * = statistically significant (p &lt; 0.05). Delta measures
-                clutch game WR minus overall baseline.
+              <p className="text-fluid-xs text-muted mt-3 leading-relaxed">
+                * = statistically significant (p &lt; 0.05). Clutch delta is
+                win rate in deciding games minus overall win rate; it is not a
+                measure of overall skill. A top player can rank low here if they
+                rarely drop deciding games or underperform in those spots.
               </p>
             </div>
           </section>
@@ -488,9 +511,15 @@ export default function AnalysisPage() {
           <h2 className="section-label mb-5">
             Draft Position Analysis
           </h2>
-          <p className="text-fluid-sm text-secondary mb-6 max-w-xl">
+          <p className="text-fluid-sm text-secondary mb-4 max-w-xl">
             Civilization distribution by pick order across 141 games with
             draft data. Each game has 3 civ draft positions per player.
+          </p>
+          <p className="callout text-fluid-xs text-secondary mb-6 max-w-2xl">
+            Map names in this extract may include qualifiers or sessions outside
+            the main Season 5 map pool. Treat draft stats as tied to the
+            recorded draft file, not necessarily the current pool list on the
+            Maps page.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {draftOutcomes.map((d) => (

@@ -1,9 +1,10 @@
 import type { PlayerCivStats } from "@/lib/types";
+import type { SeasonId } from "@/lib/season-types";
 import { parseCSV } from "./csv";
 import { dataFilePath } from "./paths";
 
-export function getPlayerCivs(): PlayerCivStats[] {
-  const rows = parseCSV(dataFilePath("player_civs.csv"));
+export function getPlayerCivs(seasonId: SeasonId): PlayerCivStats[] {
+  const rows = parseCSV(dataFilePath("player_civs.csv", seasonId));
   return rows.map((row) => ({
     league: row.league,
     civilization: row.civilization,

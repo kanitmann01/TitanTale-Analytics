@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 interface HeatmapCell {
   row: string;
@@ -18,6 +18,10 @@ interface HeatmapChartProps {
   valueFormat?: (v: number) => string;
   cellSize?: number;
   title?: string;
+  /** When set, hide cells with count below this (affinity use). */
+  minCount?: number;
+  /** Show gradient legend for value range */
+  showLegend?: boolean;
 }
 
 function interpolateColor(
@@ -61,17 +65,39 @@ export default function HeatmapChart({
   valueFormat = (v) => `${(v * 100).toFixed(0)}%`,
   cellSize = 36,
   title,
+  minCount = 0,
+  showLegend = false,
 }: HeatmapChartProps) {
   const [hovered, setHovered] = useState<string | null>(null);
+  const hoveredRow = hovered?.split("|")[0] ?? null;
+  const hoveredCol = hovered?.split("|")[1] ?? null;
 
-  const cellMap = new Map<string, HeatmapCell>();
-  let minVal = Infinity;
-  let maxVal = -Infinity;
-  for (const cell of data) {
-    cellMap.set(`${cell.row}|${cell.col}`, cell);
-    if (cell.value < minVal) minVal = cell.value;
-    if (cell.value > maxVal) maxVal = cell.value;
-  }
+  const { cellMap, minVal, maxVal } = useMemo(() => {
+    const m = new Map<string, HeatmapCell>();
+    let minV = Infinity;
+    let maxV = -Infinity;
+    for (const cell of data) {
+      if (
+        minCount > 0 &&
+        cell.count !== undefined &&
+        cell.count < minCount
+      ) {
+        continue;
+      }
+      m.set(`${cell.row}|${cell.col}`, cell);
+      if (cell.value < minV) {
+        minV = cell.value;
+      }
+      if (cell.value > maxV) {
+        maxV = cell.value;
+      }
+    }
+    if (!Number.isFinite(minV)) {
+      minV = 0;
+      maxV = 1;
+    }
+    return { cellMap: m, minVal: minV, maxVal: maxV };
+  }, [data, minCount]);
 
   const labelW = 90;
   const headerH = 80;
@@ -79,16 +105,13 @@ export default function HeatmapChart({
   const totalH = headerH + rows.length * cellSize;
 
   return (
-    <div className="overflow-x-auto">
-      {title && (
-        <p className="text-fluid-xs text-muted mb-2">{title}</p>
-      )}
+    <div className="overflow-x-auto min-w-0">
+      {title && <p className="text-fluid-xs text-muted mb-2">{title}</p>}
       <svg
         viewBox={`0 0 ${totalW} ${totalH}`}
         className="w-full"
         style={{ maxHeight: `${totalH}px`, minWidth: `${totalW}px` }}
       >
-        {/* Column headers */}
         {cols.map((col, ci) => (
           <text
             key={col}
@@ -99,11 +122,10 @@ export default function HeatmapChart({
             fill="var(--color-text-muted)"
             transform={`rotate(-45, ${labelW + ci * cellSize + cellSize / 2}, ${headerH - 6})`}
           >
-            {col.length > 10 ? col.slice(0, 9) + ".." : col}
+            {col.length > 10 ? `${col.slice(0, 9)}..` : col}
           </text>
         ))}
 
-        {/* Row labels + cells */}
         {rows.map((row, ri) => (
           <g key={row}>
             <text
@@ -114,26 +136,55 @@ export default function HeatmapChart({
               fontSize="9"
               fill="var(--color-text-secondary)"
             >
-              {row.length > 12 ? row.slice(0, 11) + ".." : row}
+              {row.length > 12 ? `${row.slice(0, 11)}..` : row}
             </text>
             {cols.map((col, ci) => {
-              const cell = cellMap.get(`${row}|${col}`);
+              const key = `${row}|${col}`;
+              const cell = cellMap.get(key);
+              const inCross =
+                (hoveredRow !== null && row === hoveredRow) ||
+                (hoveredCol !== null && col === hoveredCol);
               if (!cell) {
                 return (
-                  <rect
-                    key={col}
-                    x={labelW + ci * cellSize}
-                    y={headerH + ri * cellSize}
-                    width={cellSize - 1}
-                    height={cellSize - 1}
-                    fill="var(--color-bg-surface)"
-                    rx={2}
-                  />
+                  <g key={col}>
+                    <title>
+                      {row} vs {col}: no matches played
+                    </title>
+                    <rect
+                      x={labelW + ci * cellSize}
+                      y={headerH + ri * cellSize}
+                      width={cellSize - 1}
+                      height={cellSize - 1}
+                      fill="var(--color-bg-surface)"
+                      opacity={inCross ? 0.95 : 0.75}
+                      stroke={
+                        inCross ? "var(--color-gold)" : "var(--color-border)"
+                      }
+                      strokeWidth={inCross ? 1 : 0.5}
+                      rx={2}
+                    />
+                    <text
+                      x={labelW + ci * cellSize + (cellSize - 1) / 2}
+                      y={headerH + ri * cellSize + (cellSize - 1) / 2}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize="10"
+                      fill="var(--color-text-muted)"
+                    >
+                      -
+                    </text>
+                  </g>
                 );
               }
-              const key = `${row}|${col}`;
               const isHovered = hovered === key;
-              const bg = interpolateColor(cell.value, minVal, maxVal, colorScale);
+              const bg = interpolateColor(
+                cell.value,
+                minVal,
+                maxVal,
+                colorScale,
+              );
+              const lowSample =
+                cell.count !== undefined && cell.count < 5;
               return (
                 <g
                   key={col}
@@ -141,6 +192,11 @@ export default function HeatmapChart({
                   onMouseLeave={() => setHovered(null)}
                   style={{ cursor: "default" }}
                 >
+                  <title>
+                    {row} vs {col}
+                    {cell.label ? `: ${cell.label}` : ""}
+                    {cell.count !== undefined ? ` (${cell.count} games)` : ""}
+                  </title>
                   <rect
                     x={labelW + ci * cellSize}
                     y={headerH + ri * cellSize}
@@ -148,10 +204,27 @@ export default function HeatmapChart({
                     height={cellSize - 1}
                     fill={bg}
                     rx={2}
-                    opacity={isHovered ? 1 : 0.85}
-                    stroke={isHovered ? "var(--color-text)" : "none"}
-                    strokeWidth={isHovered ? 1.5 : 0}
+                    opacity={isHovered ? 1 : inCross ? 0.95 : 0.88}
+                    stroke={
+                      isHovered
+                        ? "var(--color-text)"
+                        : inCross
+                          ? "var(--color-gold)"
+                          : "none"
+                    }
+                    strokeWidth={isHovered ? 1.5 : inCross ? 0.8 : 0}
                   />
+                  {lowSample && (
+                    <line
+                      x1={labelW + ci * cellSize}
+                      y1={headerH + ri * cellSize}
+                      x2={labelW + ci * cellSize + cellSize - 1}
+                      y2={headerH + ri * cellSize + cellSize - 1}
+                      stroke="var(--color-text-muted)"
+                      strokeWidth={0.6}
+                      opacity={0.5}
+                    />
+                  )}
                   {cellSize >= 30 && (
                     <text
                       x={labelW + ci * cellSize + (cellSize - 1) / 2}
@@ -165,23 +238,26 @@ export default function HeatmapChart({
                       {cell.label ?? valueFormat(cell.value)}
                     </text>
                   )}
-                  {isHovered && cell.count !== undefined && (
-                    <text
-                      x={labelW + ci * cellSize + (cellSize - 1) / 2}
-                      y={headerH + ri * cellSize + cellSize + 10}
-                      textAnchor="middle"
-                      fontSize="8"
-                      fill="var(--color-text-muted)"
-                    >
-                      n={cell.count}
-                    </text>
-                  )}
                 </g>
               );
             })}
           </g>
         ))}
       </svg>
+      {showLegend && (
+        <div className="mt-3 flex items-center gap-3 text-fluid-xs text-muted">
+          <span className="shrink-0">Scale</span>
+          <div
+            className="h-2 flex-1 max-w-xs rounded"
+            style={{
+              background: `linear-gradient(90deg, ${colorScale.min}, ${colorScale.mid}, ${colorScale.max})`,
+            }}
+          />
+          <span className="tabular-nums shrink-0">
+            {valueFormat(minVal)} to {valueFormat(maxVal)}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

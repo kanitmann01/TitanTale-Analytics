@@ -1,9 +1,13 @@
 import fs from "fs";
 import type { TournamentInfo } from "@/lib/types";
+import type { SeasonId } from "@/lib/season-types";
 import { dataFilePath } from "./paths";
 
-export function getTournamentInfo(): TournamentInfo {
-  const raw = fs.readFileSync(dataFilePath("tournament_info.json"), "utf-8");
+export function getTournamentInfo(seasonId: SeasonId): TournamentInfo {
+  const raw = fs.readFileSync(
+    dataFilePath("tournament_info.json", seasonId),
+    "utf-8",
+  );
   const json = JSON.parse(raw);
   return {
     tournamentName: json.tournament_name,

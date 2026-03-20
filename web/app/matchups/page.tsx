@@ -1,23 +1,33 @@
+import type { Metadata } from "next";
 import {
   getPlayerH2H,
   getPlayerStats,
   getCivMatchups,
   getPlayerMapAffinities,
-  getSpiritCivMatchups,
 } from "@/lib/data";
 import HeatmapChart from "@/components/charts/HeatmapChart";
 import MiniBar from "@/components/charts/MiniBar";
+import AffinityHeatmapSection from "@/components/AffinityHeatmapSection";
+import PageLabel from "@/components/PageLabel";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
 
-export default function MatchupsPage() {
-  const h2h = getPlayerH2H();
-  const playerStats = getPlayerStats().sort((a, b) => b.win_rate - a.win_rate);
-  const civMatchups = getCivMatchups();
-  const affinities = getPlayerMapAffinities();
-  const spiritCivs = getSpiritCivMatchups();
+export async function generateMetadata(): Promise<Metadata> {
+  const seasonId = await getSeasonId();
+  return { title: pageTitle("Matchups", seasonId) };
+}
+
+export default async function MatchupsPage() {
+  const seasonId = await getSeasonId();
+  const h2h = getPlayerH2H(seasonId);
+  const playerStats = getPlayerStats(seasonId).sort(
+    (a, b) => b.win_rate - a.win_rate,
+  );
+  const civMatchups = getCivMatchups(seasonId);
+  const affinities = getPlayerMapAffinities(seasonId);
 
   const players = playerStats.map((p) => p.player);
 
-  // H2H heatmap data: value = player_a win fraction in series
   const h2hCells = h2h.map((h) => {
     const aFrac = h.a_game_wins / h.total_games;
     return {
@@ -29,7 +39,6 @@ export default function MatchupsPage() {
     };
   });
 
-  // Player-map affinity heatmap
   const topPlayers = players.slice(0, 15);
   const allMaps = Array.from(new Set(affinities.map((a) => a.map))).sort();
   const mapCells = affinities
@@ -44,10 +53,10 @@ export default function MatchupsPage() {
 
   return (
     <main className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-14">
         <header className="mb-10 anim-fade-up">
-          <p className="section-label-gold mb-3">Head-to-Head</p>
-          <h1 className="font-display text-fluid-2xl font-bold text-primary">
+          <PageLabel gold>Head-to-Head</PageLabel>
+          <h1 className="font-display text-fluid-2xl font-bold text-primary mt-3">
             Matchup Explorer
           </h1>
           <p className="text-fluid-base text-secondary mt-2 max-w-lg leading-relaxed">
@@ -56,41 +65,36 @@ export default function MatchupsPage() {
           </p>
         </header>
 
-        {/* Player H2H Grid */}
         <section className="mb-16 anim-fade-up d1">
           <h2 className="section-label mb-4">Player H2H Results</h2>
-          <div className="panel p-4">
+          <div className="panel p-4 overflow-x-auto min-w-0">
             <HeatmapChart
               data={h2hCells}
               rows={players}
               cols={players}
-              cellSize={38}
-              title="Cell shows row player's game wins vs column player. Green = row favored."
+              cellSize={34}
+              title="Cell shows row player game wins vs column player (read tooltip for full record). Green = row favored."
             />
           </div>
         </section>
 
-        {/* Player-Map Affinity Heatmap */}
         <section className="mb-16 anim-fade-up d2">
           <h2 className="section-label mb-4">
             Player-Map Affinity (WR delta vs baseline)
           </h2>
           <div className="panel p-4">
-            <HeatmapChart
+            <AffinityHeatmapSection
               data={mapCells}
               rows={topPlayers}
               cols={allMaps}
-              cellSize={34}
-              title="Green = above-baseline WR on this map. Red = below. Hover for game count."
             />
           </div>
         </section>
 
-        {/* Civ Matchup Table */}
         <section className="mb-16 anim-fade-up d3">
           <h2 className="section-label mb-4">Civilization Matchups</h2>
-          <div className="panel overflow-x-auto">
-            <table className="w-full text-fluid-sm">
+          <div className="panel overflow-x-auto min-w-0">
+            <table className="w-full text-fluid-sm min-w-[560px]">
               <thead>
                 <tr className="border-b border-ttl-border text-left text-muted uppercase tracking-wider text-fluid-xs">
                   <th className="py-2.5 pr-3">Civ A</th>
@@ -103,11 +107,6 @@ export default function MatchupsPage() {
               </thead>
               <tbody>
                 {civMatchups.slice(0, 25).map((cm) => {
-                  const spiritMatch = spiritCivs.find(
-                    (s) =>
-                      (s.civ_a === cm.civilization1 && s.civ_b === cm.civilization2) ||
-                      (s.civ_a === cm.civilization2 && s.civ_b === cm.civilization1),
-                  );
                   const lowN = cm.games_played < 3;
                   return (
                     <tr
@@ -134,8 +133,8 @@ export default function MatchupsPage() {
                             cm.civ1_win_rate > 0.6
                               ? "text-ttl-gold font-bold"
                               : cm.civ1_win_rate < 0.4
-                              ? "text-ttl-loss"
-                              : "text-secondary"
+                                ? "text-ttl-loss"
+                                : "text-secondary"
                           }
                         >
                           {(cm.civ1_win_rate * 100).toFixed(0)}%
@@ -166,14 +165,13 @@ export default function MatchupsPage() {
           </div>
         </section>
 
-        {/* H2H Detail Cards */}
         <section className="anim-fade-up d4">
           <h2 className="section-label mb-5">Series Detail</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {h2h.slice(0, 12).map((h) => (
               <div
                 key={`${h.player_a}-${h.player_b}`}
-                className="lift panel hover:border-ttl-border transition-colors"
+                className="lift panel hover:border-ttl-border transition-colors border border-ttl-border-subtle/60"
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-fluid-sm text-primary font-bold">
@@ -189,11 +187,7 @@ export default function MatchupsPage() {
                 <div className="flex items-center gap-2 mb-2">
                   <MiniBar
                     value={h.a_game_wins / h.total_games}
-                    color={
-                      h.series_winner === h.player_a
-                        ? "var(--color-chart-4)"
-                        : "var(--color-chart-5)"
-                    }
+                    color="var(--color-chart-4)"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-fluid-xs text-muted">

@@ -1,0 +1,17 @@
+{
+  "tournament_name": "T90 Titans League Season 2",
+  "start_date": "2021-01-01",
+  "end_date": "2021-03-31",
+  "prize_pool": 30000,
+  "currency": "USD",
+  "location": "Online",
+  "game": "Age of Empires II: Definitive Edition",
+  "format": "Double elimination bracket with group stage (demo: shares Season 5 match export)",
+  "total_players": 20,
+  "organizer": "T90Official",
+  "links": {
+    "liquipedia": "https://liquipedia.net/ageofempires/T90_Titans_League/Season_2",
+    "challonge": "",
+    "youtube": "https://youtube.com/@T90Official"
+  }
+}

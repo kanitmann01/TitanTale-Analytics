@@ -1,21 +1,31 @@
-import type { PlayerProfile, PlayerMatchHistory, PlayerCivPreference, PlayerStats } from "@/lib/types";
+import type {
+  PlayerProfile,
+  PlayerMatchHistory,
+  PlayerCivPreference,
+  PlayerStats,
+} from "@/lib/types";
 import { PlayerProfileSchema } from "@/lib/schemas";
+import type { SeasonId } from "@/lib/season-types";
 import { getMatches } from "./matches";
 import { getPlayerStats } from "./player-stats";
 
-export function getPlayerProfile(playerName: string): PlayerProfile | null {
-  const matches = getMatches();
-  const allPlayerStats = getPlayerStats();
-  
-  // Get player stats
-  const playerStats = allPlayerStats.find(p => p.player === playerName);
+export function getPlayerProfile(
+  seasonId: SeasonId,
+  playerName: string,
+): PlayerProfile | null {
+  const matches = getMatches(seasonId);
+  const allPlayerStats = getPlayerStats(seasonId);
+
+  const playerStats = allPlayerStats.find((p) => p.player === playerName);
   if (!playerStats) {
     return null;
   }
 
-  // Build match history
   const matchHistory: PlayerMatchHistory[] = [];
-  const civStats = new Map<string, { games: number; wins: number; losses: number }>();
+  const civStats = new Map<
+    string,
+    { games: number; wins: number; losses: number }
+  >();
 
   for (const match of matches) {
     if (match.player1 === playerName || match.player2 === playerName) {
@@ -35,14 +45,17 @@ export function getPlayerProfile(playerName: string): PlayerProfile | null {
         opponent_civ: opponentCiv,
         map: match.map,
         duration_minutes: match.duration_minutes,
-        result: won ? 'win' : 'loss',
+        result: won ? "win" : "loss",
         stage: match.stage,
         player_elo: playerElo,
         opponent_elo: opponentElo,
       });
 
-      // Track civ stats
-      const currentCivStats = civStats.get(playerCiv) || { games: 0, wins: 0, losses: 0 };
+      const currentCivStats = civStats.get(playerCiv) || {
+        games: 0,
+        wins: 0,
+        losses: 0,
+      };
       currentCivStats.games++;
       if (won) {
         currentCivStats.wins++;
@@ -53,10 +66,10 @@ export function getPlayerProfile(playerName: string): PlayerProfile | null {
     }
   }
 
-  // Sort match history by match_id descending (most recent first)
-  matchHistory.sort((a, b) => b.match_id - a.match_id || b.game_number - a.game_number);
+  matchHistory.sort(
+    (a, b) => b.match_id - a.match_id || b.game_number - a.game_number,
+  );
 
-  // Build civ preferences
   const civPreferences: PlayerCivPreference[] = Array.from(civStats.entries())
     .map(([civilization, stats]) => ({
       civilization,
@@ -84,12 +97,12 @@ export function getPlayerProfile(playerName: string): PlayerProfile | null {
   return PlayerProfileSchema.parse(profile);
 }
 
-export function getAllPlayerProfiles(): PlayerProfile[] {
-  const playerStats = getPlayerStats();
+export function getAllPlayerProfiles(seasonId: SeasonId): PlayerProfile[] {
+  const playerStats = getPlayerStats(seasonId);
   const profiles: PlayerProfile[] = [];
 
   for (const stats of playerStats) {
-    const profile = getPlayerProfile(stats.player);
+    const profile = getPlayerProfile(seasonId, stats.player);
     if (profile) {
       profiles.push(profile);
     }

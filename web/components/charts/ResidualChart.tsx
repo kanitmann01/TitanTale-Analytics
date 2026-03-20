@@ -24,6 +24,8 @@ interface ResidualChartProps {
   data: ResidualDatum[];
   xLabel?: string;
   yLabel?: string;
+  /** Visible chart headline inside the panel */
+  chartTitle?: string;
 }
 
 const TIER_COLORS: Record<string, string> = {
@@ -55,9 +57,16 @@ export default function ResidualChart({
   data,
   xLabel = "Expected Win Rate",
   yLabel = "Residual (Actual - Expected)",
+  chartTitle,
 }: ResidualChartProps) {
   return (
-    <ResponsiveContainer width="100%" height={340}>
+    <div className="w-full">
+      {chartTitle && (
+        <p className="text-fluid-sm font-bold text-primary mb-3 px-1">
+          {chartTitle}
+        </p>
+      )}
+      <ResponsiveContainer width="100%" height={340}>
       <ScatterChart margin={{ top: 10, right: 20, bottom: 40, left: 20 }}>
         <CartesianGrid
           strokeDasharray="3 3"
@@ -109,5 +118,6 @@ export default function ResidualChart({
         </Scatter>
       </ScatterChart>
     </ResponsiveContainer>
+    </div>
   );
 }

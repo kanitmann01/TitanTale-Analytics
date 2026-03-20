@@ -1,9 +1,21 @@
+import type { Metadata } from "next";
 import { getCivStats } from "@/lib/data";
-import HBarChart from "@/components/charts/HBarChart";
-import ScatterChart from "@/components/charts/ScatterChart";
+import MetaScatterChart from "@/components/charts/MetaScatterChart";
+import RankedHBarChart from "@/components/charts/RankedHBarChart";
+import PageLabel from "@/components/PageLabel";
+import { getSeasonId } from "@/lib/season-server";
+import { pageTitle } from "@/lib/site-metadata";
 
-export default function CivilizationsPage() {
-  const civs = getCivStats().sort((a, b) => b.pick_rate - a.pick_rate);
+export async function generateMetadata(): Promise<Metadata> {
+  const seasonId = await getSeasonId();
+  return { title: pageTitle("Civilizations", seasonId) };
+}
+
+export default async function CivilizationsPage() {
+  const seasonId = await getSeasonId();
+  const civs = getCivStats(seasonId).sort(
+    (a, b) => b.pick_rate - a.pick_rate,
+  );
 
   const pickBars = civs.slice(0, 15).map((c) => ({
     label: c.civilization,
@@ -21,8 +33,8 @@ export default function CivilizationsPage() {
         c.win_rate >= 0.55
           ? "var(--color-chart-1)"
           : c.win_rate >= 0.45
-          ? "var(--color-chart-2)"
-          : "var(--color-loss)",
+            ? "var(--color-chart-2)"
+            : "var(--color-loss)",
     }));
 
   const scatterData = civs
@@ -31,7 +43,13 @@ export default function CivilizationsPage() {
       label: c.civilization,
       x: c.pick_rate * 100,
       y: c.win_rate,
-      size: Math.max(3, Math.min(c.games_played / 4, 10)),
+      z: c.games_played,
+      fill:
+        c.win_rate >= 0.55
+          ? "var(--color-chart-1)"
+          : c.win_rate >= 0.45
+            ? "var(--color-chart-4)"
+            : "var(--color-chart-5)",
     }));
 
   const topPick = civs[0];
@@ -40,18 +58,18 @@ export default function CivilizationsPage() {
 
   return (
     <main className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-14">
         <header className="mb-10 anim-fade-up">
-          <p className="section-label-gold mb-3">Civilization Analysis</p>
-          <h1 className="font-display text-fluid-2xl font-bold text-primary">
+          <PageLabel gold>Civilization Analysis</PageLabel>
+          <h1 className="font-display text-fluid-2xl font-bold text-primary mt-3">
             {civs.length} Civilizations
           </h1>
           <p className="text-fluid-base text-secondary mt-2 max-w-lg leading-relaxed">
-            Pick rates, win rates, and the emerging meta from Season 5 matches.
+            Pick rates, win rates, and meta from tournament matches in the
+            selected season.
           </p>
         </header>
 
-        {/* Key insight strip */}
         <div className="flex flex-wrap gap-x-10 gap-y-4 mb-12 anim-slide-in d1">
           <div>
             <p className="text-fluid-xl font-display font-bold text-ttl-gold leading-none">
@@ -73,54 +91,52 @@ export default function CivilizationsPage() {
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
               {(avgWr * 100).toFixed(1)}%
             </p>
-            <p className="text-fluid-xs text-muted mt-1">avg win rate</p>
+            <p className="text-fluid-xs text-muted mt-1">field avg win rate</p>
           </div>
         </div>
 
-        {/* Scatter -- full width for prominence */}
         <section className="mb-14 anim-scale-in d2">
-          <h2 className="section-label mb-4">
-            Pick Rate vs Win Rate
-          </h2>
-          <div className="panel">
-            <ScatterChart
+          <h2 className="section-label mb-4">Pick Rate vs Win Rate</h2>
+          <div className="panel overflow-x-auto min-w-0">
+            <MetaScatterChart
               data={scatterData}
-              xLabel="Pick Rate %"
-              yLabel="Win Rate"
-              xFormatType="decimal"
-              color="var(--color-chart-2)"
+              xLabel="Pick rate (%)"
+              yLabel="Win rate"
+              chartTitle="Meta popularity vs effectiveness"
+              xTickFormatter={(v) => `${v.toFixed(0)}%`}
+              yTickFormatter={(v) => `${(v * 100).toFixed(0)}%`}
+              formatTooltipX={(v) => `Pick rate: ${v.toFixed(1)}%`}
+              formatTooltipY={(v) => `Win rate: ${(v * 100).toFixed(1)}%`}
             />
           </div>
-          <p className="text-fluid-xs text-muted mt-3">
-            Civilizations with fewer than 5 games excluded. Bubble size reflects
-            total games played.
+          <p className="callout mt-4 text-fluid-xs text-secondary">
+            Civilizations with fewer than 5 games excluded. Point color: gold
+            55%+ WR, teal 45-54%, purple below 45%. Cards below mark gold when
+            above field average ({(avgWr * 100).toFixed(1)}%).
           </p>
         </section>
 
-        {/* Two bar charts -- different panel styles */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
           <section className="anim-slide-in d3">
-            <h2 className="section-label mb-4">
-              Most Picked -- Top 15
-            </h2>
-            <div className="panel-flush p-5">
-              <HBarChart
+            <h2 className="section-label mb-4">Most Picked - Top 15</h2>
+            <div className="panel overflow-x-auto min-w-0">
+              <RankedHBarChart
                 data={pickBars}
                 formatValue={(v) => `${v.toFixed(1)}%`}
                 accentColor="var(--color-chart-2)"
+                caption="Teal bars = pick share (neutral volume), same palette as Analysis duration bars."
               />
             </div>
           </section>
 
           <section className="anim-fade-up d4">
-            <h2 className="section-label mb-4">
-              Highest Win Rate -- Top 15
-            </h2>
-            <div className="panel p-5">
-              <HBarChart
+            <h2 className="section-label mb-4">Highest Win Rate - Top 15</h2>
+            <div className="panel overflow-x-auto min-w-0">
+              <RankedHBarChart
                 data={winBars}
                 maxValue={100}
                 formatValue={(v) => `${v.toFixed(0)}%`}
+                caption="Gold: 55%+ win rate. Teal: 45-54%. Muted red: under 45%."
               />
             </div>
           </section>
@@ -128,66 +144,44 @@ export default function CivilizationsPage() {
 
         <div className="divider my-10" />
 
-        {/* Full civ grid -- tiered: top 5 prominent, rest compact */}
         <section className="anim-fade-up d5">
-          <h2 className="section-label mb-6">
-            All Civilizations
-          </h2>
-
-          {/* Tier 1: top 5 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {civs.slice(0, 6).map((c, i) => {
+          <h2 className="section-label mb-6">All Civilizations</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {civs.map((c, i) => {
               const winPct = (c.win_rate * 100).toFixed(1);
               const pickPct = (c.pick_rate * 100).toFixed(1);
+              const aboveAvg = c.win_rate > avgWr;
+              const rankClass =
+                i === 0
+                  ? "rank-1"
+                  : i === 1
+                    ? "rank-2"
+                    : i === 2
+                      ? "rank-3"
+                      : "rank-n";
               return (
                 <div
                   key={c.civilization}
-                  className={`lift rounded-lg border px-5 py-4 ${
-                    i < 2
-                      ? "panel-accent"
-                      : "border-ttl-border-subtle bg-ttl-raised"
-                  }`}
+                  className="lift rounded-lg border border-ttl-border-subtle bg-ttl-raised px-4 py-3 flex flex-col gap-2"
                 >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`rank-badge ${
-                      i === 0 ? "rank-1" : i === 1 ? "rank-2" : i === 2 ? "rank-3" : "rank-n"
-                    }`}>{i + 1}</span>
-                    <span className="text-fluid-sm text-primary font-bold truncate">
+                  <div className="flex items-center gap-2">
+                    <span className={`rank-badge ${rankClass}`}>{i + 1}</span>
+                    <span className="font-display text-fluid-sm font-bold text-ttl-gold truncate">
                       {c.civilization}
                     </span>
                   </div>
-                  <div className="flex items-center gap-4 text-fluid-xs">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-fluid-xs">
                     <span className="text-muted">{c.games_played}g</span>
-                    <span className={Number(winPct) >= 55 ? "text-ttl-gold font-bold" : "text-secondary"}>
+                    <span
+                      className={
+                        aboveAvg
+                          ? "text-ttl-gold font-bold"
+                          : "text-secondary"
+                      }
+                    >
                       {winPct}% WR
                     </span>
                     <span className="text-ttl-accent">{pickPct}% pick</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Rest: compact rows */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {civs.slice(6).map((c) => {
-              const winPct = (c.win_rate * 100).toFixed(1);
-              const pickPct = (c.pick_rate * 100).toFixed(1);
-              const isWeak = c.win_rate < 0.45;
-              return (
-                <div
-                  key={c.civilization}
-                  className="flex items-center justify-between rounded border border-ttl-border-subtle/70 bg-ttl-raised/60 px-4 py-2.5 hover:bg-ttl-slate/50 transition-colors"
-                >
-                  <span className="text-fluid-sm text-primary font-medium truncate mr-3">
-                    {c.civilization}
-                  </span>
-                  <div className="flex items-center gap-4 text-fluid-xs shrink-0">
-                    <span className="text-muted">{c.games_played}g</span>
-                    <span className={isWeak ? "text-ttl-loss" : "text-secondary"}>
-                      {winPct}%
-                    </span>
-                    <span className="text-ttl-accent">{pickPct}%</span>
                   </div>
                 </div>
               );

@@ -1,9 +1,10 @@
 import type { MapResult } from "@/lib/types";
+import type { SeasonId } from "@/lib/season-types";
 import { parseCSV } from "./csv";
 import { dataFilePath } from "./paths";
 
-export function getMapResults(): MapResult[] {
-  const rows = parseCSV(dataFilePath("map_results.csv"));
+export function getMapResults(seasonId: SeasonId): MapResult[] {
+  const rows = parseCSV(dataFilePath("map_results.csv", seasonId));
   return rows.map((row) => ({
     match_id: row.match_id,
     game_number: Number(row.game_number),

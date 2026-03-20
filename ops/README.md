@@ -1,5 +1,7 @@
 # ops/ -- Project Operations
 
+Last audited: 2026-03-20
+
 Lightweight task tracking and changelog system designed for multi-agent workflows
 with minimal token overhead.
 
@@ -22,7 +24,7 @@ ops/
 ## Rules for Agents
 
 1. **Read `CURRENT.md` first.** It is the only file every agent should open at the start of a session.
-2. **Open only the files you need.** Do not read the full `done/` archive or old changelogs.
+2. **Open only the files you need.** Do not read the full `done/` archive or old changelogs unless an explicit audit request requires it.
 3. **Append, do not rewrite.** Changelog entries are single-line appends. Task files are small and self-contained.
 4. **Move task files** between `backlog/`, `in-progress/`, and `done/` to reflect status changes. Also update the `Status:` field inside the file.
 5. **Keep `CURRENT.md` under 30 lines.** It is a snapshot, not a history.

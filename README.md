@@ -3,6 +3,8 @@
 Analytics and visualization platform for the **T90 Titans League Season 5**
 (Age of Empires II: Definitive Edition).
 
+Last audited: 2026-03-20
+
 [![DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/kanitmann01/TitanTale-Analytics)
 
 ---
@@ -14,9 +16,10 @@ tournament data from the T90 Titans League:
 
 1. **Python analytics pipeline** -- ETL, exploratory data analysis, and
    statistical modeling at the repo root. Produces structured CSV/JSON
-   in `data/`.
-2. **Next.js web app** (in progress) -- full-stack UI in `web/` that
-   presents the data with a polished, impeccable design quality bar.
+   in `data/` and visualizations in `assets/`.
+2. **Next.js web app** -- full-stack UI in `web/` that presents the data
+   through typed adapters, with routes for players, civilizations, maps,
+   analysis, matchups, compare, research, and test-data.
 
 ### Dataset at a Glance
 
@@ -41,7 +44,7 @@ tournament data from the T90 Titans League:
                    CSV + JSON
                    /        \
      analyze_*.py            web/ (Next.js)
-     (EDA, stats)            (UI, adapters)
+     (EDA, stats)            (adapters, pages)
           |                       |
        assets/              Browser
      (PNG plots)
@@ -49,7 +52,8 @@ tournament data from the T90 Titans League:
 
 The two layers are decoupled by design
 ([ADR-001](ops/decisions/ADR-001-web-boundary.md)). Python scripts produce
-data; the web app consumes it. Neither layer imports from the other.
+data; the web app consumes it through typed adapters in `web/lib/data/`.
+Neither layer imports from the other.
 
 ---
 
@@ -57,21 +61,25 @@ data; the web app consumes it. Neither layer imports from the other.
 
 ### Analytics Pipeline
 
-```
+```bash
 pip install -r requirements.txt
-python scraper.py
+python generate_sample_data.py
 python analyze_ttl_s5.py
 ```
 
-Output lands in `data/` (CSVs) and `assets/` (visualizations).
+Output lands in `data/` (CSV/JSON) and `assets/` (visualizations).
+See [README_ETL.md](README_ETL.md) for full pipeline documentation.
 
-### Web App (when available)
+### Web App
 
-```
+```bash
 cd web
 npm install
 npm run dev
 ```
+
+Open `http://localhost:3000`. The app reads CSV/JSON from `data/` via
+server-side adapters -- no separate API server needed.
 
 ---
 
@@ -85,9 +93,13 @@ TTL Stats/
   advanced_statistical_analysis.py  Advanced stats and modeling
   generate_sample_data.py       Sample data generator for dev/test
   validate_ascii.py             ASCII compliance checker
-  data/                         Structured CSV/JSON output
-  assets/                       Visualization PNGs (planned)
-  web/                          (planned) Next.js App Router app
+  data/                         Structured CSV/JSON output (core + spirit datasets)
+  assets/                       Visualization PNGs (current spirit charts under assets/spirit/)
+  web/                          Next.js App Router app
+    app/                        Routes: /, /players, /civilizations, /maps, /analysis, /matchups, /compare, /research, /test-data
+    lib/data/                   Typed CSV/JSON adapters and parser utilities
+    lib/types.ts                Shared TypeScript interfaces
+    lib/schemas/                Zod runtime validation
   agents/                       Multi-agent instruction files (Paperclip)
   ops/
     CURRENT.md                  Active project snapshot
@@ -106,9 +118,9 @@ TTL Stats/
 | Layer | Stack |
 |-------|-------|
 | Analytics | Python 3.10+, pandas, scipy, seaborn, matplotlib, BeautifulSoup |
-| Web (planned) | Next.js (App Router), TypeScript, Tailwind CSS |
+| Web | Next.js 14 (App Router), TypeScript, Tailwind CSS, Zod |
 | Data | CSV files in `data/`, JSON metadata |
-| Agent System | Paperclip multi-agent orchestration (12 agents) |
+| Agent System | Paperclip multi-agent orchestration |
 
 ---
 
@@ -130,7 +142,7 @@ narrative.
 
 ## Contributing
 
-See [AGENTS.md](Agents.MD) for project conventions. Branch from `dev`,
+See [AGENTS.md](AGENTS.md) for project conventions. Branch from `dev`,
 one branch per task (`feature/TASK-NNN-slug`). PRs target `dev`, not
 `main`. Commits follow
 [Conventional Commits](https://www.conventionalcommits.org/) with ASCII
@@ -140,4 +152,5 @@ only.
 
 ## License
 
-TBD
+This project is licensed under the **GNU General Public License v3.0**.
+See [LICENSE](LICENSE) for the full text.

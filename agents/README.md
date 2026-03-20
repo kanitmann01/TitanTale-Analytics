@@ -1,5 +1,7 @@
 # agents/ -- Per-Agent Instruction Files
 
+Last audited: 2026-03-20
+
 Each file is a **static instruction file** for one Paperclip agent. It is
 injected into the system prompt once, cached by the LLM, and used as the
 foundational rulebook. It does NOT change between heartbeats.
@@ -31,6 +33,7 @@ agents/<role>.md                        Heartbeat prompt template
 | `backend-engineer.md` | Backend Engineer |
 | `data-engineer.md` | Data Engineer |
 | `statistical-modeler.md` | Statistical Modeler |
+| `spirit-of-the-law.md` | Spirit of the Law (Deep Investigative Analyst) |
 | `design-polish.md` | Design/Polish Agent |
 | `performance.md` | Performance Agent |
 | `qa-reviewer.md` | QA Reviewer |
@@ -48,4 +51,4 @@ For each agent in Paperclip's org chart:
 
 If you do not want per-agent files, point all agents at `AGENTS.md` in the
 repo root. It works as a shared instruction file but costs more tokens per
-heartbeat since every agent loads the full 103-line shared context.
+heartbeat since every agent loads the full shared project context each cycle.

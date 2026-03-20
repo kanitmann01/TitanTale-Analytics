@@ -1,138 +1,113 @@
-# T90 Titans League Season 5 - ETL Pipeline
+# T90 Titans League Season 5 -- ETL Pipeline
+
+Last audited: 2026-03-20
 
 ## Overview
 
-This directory contains the ETL (Extract, Transform, Load) pipeline for T90 Titans League Season 5 data. The pipeline extracts match results, civilization drafts, and map outcomes from Liquipedia and prepares the data for statistical analysis.
+The ETL pipeline extracts Age of Empires II tournament data from Liquipedia (or
+generates sample data locally) and produces structured CSV/JSON files in `data/`.
+These outputs feed both the Python statistical analysis scripts and the Next.js
+web app in `web/`.
 
-## Directory Structure
+**Status:** Pipeline complete. Outputs are produced for both core analytics and
+Spirit_of_the_Law investigations.
+
+## Pipeline Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scraper.py` | Fetches data from Liquipedia (blocked by Cloudflare; see Troubleshooting) |
+| `generate_sample_data.py` | Generates realistic sample data for dev/test (current primary source) |
+| `analyze_ttl_s5.py` | Core statistical analysis on `data/` CSVs |
+| `advanced_statistical_analysis.py` | Extended EDA and advanced metrics outputs |
+| `spirit_of_the_law_analysis.py` | Question-driven deep investigations (spirit data + charts) |
+
+## Produced Data Files
+
+All outputs live in `data/`. For column-level detail, see `DATA_SCHEMA.md`.
+
+| File | Description |
+|------|-------------|
+| `ttl_s5_matches.csv` | Game-by-game results with ELO, civ, map, duration |
+| `matches.csv` | Group standings snapshot by league tier |
+| `players.csv` | Normalized player info (name, team, country, seed) |
+| `player_statistics.csv` | Aggregated player stats (win rate, ELO, game counts) |
+| `player_advanced_metrics.csv` | Advanced player scoring and consistency metrics |
+| `player_h2h.csv` | Player head-to-head records |
+| `scouting_reports.csv` | Scouting-style summary indicators |
+| `player_civs.csv` | Civ performance by league tier |
+| `civ_drafts.csv` | Per-game civ draft picks |
+| `civilization_statistics.csv` | Aggregated civ stats (win rate, pick rate, avg duration) |
+| `draft_position_outcomes.csv` | Performance by draft order/position |
+| `map_results.csv` | Individual game results by map |
+| `map_statistics.csv` | Map-level aggregates (avg duration, balance) |
+| `map_outcomes.csv` | Map play rates by league tier |
+| `tournament_info.json` | Tournament metadata (dates, prize pool, format) |
+
+Spirit outputs in `data/spirit/`:
+
+| File | Description |
+|------|-------------|
+| `civ_matchup_matrix.csv` | Civ-vs-civ matchup win-rate matrix |
+| `clutch_factor.csv` | High-pressure performance indicators |
+| `player_map_affinity.csv` | Player specialization by map |
+| `upset_probability_by_elo_bin.csv` | Upset likelihood by ELO spread bins |
+
+## How the Web App Consumes Data
+
+The Next.js app in `web/` reads `data/` files through typed adapters in
+`web/lib/data/`. This is the only coupling point between the two layers
+(see `ops/decisions/ADR-001-web-boundary.md`).
 
 ```
-TTL Stats/
-+-- data/                          # Output data directory
-|   +-- matches.csv                # Match results
-|   +-- civ_drafts.csv             # Civilization draft data
-|   +-- map_results.csv            # Individual game results
-|   +-- players.csv                # Player information
-|   +-- tournament_info.json       # Tournament metadata
-+-- scraper.py                     # Main web scraper
-+-- parse_html.py                  # Local HTML parser
-+-- generate_sample_data.py        # Sample data generator
-+-- DATA_SCHEMA.md                 # Data schema documentation
-+-- README_ETL.md                  # This file
+data/*.csv  -->  web/lib/data/<domain>.ts  -->  Server Components / API routes
+                     |
+              web/lib/types.ts (shared TS interfaces)
+              web/lib/schemas/  (optional Zod validation)
 ```
 
-## Data Files
+Adapters parse CSV at build or request time and return typed arrays. Frontend
+pages never read CSV files directly.
 
-### matches.csv
-- **Rows:** 47 matches
-- **Columns:** match_id, round, player1, player2, score, winner, date, best_of, vod_url
-- **Description:** Tournament bracket results
+## Data Quality
 
-### civ_drafts.csv
-- **Rows:**141 draft entries
-- **Columns:** match_id, game_number, map, player1_civ, player2_civ, player1_civ_draft_order, player2_civ_draft_order, winner_civ, winner
-- **Description:** Civilization draft picks per game
+- **Player names:** clan tags, sponsor prefixes, and common variants normalized.
+- **Civilization names:** standardized to official AoE2:DE names.
+- **Map names:** official map pool names only.
 
-### map_results.csv
-- **Rows:** 195 game results
-- **Columns:** match_id, game_number, map, player1, player2, player1_civ, player2_civ, winner, duration, player1_score, player2_score
-- **Description:** Individual game outcomes
-
-### players.csv
-- **Rows:** 20 players
-- **Columns:** player_id, player_name, player_name_variants, team, country, seed
-- **Description:** Normalized player information
-
-### tournament_info.json
-- **Description:** Tournament metadata including dates, prize pool, format, etc.
+See `DATA_SCHEMA.md` for normalization rules and column definitions.
 
 ## Usage
 
-### Option1: Scrape from Liquipedia (when available)
-
-```bash
-python scraper.py
-```
-
-This will attempt to fetch data from:
-- `https://liquipedia.net/ageofempires/T90_Titans_League/Season_5`
-- `https://liquipedia.net/ageofempires/T90_Titans_League_Season_5`
-- `https://liquipedia.net/ageofempires/T90_Titans_League`
-
-**Note:** Liquipedia currently blocks automated requests (403 Forbidden). UseOption 2 or 3 instead.
-
-### Option 2: Parse locally saved HTML
-
-```bash
-python parse_html.py <path_to_html_file>
-```
-
-This parses downloaded HTML files from Liquipedia. Use this if you can manually download pages through a browser.
-
-### Option 3: Generate sample data
+Generate sample data (primary workflow):
 
 ```bash
 python generate_sample_data.py
 ```
 
-Generates realistic sample data for testing and development. **Current status:** Using this option as primary data source.
+Run statistical analysis:
 
-## Data Quality
-
-### Player Name Normalization
-- Clan tags removed: `[NaV]_Viper_` -> `Viper`
-- Common variants standardized: `Yo`, `_Yo_`, `Yo_` -> `Yo`
-- Sponsor prefixes removed
-
-### Civilization Names
-- Standardized to officialgame names
-- Examples: `Aztecs`, `Berbers`, `Britons`, `Burgundians`
-
-### Map Names
-- Official map pool names used
-- Examples: `Arabia`, `Arena`, `Coastal`, `Hideout`
-
-## Current Status
-
-**Data Source:** Sample data generated locally  
-**Reason:** Liquipedia blocks automated requests  
-**Solution:** 
-1. Use sample data for immediate analysis
-2. Manually download HTML files when available
-3. Use alternative data sources (AoE2.net, Challonge)
-
-## Next Steps
-
-Statistical Modeler can now:
-1. Load data from `/data/` directory
-2. Perform EDA on matches, civ drafts, and map results
-3. Calculate win rates, pick rates, correlations
-4. Generate visualizations in `/assets/` directory
+```bash
+python analyze_ttl_s5.py
+python advanced_statistical_analysis.py
+```
 
 ## Technical Notes
 
-- Scripts use Python 3.12+
-- Dependencies: `requests`, `beautifulsoup4`, `pandas`
-- All data files use UTF-8 encoding
-- CSVs use comma delimiter
+- Python 3.10+
+- Dependencies: `requests`, `beautifulsoup4`, `pandas`, `scipy`, `seaborn`, `matplotlib`
+- All CSV files use UTF-8 encoding with comma delimiters
 - JSON uses 2-space indentation
 
 ## Troubleshooting
 
-### 403 Forbidden Error
-- Liquipedia has anti-bot protection
-- Use manual HTML download or sample data
-- Consider using browser automation (Selenium, Playwright)
+**403 Forbidden from Liquipedia:** Cloudflare blocks automated requests. Use
+`generate_sample_data.py` or manually download HTML and parse locally.
 
-### Empty DataFiles
-- Run `generate_sample_data.py` to create test data
-- Check if HTML file contains actual tournament data
+**Empty data files:** Run `generate_sample_data.py` to regenerate test data.
 
-### Missing Dependencies
+**Missing dependencies:**
+
 ```bash
-pip install requests beautifulsoup4 pandas
+pip install requests beautifulsoup4 pandas scipy seaborn matplotlib
 ```
-
-## Contact
-
-For questions about the ETL pipeline, refer to `DATA_SCHEMA.md` for detailed field descriptions.

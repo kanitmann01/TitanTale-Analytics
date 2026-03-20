@@ -9,6 +9,8 @@ import HeatmapChart from "@/components/charts/HeatmapChart";
 import MiniBar from "@/components/charts/MiniBar";
 import AffinityHeatmapSection from "@/components/AffinityHeatmapSection";
 import PageLabel from "@/components/PageLabel";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import { getSeasonId } from "@/lib/season-server";
 import { pageTitle } from "@/lib/site-metadata";
 
@@ -66,59 +68,138 @@ export default async function MatchupsPage() {
         </header>
 
         <section className="mb-16 anim-fade-up d1">
-          <h2 className="section-label mb-4">Player H2H Results</h2>
-          <div className="panel p-4 overflow-x-auto min-w-0">
+          <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+            Player H2H Results
+            <StatHelp
+              text={STAT_HELP.playerH2HHeatmap}
+              ariaLabel={helpAria("Player H2H Results")}
+            />
+          </h2>
+          <div className="panel p-4 overflow-x-auto min-w-0 touch-pan-x overscroll-x-contain">
             <HeatmapChart
               data={h2hCells}
               rows={players}
               cols={players}
               cellSize={34}
-              title="Cell shows row player game wins vs column player (read tooltip for full record). Green = row favored."
             />
           </div>
+          <p className="md:hidden text-fluid-xs text-muted text-center px-2 mt-2">
+            Scroll the heatmap horizontally to see all players.
+          </p>
         </section>
 
         <section className="mb-16 anim-fade-up d2">
-          <h2 className="section-label mb-4">
+          <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
             Player-Map Affinity (WR delta vs baseline)
+            <StatHelp
+              text={STAT_HELP.playerMapAffinityHeatmap}
+              ariaLabel={helpAria("Player-Map Affinity")}
+            />
           </h2>
-          <div className="panel p-4">
+          <div className="panel p-4 overflow-x-auto min-w-0 touch-pan-x overscroll-x-contain">
             <AffinityHeatmapSection
               data={mapCells}
               rows={topPlayers}
               cols={allMaps}
             />
           </div>
+          <p className="md:hidden text-fluid-xs text-muted text-center px-2 mt-2">
+            Scroll horizontally to compare players across the full map list.
+          </p>
         </section>
 
         <section className="mb-16 anim-fade-up d3">
-          <h2 className="section-label mb-4">Civilization Matchups</h2>
-          <div className="panel overflow-x-auto min-w-0">
+          <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+            Civilization Matchups
+            <StatHelp
+              text={STAT_HELP.civMatchupSection}
+              ariaLabel={helpAria("Civilization Matchups")}
+            />
+          </h2>
+          <div className="panel overflow-x-auto min-w-0 touch-pan-x overscroll-x-contain scroll-pl-4">
             <table className="w-full text-fluid-sm min-w-[560px]">
               <thead>
                 <tr className="border-b border-ttl-border text-left text-muted uppercase tracking-wider text-fluid-xs">
-                  <th className="py-2.5 pr-3">Civ A</th>
-                  <th className="py-2.5 pr-3">Civ B</th>
-                  <th className="py-2.5 pr-3 text-right">Games</th>
-                  <th className="py-2.5 pr-3 text-right">A Win Rate</th>
-                  <th className="py-2.5 pr-3 w-28">Balance</th>
-                  <th className="py-2.5 text-right">Avg Dur.</th>
+                  <th className="py-2.5 pr-3 w-36 max-lg:sticky max-lg:left-0 max-lg:z-20 max-lg:bg-ttl-raised max-lg:shadow-[2px_0_10px_-4px_rgba(0,0,0,0.45)]">
+                    <span className="inline-flex items-center gap-1">
+                      Civ A
+                      <StatHelp
+                        text={STAT_HELP.civMatchupCivA}
+                        ariaLabel={helpAria("Civ A")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3 w-36 max-lg:sticky max-lg:left-36 max-lg:z-20 max-lg:bg-ttl-raised max-lg:shadow-[4px_0_14px_-6px_rgba(0,0,0,0.55)]">
+                    <span className="inline-flex items-center gap-1">
+                      Civ B
+                      <StatHelp
+                        text={STAT_HELP.civMatchupCivB}
+                        ariaLabel={helpAria("Civ B")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3 text-right">
+                    <span className="inline-flex items-center justify-end gap-1 w-full">
+                      Games
+                      <StatHelp
+                        text={STAT_HELP.civMatchupGames}
+                        ariaLabel={helpAria("Games")}
+                        align="end"
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3 text-right">
+                    <span className="inline-flex items-center justify-end gap-1 w-full">
+                      A Win Rate
+                      <StatHelp
+                        text={STAT_HELP.civMatchupAWinRate}
+                        ariaLabel={helpAria("A Win Rate")}
+                        align="end"
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3 w-28">
+                    <span className="inline-flex items-center gap-1">
+                      Balance
+                      <StatHelp
+                        text={STAT_HELP.civMatchupBalance}
+                        ariaLabel={helpAria("Balance")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 text-right">
+                    <span className="inline-flex items-center justify-end gap-1 w-full">
+                      Avg Dur.
+                      <StatHelp
+                        text={STAT_HELP.civMatchupAvgDur}
+                        ariaLabel={helpAria("Avg Dur.")}
+                        align="end"
+                      />
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {civMatchups.slice(0, 25).map((cm) => {
                   const lowN = cm.games_played < 3;
+                  const stickyCivBg = lowN
+                    ? "max-lg:bg-ttl-raised/50 max-lg:group-hover:bg-ttl-slate/25"
+                    : "max-lg:bg-ttl-raised max-lg:group-hover:bg-ttl-slate/40";
                   return (
                     <tr
                       key={`${cm.civilization1}-${cm.civilization2}`}
-                      className={`border-b border-ttl-border-subtle/60 transition-colors ${
+                      className={`group border-b border-ttl-border-subtle/60 transition-colors ${
                         lowN ? "opacity-50" : "hover:bg-ttl-slate/40"
                       }`}
                     >
-                      <td className="py-2.5 pr-3 text-primary font-medium">
+                      <td
+                        className={`py-2.5 pr-3 w-36 text-primary font-medium max-lg:sticky max-lg:left-0 max-lg:z-10 max-lg:shadow-[3px_0_12px_-5px_rgba(0,0,0,0.5)] ${stickyCivBg}`}
+                      >
                         {cm.civilization1}
                       </td>
-                      <td className="py-2.5 pr-3 text-primary font-medium">
+                      <td
+                        className={`py-2.5 pr-3 w-36 text-primary font-medium max-lg:sticky max-lg:left-36 max-lg:z-10 max-lg:shadow-[4px_0_14px_-6px_rgba(0,0,0,0.55)] ${stickyCivBg}`}
+                      >
                         {cm.civilization2}
                       </td>
                       <td className="py-2.5 pr-3 text-right text-secondary">
@@ -158,9 +239,14 @@ export default async function MatchupsPage() {
                 })}
               </tbody>
             </table>
+            <p className="md:hidden text-fluid-xs text-muted text-center px-3 py-2.5 border-t border-ttl-border-subtle/60 bg-ttl-navy/20">
+              Swipe sideways for games, win rate, balance, and duration.
+            </p>
             <p className="text-fluid-xs text-muted mt-3 px-1">
-              * = fewer than 3 games. No civ matchup reached statistical
-              significance (p &lt; 0.05). Data is sparse across 39 civs.
+              * = fewer than 3 games. Spirit tests found no significant civ-pair
+              imbalance among 25 pairs (min 3 games) -- low power and meta
+              avoidance mean this is not proof of perfect balance. Sparse data
+              across 39 civs.
             </p>
           </div>
         </section>

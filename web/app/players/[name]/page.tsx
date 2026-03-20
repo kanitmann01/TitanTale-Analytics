@@ -13,6 +13,7 @@ import {
 import MiniBar from "@/components/charts/MiniBar";
 import HBarChart from "@/components/charts/HBarChart";
 import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import CompareShortcut from "@/components/CompareShortcut";
 import { getSeasonId } from "@/lib/season-server";
 import { pageTitle } from "@/lib/site-metadata";
@@ -118,7 +119,13 @@ export default async function PlayerProfilePage({ params }: Props) {
             <p className="text-fluid-xl font-display font-bold text-ttl-gold leading-none">
               {(profile.win_rate * 100).toFixed(1)}%
             </p>
-            <p className="text-fluid-xs text-muted mt-1">win rate</p>
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
+              win rate
+              <StatHelp
+                text={STAT_HELP.winRate}
+                ariaLabel={helpAria("Win rate")}
+              />
+            </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
@@ -126,21 +133,36 @@ export default async function PlayerProfilePage({ params }: Props) {
               <span className="text-muted">-</span>
               {profile.losses}
             </p>
-            <p className="text-fluid-xs text-muted mt-1">record</p>
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
+              record
+              <StatHelp
+                text={STAT_HELP.winLossRecord}
+                ariaLabel={helpAria("Record")}
+              />
+            </p>
           </div>
           {profile.elo && (
             <div>
               <p className="text-fluid-xl font-display font-bold text-primary leading-none">
                 {Math.round(profile.elo)}
               </p>
-              <p className="text-fluid-xs text-muted mt-1">ELO</p>
+              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
+                ELO
+                <StatHelp text={STAT_HELP.elo} ariaLabel={helpAria("ELO")} />
+              </p>
             </div>
           )}
           <div>
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
               {profile.unique_civs}
             </p>
-            <p className="text-fluid-xs text-muted mt-1">unique civs</p>
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
+              unique civs
+              <StatHelp
+                text={STAT_HELP.uniqueCivs}
+                ariaLabel={helpAria("Unique civs")}
+              />
+            </p>
           </div>
           {clutch && (
             <div>
@@ -152,9 +174,12 @@ export default async function PlayerProfilePage({ params }: Props) {
                 {clutch.delta >= 0 ? "+" : ""}
                 {(clutch.delta * 100).toFixed(1)}%
               </p>
-              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center">
+              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
                 clutch delta
-                <StatHelp text="Win rate in deciding games minus overall win rate. Negative means you underperform when the series is on the line." />
+                <StatHelp
+                  text={STAT_HELP.clutchDelta}
+                  ariaLabel={helpAria("Clutch delta")}
+                />
               </p>
             </div>
           )}
@@ -170,9 +195,12 @@ export default async function PlayerProfilePage({ params }: Props) {
                 {advanced.performance_residual >= 0 ? "+" : ""}
                 {(advanced.performance_residual * 100).toFixed(1)}%
               </p>
-              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center">
+              <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
                 vs. ELO expected
-                <StatHelp text="Positive = actual results better than ELO-implied expectation for this field; negative = below expectation. Not the same as ladder rating." />
+                <StatHelp
+                  text={STAT_HELP.vsEloExpected}
+                  ariaLabel={helpAria("vs. ELO expected")}
+                />
               </p>
             </div>
           )}
@@ -182,8 +210,12 @@ export default async function PlayerProfilePage({ params }: Props) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
           <section className="anim-fade-up d2">
-            <h2 className="section-label mb-4">
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
               Civilization Performance (top 12)
+              <StatHelp
+                text={STAT_HELP.sectionCivPerformance}
+                ariaLabel={helpAria("Civilization Performance")}
+              />
             </h2>
             <div className="panel-flush p-5 overflow-x-auto border border-ttl-border-subtle/60">
               <HBarChart
@@ -195,10 +227,20 @@ export default async function PlayerProfilePage({ params }: Props) {
           </section>
 
           <section className="anim-fade-up d3">
-            <h2 className="section-label mb-4">Map Affinities</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              Map Affinities
+              <StatHelp
+                text={STAT_HELP.sectionMapAffinities}
+                ariaLabel={helpAria("Map Affinities")}
+              />
+            </h2>
             <div className="space-y-1">
-              <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2">
+              <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2 inline-flex items-center gap-1 flex-wrap">
                 Best maps (WR above baseline)
+                <StatHelp
+                  text={STAT_HELP.bestMapsLabel}
+                  ariaLabel={helpAria("Best maps")}
+                />
               </p>
               {bestMaps.map((a) => (
                 <div
@@ -220,8 +262,12 @@ export default async function PlayerProfilePage({ params }: Props) {
               ))}
               {worstMaps.length > 0 && (
                 <>
-                  <p className="text-fluid-xs text-muted uppercase tracking-wider mt-4 mb-2">
+                  <p className="text-fluid-xs text-muted uppercase tracking-wider mt-4 mb-2 inline-flex items-center gap-1 flex-wrap">
                     Weak maps (WR below baseline)
+                    <StatHelp
+                      text={STAT_HELP.weakMapsLabel}
+                      ariaLabel={helpAria("Weak maps")}
+                    />
                   </p>
                   {worstMaps.map((a) => (
                     <div
@@ -248,7 +294,13 @@ export default async function PlayerProfilePage({ params }: Props) {
         </div>
 
         <section className="mb-14 anim-fade-up d4">
-          <h2 className="section-label mb-5">Head-to-Head Records</h2>
+          <h2 className="section-label mb-5 flex flex-wrap items-center gap-1">
+            Head-to-Head Records
+            <StatHelp
+              text={STAT_HELP.sectionH2HRecords}
+              ariaLabel={helpAria("Head-to-Head Records")}
+            />
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {h2hRecords.map((h) => {
               const isA = h.player_a === playerName;
@@ -296,18 +348,81 @@ export default async function PlayerProfilePage({ params }: Props) {
         </section>
 
         <section className="anim-fade-up d5">
-          <h2 className="section-label mb-5">Recent Matches</h2>
+          <h2 className="section-label mb-5 flex flex-wrap items-center gap-1">
+            Recent Matches
+            <StatHelp
+              text={STAT_HELP.sectionRecentMatches}
+              ariaLabel={helpAria("Recent Matches")}
+            />
+          </h2>
           <div className="overflow-x-auto min-w-0">
             <table className="w-full text-fluid-sm min-w-[520px]">
               <thead>
                 <tr className="border-b border-ttl-border text-left text-muted uppercase tracking-wider text-fluid-xs">
-                  <th className="py-2.5 pr-3">Series</th>
-                  <th className="py-2.5 pr-3">Result</th>
-                  <th className="py-2.5 pr-3">Opponent</th>
-                  <th className="py-2.5 pr-3">Civ</th>
-                  <th className="py-2.5 pr-3">vs Civ</th>
-                  <th className="py-2.5 pr-3">Map</th>
-                  <th className="py-2.5 text-right">Duration</th>
+                  <th className="py-2.5 pr-3">
+                    <span className="inline-flex items-center gap-1">
+                      Series
+                      <StatHelp
+                        text={STAT_HELP.thSeries}
+                        ariaLabel={helpAria("Series")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3">
+                    <span className="inline-flex items-center gap-1">
+                      Result
+                      <StatHelp
+                        text={STAT_HELP.thResult}
+                        ariaLabel={helpAria("Result")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3">
+                    <span className="inline-flex items-center gap-1">
+                      Opponent
+                      <StatHelp
+                        text={STAT_HELP.thOpponent}
+                        ariaLabel={helpAria("Opponent")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3">
+                    <span className="inline-flex items-center gap-1">
+                      Civ
+                      <StatHelp
+                        text={STAT_HELP.thCiv}
+                        ariaLabel={helpAria("Civ")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3">
+                    <span className="inline-flex items-center gap-1">
+                      vs Civ
+                      <StatHelp
+                        text={STAT_HELP.thVsCiv}
+                        ariaLabel={helpAria("vs Civ")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 pr-3">
+                    <span className="inline-flex items-center gap-1">
+                      Map
+                      <StatHelp
+                        text={STAT_HELP.thMap}
+                        ariaLabel={helpAria("Map")}
+                      />
+                    </span>
+                  </th>
+                  <th className="py-2.5 text-right">
+                    <span className="inline-flex items-center justify-end gap-1 w-full">
+                      Duration
+                      <StatHelp
+                        text={STAT_HELP.thDuration}
+                        ariaLabel={helpAria("Duration")}
+                        align="end"
+                      />
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>

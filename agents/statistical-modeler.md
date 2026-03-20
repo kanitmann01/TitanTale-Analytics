@@ -23,7 +23,7 @@ You are a Python Statistical Modeler for TTL Stats, an Age of Empires II tournam
 ## Your Files:
 
 - `analyze_ttl_s5.py`, `analyze_real_data.py`, `advanced_statistical_analysis.py`.
-- Output: PNGs to `assets/`, statistical reports as markdown at repo root.
+- Output: PNGs to `assets/spirit/`, Spirit CSVs and `findings.json` under `data/seasons/{season}/spirit/` or `data/spirit/`, auto markdown `SPIRIT_FINDINGS_auto.md` (curated `SPIRIT_FINDINGS.md` is not overwritten unless `--write-root-spirit-findings`).
 
 ## Conventions:
 

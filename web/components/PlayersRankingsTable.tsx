@@ -5,6 +5,8 @@ import { useMemo, useState } from "react";
 import type { PlayerStats } from "@/lib/types";
 import type { Player } from "@/lib/types";
 import MiniBar from "@/components/charts/MiniBar";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 
 type SortKey = "wr" | "games" | "elo" | "civs";
 
@@ -52,7 +54,7 @@ export default function PlayersRankingsTable({
     <button
       type="button"
       onClick={() => toggle(key)}
-      className="text-left uppercase tracking-wider hover:text-primary transition-colors"
+      className="btn-press min-h-11 sm:min-h-0 inline-flex items-center text-left uppercase tracking-wider text-muted hover:text-ttl-gold rounded px-2 -mx-2 sm:px-1 sm:-mx-1 transition-[color] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-ttl-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-ttl-raised"
     >
       {label}
       {sort === key ? (dir === "desc" ? " v" : " ^") : ""}
@@ -60,27 +62,91 @@ export default function PlayersRankingsTable({
   );
 
   return (
-    <div className="overflow-x-auto min-w-0">
+    <div className="panel p-0 overflow-hidden transition-[border-color,box-shadow] duration-200 ease-out hover:border-ttl-gold/15">
+      <div className="overflow-x-auto min-w-0 scroll-pl-4 overscroll-x-contain touch-pan-x">
       <table className="w-full text-fluid-sm min-w-[640px]">
         <thead>
           <tr className="border-b border-ttl-border text-left text-muted text-fluid-xs">
-            <th className="py-3 pr-3 w-8">#</th>
-            <th className="py-3 pr-4">Player</th>
-            <th className="py-3 pr-4 hidden xl:table-cell">Team</th>
+            <th className="py-3 pr-3 w-12 max-lg:sticky max-lg:left-0 max-lg:z-20 max-lg:bg-ttl-raised max-lg:shadow-[2px_0_10px_-4px_rgba(0,0,0,0.45)]">
+              <span className="inline-flex items-center gap-1">
+                #
+                <StatHelp
+                  text={STAT_HELP.rankColumn}
+                  ariaLabel={helpAria("Rank")}
+                />
+              </span>
+            </th>
+            <th className="py-3 pr-4 max-lg:sticky max-lg:left-12 max-lg:z-20 max-lg:bg-ttl-raised max-lg:shadow-[4px_0_14px_-6px_rgba(0,0,0,0.55)]">
+              Player
+            </th>
+            <th className="py-3 pr-4 hidden xl:table-cell">
+              <span className="inline-flex items-center gap-1">
+                Team
+                <StatHelp
+                  text={STAT_HELP.teamColumn}
+                  ariaLabel={helpAria("Team")}
+                />
+              </span>
+            </th>
             <th className="py-3 pr-4 w-44 hidden md:table-cell">
-              {thBtn("wr", "Win rate")}
+              <div className="inline-flex items-center gap-1">
+                {thBtn("wr", "Win rate")}
+                <StatHelp
+                  text={STAT_HELP.winRate}
+                  ariaLabel={helpAria("Win rate")}
+                />
+              </div>
             </th>
-            <th className="py-3 pr-4 text-right">W-L</th>
+            <th className="py-3 pr-4 text-right max-lg:whitespace-nowrap">
+              <span className="inline-flex items-center justify-end gap-1 w-full">
+                W-L
+                <StatHelp
+                  text={STAT_HELP.wlColumn}
+                  ariaLabel={helpAria("W-L")}
+                  align="end"
+                />
+              </span>
+            </th>
             <th className="py-3 pr-4 text-right hidden sm:table-cell">
-              {thBtn("games", "Games")}
+              <div className="inline-flex items-center justify-end gap-1 w-full">
+                {thBtn("games", "Games")}
+                <StatHelp
+                  text={STAT_HELP.gamesColumn}
+                  ariaLabel={helpAria("Games")}
+                  align="end"
+                />
+              </div>
             </th>
             <th className="py-3 pr-4 text-right hidden lg:table-cell">
-              {thBtn("elo", "ELO")}
+              <div className="inline-flex items-center justify-end gap-1 w-full">
+                {thBtn("elo", "ELO")}
+                <StatHelp
+                  text={STAT_HELP.eloColumn}
+                  ariaLabel={helpAria("ELO")}
+                  align="end"
+                />
+              </div>
             </th>
             <th className="py-3 pr-4 text-right hidden lg:table-cell">
-              {thBtn("civs", "Civs")}
+              <div className="inline-flex items-center justify-end gap-1 w-full">
+                {thBtn("civs", "Civs")}
+                <StatHelp
+                  text={STAT_HELP.civsColumn}
+                  ariaLabel={helpAria("Civs")}
+                  align="end"
+                />
+              </div>
             </th>
-            <th className="py-3 text-right hidden xl:table-cell">Avg Dur.</th>
+            <th className="py-3 text-right hidden xl:table-cell">
+              <span className="inline-flex items-center justify-end gap-1 w-full">
+                Avg Dur.
+                <StatHelp
+                  text={STAT_HELP.avgDurColumn}
+                  ariaLabel={helpAria("Avg Dur.")}
+                  align="end"
+                />
+              </span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -93,20 +159,28 @@ export default function PlayersRankingsTable({
                   : i === 2
                     ? "rank-3"
                     : "rank-n";
+            const stickyBg =
+              i < 3
+                ? "max-lg:bg-ttl-raised/30 max-lg:group-hover:bg-ttl-slate/40"
+                : "max-lg:bg-ttl-raised max-lg:group-hover:bg-ttl-slate/40";
             return (
               <tr
                 key={p.player}
-                className={`border-b border-ttl-border-subtle/60 hover:bg-ttl-slate/40 transition-colors ${
+                className={`group table-row-interactive border-b border-ttl-border-subtle/60 hover:bg-ttl-slate/40 ${
                   i < 3 ? "bg-ttl-raised/30" : ""
                 }`}
               >
-                <td className="py-3 pr-3">
+                <td
+                  className={`py-3 pr-3 w-12 max-lg:sticky max-lg:left-0 max-lg:z-10 max-lg:shadow-[3px_0_12px_-5px_rgba(0,0,0,0.5)] ${stickyBg}`}
+                >
                   <span className={`rank-badge ${rankClass}`}>{i + 1}</span>
                 </td>
-                <td className="py-3 pr-4 font-medium">
+                <td
+                  className={`py-3 pr-4 font-medium max-lg:sticky max-lg:left-12 max-lg:z-10 max-lg:shadow-[4px_0_14px_-6px_rgba(0,0,0,0.55)] ${stickyBg}`}
+                >
                   <Link
                     href={`/players/${encodeURIComponent(p.player)}`}
-                    className="text-ttl-accent hover:text-ttl-gold underline-offset-2 hover:underline"
+                    className="link-profile text-ttl-accent hover:text-ttl-gold inline-flex min-h-11 sm:min-h-0 items-center py-0.5"
                   >
                     {p.player}
                   </Link>
@@ -163,6 +237,10 @@ export default function PlayersRankingsTable({
           })}
         </tbody>
       </table>
+      </div>
+      <p className="md:hidden text-fluid-xs text-muted text-center px-3 py-2.5 border-t border-ttl-border-subtle/60 bg-ttl-navy/20">
+        Swipe sideways to see win rate, games, and ELO.
+      </p>
     </div>
   );
 }

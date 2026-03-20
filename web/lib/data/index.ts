@@ -19,6 +19,7 @@ export {
   getSpiritCivMatchups,
   getUpsetProbabilities,
 } from "./spirit";
+export { getSpiritFindings, SPIRIT_SLUG_ORDER } from "./spirit-findings";
 export {
   getPlayerH2H,
   getPlayerH2HFor,

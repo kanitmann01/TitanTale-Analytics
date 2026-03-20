@@ -72,6 +72,19 @@ export function spiritDataPath(filename: string, seasonId: SeasonId): string {
   return found;
 }
 
+/** Resolve Spirit file if present (e.g. findings.json); otherwise null. */
+export function trySpiritDataPath(
+  filename: string,
+  seasonId: SeasonId,
+): string | null {
+  const chain = [
+    path.join(DATA_DIR, "seasons", seasonId, "spirit", filename),
+    path.join(DATA_DIR, "seasons", DEFAULT_SEASON_ID, "spirit", filename),
+    path.join(DATA_DIR, "spirit", filename),
+  ];
+  return uniqueExisting(chain);
+}
+
 export function getDataDir(): string {
   return DATA_DIR;
 }

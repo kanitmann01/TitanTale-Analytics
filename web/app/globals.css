@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 :root {
   --color-bg: #0c141e;
   --color-bg-raised: #131f2e;
@@ -26,6 +31,11 @@
   --color-chart-3: #cd7f32;
   --color-chart-4: #5cb85c;
   --color-chart-5: #9b7fcf;
+  /* motion (transform + opacity only in animations) */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-ui: 220ms;
 }
 
 @layer base {
@@ -34,9 +44,28 @@
     background: var(--color-bg);
   }
 
+  a,
+  button {
+    -webkit-tap-highlight-color: color-mix(
+      in oklch,
+      var(--color-gold) 22%,
+      transparent
+    );
+  }
+
   ::selection {
     background: color-mix(in oklch, var(--color-gold) 30%, transparent);
     color: var(--color-text);
+  }
+
+  a:focus-visible {
+    outline: 2px solid color-mix(in oklch, var(--color-accent) 55%, var(--color-gold));
+    outline-offset: 3px;
+  }
+
+  button:focus-visible:not(:disabled) {
+    outline: 2px solid color-mix(in oklch, var(--color-accent) 55%, var(--color-gold));
+    outline-offset: 2px;
   }
 }
 
@@ -95,11 +124,40 @@ body::before {
   100% { background-position: 200% 0; }
 }
 
-.anim-fade-up  { animation: fadeUp 0.5s ease-out both; }
-.anim-fade-in  { animation: fadeIn 0.4s ease-out both; }
-.anim-slide-in { animation: slideInLeft 0.5s ease-out both; }
-.anim-scale-in { animation: scaleIn 0.45s ease-out both; }
-.anim-bar-grow { animation: barGrow 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: left; }
+@keyframes heroAmbient {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+
+@keyframes slideInMenu {
+  from {
+    opacity: 0.85;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.anim-slide-menu {
+  animation: slideInMenu 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-fade-up  { animation: fadeUp 0.5s var(--ease-out-quint) both; }
+.anim-fade-in  { animation: fadeIn 0.4s var(--ease-out-quint) both; }
+.anim-slide-in { animation: slideInLeft 0.5s var(--ease-out-quint) both; }
+.anim-scale-in { animation: scaleIn 0.45s var(--ease-out-quint) both; }
+.anim-bar-grow { animation: barGrow 0.8s var(--ease-out-quint) both; transform-origin: left; }
+
+.hero-ambient {
+  animation: heroAmbient 16s ease-in-out infinite;
+}
 
 .d1  { animation-delay: 0.05s; }
 .d2  { animation-delay: 0.1s; }
@@ -117,10 +175,47 @@ body::before {
   .anim-fade-in,
   .anim-slide-in,
   .anim-scale-in,
-  .anim-bar-grow {
+  .anim-bar-grow,
+  .hero-ambient {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .anim-slide-menu {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .lift {
+    transition: none;
+  }
+
+  .lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .nav-brand,
+  .btn-press:active {
+    transform: none;
+  }
+
+  .cta-shimmer::after {
+    display: none;
+  }
+
+  .footer-link::after {
+    transition: none;
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  .footer-link:hover::after,
+  .footer-link:focus-visible::after {
+    transform: scaleX(1);
+    opacity: 1;
   }
 }
 
@@ -143,6 +238,13 @@ body::before {
   border: 1px solid var(--color-border-subtle);
   background: var(--color-bg-raised);
   padding: 1.25rem;
+  transition: border-color var(--dur-ui) var(--ease-out-quint),
+    box-shadow var(--dur-ui) var(--ease-out-quint);
+}
+
+.panel-interactive:hover {
+  border-color: color-mix(in oklch, var(--color-gold) 22%, var(--color-border-subtle));
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-gold) 8%, transparent);
 }
 
 .panel-flush {
@@ -166,11 +268,13 @@ body::before {
 
 /* --- Hover lift on interactive surfaces --- */
 .lift {
-  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+  transition: transform var(--dur-ui) var(--ease-out-quint),
+    box-shadow var(--dur-ui) var(--ease-out-quint),
+    border-color var(--dur-ui) var(--ease-out-quint);
 }
 .lift:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 
 /* --- Rank badge --- */
@@ -205,6 +309,180 @@ body::before {
   color: var(--color-gold-dim);
 }
 
+/* Section titles: gold-to-accent accent bar (wayfinding) */
+.h2-section {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.4rem;
+}
+.h2-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.75rem;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold),
+    color-mix(in oklch, var(--color-accent) 70%, var(--color-gold))
+  );
+}
+
+/* Primary actions: quick press + optional hover sheen */
+.btn-press {
+  transition: transform var(--dur-fast) var(--ease-out-quint),
+    background-color var(--dur-ui) var(--ease-out-quint),
+    border-color var(--dur-ui) var(--ease-out-quint),
+    color var(--dur-ui) var(--ease-out-quint),
+    box-shadow var(--dur-ui) var(--ease-out-quint);
+}
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+.cta-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.cta-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    color-mix(in oklch, var(--color-gold-light) 25%, transparent) 50%,
+    transparent 65%
+  );
+  background-size: 220% 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.cta-shimmer:hover::after {
+  opacity: 1;
+  animation: shimmer 1s var(--ease-out-quint);
+}
+
+/* Nav wordmark */
+.nav-brand {
+  transition: color var(--dur-ui) var(--ease-out-quint),
+    transform var(--dur-ui) var(--ease-out-quint);
+}
+.nav-brand:hover {
+  transform: scale(1.02);
+}
+.nav-brand:active {
+  transform: scale(0.98);
+}
+
+/* Footer links: reveal underline */
+.footer-link {
+  position: relative;
+  transition: color var(--dur-ui) var(--ease-out-quint);
+}
+.footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-dim),
+    var(--color-accent-dim)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-ui) var(--ease-out-quint);
+}
+.footer-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Form controls: warmer focus ring (pairs with Tailwind focus:ring on inputs) */
+.select-interactive {
+  transition: border-color var(--dur-ui) var(--ease-out-quint),
+    box-shadow var(--dur-ui) var(--ease-out-quint);
+}
+.select-interactive:hover {
+  border-color: color-mix(in oklch, var(--color-accent) 35%, var(--color-border));
+}
+
+/* Dense grids (civ / map cards): lift handles transform; this adds border glow */
+.list-card-tile {
+  transition: border-color var(--dur-ui) var(--ease-out-quint),
+    box-shadow var(--dur-ui) var(--ease-out-quint);
+}
+.list-card-tile:hover {
+  border-color: color-mix(in oklch, var(--color-accent) 30%, var(--color-border-subtle));
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-accent) 8%, transparent);
+}
+
+/* Rankings table: row hover accent (inset, no layout shift) */
+.table-row-interactive {
+  transition: background-color var(--dur-ui) var(--ease-out-quint),
+    box-shadow var(--dur-ui) var(--ease-out-quint);
+}
+.table-row-interactive:hover {
+  box-shadow: inset 3px 0 0 0 color-mix(in oklch, var(--color-gold) 45%, transparent);
+}
+
+/* Inline links in tables / dense UI */
+.link-profile {
+  position: relative;
+  display: inline-block;
+  transition: color var(--dur-ui) var(--ease-out-quint);
+}
+.link-profile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-dim),
+    var(--color-accent)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-ui) var(--ease-out-quint);
+}
+.link-profile:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .list-card-tile {
+    transition: none;
+  }
+
+  .list-card-tile:hover {
+    box-shadow: none;
+  }
+
+  .table-row-interactive {
+    transition: none;
+  }
+
+  .table-row-interactive:hover {
+    box-shadow: inset 3px 0 0 0 color-mix(in oklch, var(--color-gold) 45%, transparent);
+  }
+
+  .link-profile::after {
+    transition: none;
+    transform: scaleX(0);
+  }
+
+  .link-profile:hover::after {
+    transform: scaleX(1);
+  }
+}
+
 /* --- Callout --- */
 .callout {
   border-left: 3px solid var(--color-gold-dim);
@@ -232,4 +510,134 @@ body::before {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--color-gold-dim) 35%, var(--color-border));
+}
+
+/* --- Custom cursor (fine pointer; disabled when prefers-reduced-motion or touch) --- */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+.custom-cursor-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10100;
+  pointer-events: none;
+  contain: strict;
+}
+
+.custom-cursor-ring-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  will-change: transform;
+}
+
+.custom-cursor-dot-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  will-change: transform;
+}
+
+.custom-cursor-ring {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid color-mix(in oklch, var(--color-gold) 50%, transparent);
+  border-radius: 50%;
+  opacity: 0.88;
+  transform: scale(1);
+  transition:
+    transform var(--dur-ui) var(--ease-out-quint),
+    border-color var(--dur-ui) var(--ease-out-quint),
+    opacity var(--dur-fast) var(--ease-out-quart);
+}
+
+.custom-cursor-root--hover .custom-cursor-ring {
+  transform: scale(1.38);
+  border-color: color-mix(in oklch, var(--color-gold) 82%, transparent);
+  opacity: 1;
+}
+
+.custom-cursor-root--press .custom-cursor-ring {
+  transform: scale(0.92);
+  opacity: 0.75;
+}
+
+.custom-cursor-root--hover.custom-cursor-root--press .custom-cursor-ring {
+  transform: scale(1.12);
+}
+
+.custom-cursor-dot {
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  margin-top: -2px;
+  border-radius: 50%;
+  background: var(--color-gold-light);
+  box-shadow:
+    0 0 10px color-mix(in oklch, var(--color-gold) 45%, transparent),
+    0 0 1px color-mix(in oklch, var(--color-bg) 80%, transparent);
+  transition: transform var(--dur-fast) var(--ease-out-quint),
+    opacity var(--dur-fast) var(--ease-out-quint);
+}
+
+.custom-cursor-root--press .custom-cursor-dot {
+  transform: scale(0.82);
+  opacity: 0.9;
+}
+
+.custom-cursor-root--hidden .custom-cursor-ring,
+.custom-cursor-root--hidden .custom-cursor-dot {
+  opacity: 0;
+  transition: opacity 100ms var(--ease-out-quart);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-ring,
+  .custom-cursor-dot {
+    transition: none;
+  }
+}
+
+@media print {
+  .custom-cursor-root {
+    display: none !important;
+  }
+
+  body::before {
+    display: none;
+  }
+
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .panel,
+  .panel-accent,
+  .panel-flush,
+  .panel-inset {
+    break-inside: avoid;
+    border-color: #ccc !important;
+    background: #f9f9f9 !important;
+  }
+}

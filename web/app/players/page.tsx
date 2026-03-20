@@ -4,6 +4,8 @@ import MetaScatterChart from "@/components/charts/MetaScatterChart";
 import RankedHBarChart from "@/components/charts/RankedHBarChart";
 import PlayersRankingsTable from "@/components/PlayersRankingsTable";
 import { getSeasonId } from "@/lib/season-server";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import { pageTitle } from "@/lib/site-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -80,7 +82,13 @@ export default async function PlayersPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-18">
           <section className="anim-scale-in d2">
-            <h2 className="section-label mb-4">ELO vs Win Rate</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              ELO vs Win Rate
+              <StatHelp
+                text={STAT_HELP.playersEloVsWinScatter}
+                ariaLabel={helpAria("ELO vs Win Rate")}
+              />
+            </h2>
             <div className="panel overflow-x-auto min-w-0">
               <MetaScatterChart
                 data={scatterData}
@@ -114,8 +122,14 @@ export default async function PlayersPage() {
         <div className="divider my-12" />
 
         <section className="anim-fade-up d4">
-          <h2 className="section-label mb-5">Full Rankings</h2>
-          <p className="text-fluid-xs text-muted mb-3">
+          <h2 className="h2-section font-display text-fluid-lg font-bold text-primary mb-1 flex flex-wrap items-center gap-1">
+            Full Rankings
+            <StatHelp
+              text={STAT_HELP.playersFullRankings}
+              ariaLabel={helpAria("Full Rankings")}
+            />
+          </h2>
+          <p className="text-fluid-xs text-muted mb-5 max-w-xl">
             Click column headers to sort. Win rate column combines bar and
             percentage.
           </p>

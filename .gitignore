@@ -21,6 +21,9 @@ build/
 # IDE
 .vscode/
 
+# TypeScript
+*.tsbuildinfo
+
 # Node / Next.js (for web/ layer)
 node_modules/
 .next/

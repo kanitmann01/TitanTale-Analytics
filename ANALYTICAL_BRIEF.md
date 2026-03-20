@@ -321,7 +321,13 @@ The web app at `web/` presents these outputs across 6 pages with editorial desig
 
 ## 12. Deep Investigative Analysis (Spirit of the Law Framework)
 
-The Spirit_of_the_Law analysis applies question-driven empirical investigation to phenomena the standard pipeline's variable-correlation approach cannot capture. Ten hypotheses were tested; six were confirmed, three were busted, and one was inconclusive.
+The Spirit_of_the_Law analysis applies question-driven empirical investigation to phenomena the standard pipeline's variable-correlation approach cannot capture. Ten hypotheses were tested; five were confirmed, four were busted, and one was inconclusive (verdicts follow the scripted tests in `spirit_of_the_law_analysis.py`).
+
+### Machine vs editorial layers (web and reproducibility)
+
+- **Machine layer:** Running `python spirit_of_the_law_analysis.py` writes `findings.json` under `data/seasons/{seasonId}/spirit/` (or `data/spirit/` when no season folder is used), plus Spirit CSVs and PNGs. Each investigation includes `p_value`, `verdict`, `test_name`, sample `n`, optional **95% Wilson CIs** for key proportions (`ci_low`, `ci_high`), `effect_size`, `statistical_weight`, and optional `multiple_testing_note` where many implicit tests apply (e.g. clutch, map grid). Auto markdown for operators only: `SPIRIT_FINDINGS_auto.md` next to `findings.json`. Curated narrative remains in repo-root `SPIRIT_FINDINGS.md` and is **not** overwritten by default (`--write-root-spirit-findings` opt-in).
+- **Editorial layer (UI):** The Research page merges `findings.json` with a static template (`web/lib/data/spirit-findings-fallback.ts`) for **confidence** (0-100), **evidenceLevel**, **practicalImpact**, **interpretation**, **action**, **caveat**, **mechanisms**, and **mythHeadline**. Those fields are **not** emitted by the Python script; they are maintained for storytelling and UX filters. Rubric below.
+- **Confidence rubric (editorial):** Scores are judgment calls, not p-value transforms. **High confidence (roughly 85-98):** large n, tiny p, single primary test, effect stable across slices (e.g. snowball, positional, upset inflation). **Medium (roughly 68-84):** adequate n but multiple testing, directional ambiguity, or reliance on one significant cell among many tests (e.g. clutch, comfort pick comparison). **Low (e.g. 25):** structurally inconclusive (meta evolution with one stage). **evidenceLevel** tracks data depth and test cleanliness; **practicalImpact** tracks how actionable the result is for scouting or format design, independent of statistical significance.
 
 ### Investigative Summary Matrix
 

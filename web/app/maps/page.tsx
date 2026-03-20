@@ -5,6 +5,8 @@ import DonutChart from "@/components/charts/DonutChart";
 import { getSeasonId } from "@/lib/season-server";
 import { pageTitle } from "@/lib/site-metadata";
 import type { MapStats } from "@/lib/types";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 
 function leagueColor(league: string): string {
   const L: Record<string, string> = {
@@ -42,8 +44,8 @@ function MapStatCard({
     <div
       className={
         featured
-          ? "lift panel-accent mb-6 grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-6 items-center"
-          : "lift panel hover:border-ttl-border transition-colors border border-ttl-border-subtle/60"
+          ? "lift panel-accent mb-6 grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-6 items-center transition-[border-color,box-shadow] duration-200 ease-out hover:border-ttl-gold/35"
+          : "lift panel rounded-lg border border-ttl-border-subtle/60 transition-[border-color,box-shadow] duration-200 ease-out hover:border-ttl-gold/25 hover:shadow-[0_0_0_1px_rgba(212,175,55,0.08)]"
       }
     >
       <div className={featured ? "" : "p-4"}>
@@ -59,38 +61,51 @@ function MapStatCard({
         </div>
         <div className="grid grid-cols-3 gap-4 text-fluid-xs">
           <div>
-            <span className="text-muted block uppercase tracking-wider mb-0.5">
+            <span className="text-muted flex items-center gap-1 uppercase tracking-wider mb-0.5">
               Games
+              <StatHelp
+                text={STAT_HELP.mapGames}
+                ariaLabel={helpAria("Games")}
+              />
             </span>
             <span className="text-primary font-medium">{m.total_games}</span>
           </div>
           <div>
-            <span className="text-muted block uppercase tracking-wider mb-0.5">
+            <span className="text-muted flex items-center gap-1 uppercase tracking-wider mb-0.5">
               Avg dur.
+              <StatHelp
+                text={STAT_HELP.mapAvgDur}
+                ariaLabel={helpAria("Avg dur.")}
+              />
             </span>
             <span className="text-secondary font-medium">
               {m.avg_duration.toFixed(1)}m
             </span>
           </div>
           <div>
-            <span className="text-muted block uppercase tracking-wider mb-0.5">
+            <span className="text-muted block uppercase tracking-wider mb-0.5 inline-flex items-center gap-1">
               Top civ
+              <StatHelp
+                text={STAT_HELP.mapTopCiv}
+                ariaLabel={helpAria("Top civ")}
+              />
             </span>
             <span className="text-secondary font-medium truncate block">
               {m.most_common_civ}
             </span>
           </div>
           <div className="col-span-3 sm:col-span-1">
-            <span className="text-muted block uppercase tracking-wider mb-0.5">
+            <span className="text-muted flex items-center gap-1 uppercase tracking-wider mb-0.5">
               Balance
+              <StatHelp
+                text={STAT_HELP.mapBalanceStd}
+                ariaLabel={helpAria("Balance")}
+              />
             </span>
             <span className={`font-medium ${b.cls}`}>
               {m.balance_std.toFixed(2)}
             </span>
             <span className="text-muted ml-2">({b.tag})</span>
-            <p className="text-[0.65rem] text-muted mt-1 leading-snug normal-case font-normal tracking-normal">
-              Std. dev. of win rates across players. Lower = fairer map.
-            </p>
           </div>
         </div>
       </div>
@@ -99,7 +114,14 @@ function MapStatCard({
           <p className="text-fluid-2xl font-display font-bold text-primary leading-none">
             {m.total_games}
           </p>
-          <p className="text-fluid-xs text-muted mt-1">games</p>
+          <p className="text-fluid-xs text-muted mt-1 inline-flex items-center justify-end gap-1">
+            games
+            <StatHelp
+              text={STAT_HELP.mapGames}
+              ariaLabel={helpAria("Games")}
+              align="end"
+            />
+          </p>
         </div>
       )}
     </div>
@@ -190,24 +212,36 @@ export default async function MapsPage() {
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
               {mostLopsided.map}
             </p>
-            <p className="text-fluid-xs text-muted mt-1">
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1 flex-wrap">
               most lopsided (balance {mostLopsided.balance_std.toFixed(2)})
+              <StatHelp
+                text={STAT_HELP.mapsKpiLopsided}
+                ariaLabel={helpAria("Most lopsided map")}
+              />
             </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-ttl-gold-light leading-none">
               {mostBalanced.map}
             </p>
-            <p className="text-fluid-xs text-muted mt-1">
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1 flex-wrap">
               most balanced ({mostBalanced.balance_std.toFixed(2)} std)
+              <StatHelp
+                text={STAT_HELP.mapsKpiBalanced}
+                ariaLabel={helpAria("Most balanced map")}
+              />
             </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
               {longestAvg.avg_duration.toFixed(0)}m
             </p>
-            <p className="text-fluid-xs text-muted mt-1">
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1 flex-wrap">
               longest avg ({longestAvg.map})
+              <StatHelp
+                text={STAT_HELP.mapsKpiLongestAvg}
+                ariaLabel={helpAria("Longest average duration")}
+              />
             </p>
           </div>
         </div>
@@ -226,7 +260,13 @@ export default async function MapsPage() {
           </section>
 
           <section className="anim-fade-up d3">
-            <h2 className="section-label mb-4">Games by League</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              Games by League
+              <StatHelp
+                text={STAT_HELP.mapsGamesByLeague}
+                ariaLabel={helpAria("Games by League")}
+              />
+            </h2>
             <div className="panel flex flex-col items-center py-6">
               <DonutChart
                 data={donutData}
@@ -267,7 +307,13 @@ export default async function MapsPage() {
         <div className="divider my-10" />
 
         <section className="anim-fade-up d5">
-          <h2 className="section-label mb-6">Map Details</h2>
+          <h2 className="h2-section font-display text-fluid-lg font-bold text-primary mb-6 flex flex-wrap items-center gap-1">
+            Map Details
+            <StatHelp
+              text={STAT_HELP.mapsMapDetails}
+              ariaLabel={helpAria("Map Details")}
+            />
+          </h2>
           {maps.length > 0 && (
             <MapStatCard m={maps[0]} rank={1} featured />
           )}

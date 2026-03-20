@@ -28,6 +28,10 @@ export {
   PlayerMapAffinitySchema,
   SpiritCivMatchupSchema,
   UpsetProbabilitySchema,
+  SpiritFindingsFileSchema,
+  SpiritFindingsInvestigationSchema,
+  type SpiritFindingsFile,
+  type SpiritFindingsInvestigation,
 } from "./spirit";
 export {
   PlayerH2HSchema,

@@ -14,6 +14,8 @@ import GroupedBarChart from "@/components/charts/GroupedBarChart";
 import MiniBar from "@/components/charts/MiniBar";
 import ComparePickers from "@/components/ComparePickers";
 import { getSeasonId } from "@/lib/season-server";
+import StatHelp from "@/components/StatHelp";
+import { COMPARE_STAT_HELP, STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import { pageTitle } from "@/lib/site-metadata";
 
 interface Props {
@@ -168,6 +170,16 @@ export default async function ComparePage({ searchParams }: Props) {
           <h1 className="font-display text-fluid-2xl font-bold text-primary">
             Player Comparison
           </h1>
+          <p className="callout mt-4 text-fluid-xs text-secondary max-w-2xl leading-relaxed">
+            Map affinities and upset probabilities are useful for prep but follow
+            Spirit caveats: map specialization is rare in aggregate tests, and
+            tournament upsets run hotter than naive ELO (~1.62x). See{" "}
+            <Link href="/research" className="text-ttl-accent hover:text-ttl-gold">
+              /research
+            </Link>{" "}
+            and <code className="text-ttl-gold">ANALYTICAL_BRIEF.md</code>{" "}
+            sections 12-13.
+          </p>
         </header>
 
         <ComparePickers
@@ -228,8 +240,14 @@ export default async function ComparePage({ searchParams }: Props) {
                   >
                     {stat.a}
                   </span>
-                  <span className="w-1/3 text-center text-fluid-xs text-muted uppercase tracking-wider px-1">
+                  <span className="w-1/3 text-center text-fluid-xs text-muted uppercase tracking-wider px-1 inline-flex items-center justify-center gap-1 flex-wrap">
                     {stat.label}
+                    {COMPARE_STAT_HELP[stat.label] ? (
+                      <StatHelp
+                        text={COMPARE_STAT_HELP[stat.label]}
+                        ariaLabel={helpAria(stat.label)}
+                      />
+                    ) : null}
                   </span>
                   <span
                     className={`w-1/3 text-fluid-sm font-bold ${
@@ -250,7 +268,13 @@ export default async function ComparePage({ searchParams }: Props) {
 
         {h2h && (
           <section className="panel mb-10 anim-fade-up d3 border border-ttl-border-subtle/60">
-            <h2 className="section-label mb-4">Head-to-Head Record</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              Head-to-Head Record
+              <StatHelp
+                text={STAT_HELP.sectionCompareH2H}
+                ariaLabel={helpAria("Head-to-Head Record")}
+              />
+            </h2>
             <div className="flex items-center justify-between mb-3">
               <span className="text-fluid-lg font-display font-bold text-ttl-gold">
                 {isAFirst ? h2h.a_game_wins : h2h.b_game_wins}
@@ -284,7 +308,13 @@ export default async function ComparePage({ searchParams }: Props) {
         <div className="space-y-10 mb-14">
           {radarData.length > 2 && (
             <section className="anim-fade-up d4 max-w-xl">
-              <h2 className="section-label mb-4">Map Win Rates (shared maps)</h2>
+              <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+                Map Win Rates (shared maps)
+                <StatHelp
+                  text={STAT_HELP.sectionMapWinRatesShared}
+                  ariaLabel={helpAria("Map Win Rates")}
+                />
+              </h2>
               <div className="panel p-4 border border-ttl-border-subtle/60">
                 <RadarCompare
                   data={radarData}
@@ -334,7 +364,13 @@ export default async function ComparePage({ searchParams }: Props) {
           )}
 
           <section className="anim-fade-up d5">
-            <h2 className="section-label mb-4">Civilization Pools</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              Civilization Pools
+              <StatHelp
+                text={STAT_HELP.sectionCivPools}
+                ariaLabel={helpAria("Civilization Pools")}
+              />
+            </h2>
             <div className="panel p-5 border border-ttl-border-subtle/60">
               <div className="mb-4">
                 <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2">
@@ -392,8 +428,12 @@ export default async function ComparePage({ searchParams }: Props) {
             <h2 className="section-label mb-4">Scouting Report</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2">
+                <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2 inline-flex items-center gap-1 flex-wrap">
                   {nameA}&apos;s best maps
+                  <StatHelp
+                    text={STAT_HELP.scoutingBestMaps}
+                    ariaLabel={helpAria(`${nameA}'s best maps`)}
+                  />
                 </p>
                 <p className="text-fluid-sm text-secondary">
                   {scout.a_best_maps
@@ -401,8 +441,12 @@ export default async function ComparePage({ searchParams }: Props) {
                     : "None identified"}
                 </p>
 
-                <p className="text-fluid-xs text-muted uppercase tracking-wider mt-4 mb-2">
+                <p className="text-fluid-xs text-muted uppercase tracking-wider mt-4 mb-2 inline-flex items-center gap-1 flex-wrap">
                   {nameA}&apos;s weak maps
+                  <StatHelp
+                    text={STAT_HELP.scoutingWeakMaps}
+                    ariaLabel={helpAria(`${nameA}'s weak maps`)}
+                  />
                 </p>
                 <p className="text-fluid-sm text-secondary">
                   {scout.a_weak_maps
@@ -411,8 +455,12 @@ export default async function ComparePage({ searchParams }: Props) {
                 </p>
               </div>
               <div>
-                <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2">
+                <p className="text-fluid-xs text-muted uppercase tracking-wider mb-2 inline-flex items-center gap-1 flex-wrap">
                   {nameB}&apos;s best maps
+                  <StatHelp
+                    text={STAT_HELP.scoutingBestMaps}
+                    ariaLabel={helpAria(`${nameB}'s best maps`)}
+                  />
                 </p>
                 <p className="text-fluid-sm text-secondary">
                   {scout.b_best_maps
@@ -420,8 +468,12 @@ export default async function ComparePage({ searchParams }: Props) {
                     : "None identified"}
                 </p>
 
-                <p className="text-fluid-xs text-muted uppercase tracking-wider mt-4 mb-2">
+                <p className="text-fluid-xs text-muted uppercase tracking-wider mt-4 mb-2 inline-flex items-center gap-1 flex-wrap">
                   Contested maps
+                  <StatHelp
+                    text={STAT_HELP.scoutingContestedMaps}
+                    ariaLabel={helpAria("Contested maps")}
+                  />
                 </p>
                 <p className="text-fluid-sm text-secondary">
                   {scout.contested_maps
@@ -432,14 +484,26 @@ export default async function ComparePage({ searchParams }: Props) {
             </div>
             <div className="mt-6 pt-4 border-t border-ttl-border-subtle">
               <div className="flex flex-wrap gap-6 text-fluid-xs">
-                <div>
-                  <span className="text-muted">ELO edge: </span>
+                <div className="inline-flex flex-wrap items-center gap-x-1 gap-y-1">
+                  <span className="text-muted inline-flex items-center gap-1">
+                    ELO edge:
+                    <StatHelp
+                      text={STAT_HELP.eloEdge}
+                      ariaLabel={helpAria("ELO edge")}
+                    />
+                  </span>
                   <span className="text-primary font-medium">
                     {scout.elo_edge}
                   </span>
                 </div>
-                <div>
-                  <span className="text-muted">Upset probability: </span>
+                <div className="inline-flex flex-wrap items-center gap-x-1 gap-y-1">
+                  <span className="text-muted inline-flex items-center gap-1">
+                    Upset probability:
+                    <StatHelp
+                      text={STAT_HELP.upsetProbability}
+                      ariaLabel={helpAria("Upset probability")}
+                    />
+                  </span>
                   <span className="text-primary font-medium">
                     {(scout.upset_probability * 100).toFixed(1)}%
                   </span>

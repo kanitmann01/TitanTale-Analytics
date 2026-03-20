@@ -3,6 +3,14 @@ T90 Titans League Season 5 -- Spirit of the Law Investigations
 Deep investigative analysis: 10 questions the standard pipeline does not cover.
 """
 
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import sys
+from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -25,13 +33,277 @@ plt.style.use("seaborn-v0_8-darkgrid")
 sns.set_palette("husl")
 sns.set_context("paper", font_scale=1.2)
 
-ASSETS_DIR = Path("assets/spirit")
-DATA_DIR = Path("data/spirit")
+SPIRIT_SLUGS: list[str] = [
+    "snowball",
+    "positional_advantage",
+    "fatigue",
+    "comfort_vs_wildcard",
+    "clutch",
+    "civ_matchups",
+    "map_specialists",
+    "upset_probability",
+    "tempo",
+    "meta_evolution",
+]
+
+SPIRIT_REQUIRED_COLUMNS: tuple[str, ...] = (
+    "match_id",
+    "game_number",
+    "player1",
+    "player2",
+    "winner",
+    "player1_civ",
+    "player2_civ",
+    "map",
+    "duration_minutes",
+    "stage",
+    "player1_elo",
+    "player2_elo",
+)
 
 
-def _ensure_dirs() -> None:
-    ASSETS_DIR.mkdir(parents=True, exist_ok=True)
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+@dataclass(frozen=True)
+class SpiritPaths:
+    """Output locations for one Spirit run (multi-season aware)."""
+
+    season_id: str
+    matches_csv: Path
+    spirit_data_dir: Path
+    assets_dir: Path
+
+    def ensure_dirs(self) -> None:
+        self.spirit_data_dir.mkdir(parents=True, exist_ok=True)
+        self.assets_dir.mkdir(parents=True, exist_ok=True)
+
+
+def proportion_wilson_ci(k: int, n: int, alpha: float = 0.05) -> tuple[float | None, float | None]:
+    """Wilson score interval for binomial proportion k/n."""
+    if n <= 0:
+        return None, None
+    z = float(stats.norm.ppf(1 - alpha / 2))
+    phat = k / n
+    denom = 1.0 + z * z / n
+    centre = (phat + z * z / (2 * n)) / denom
+    margin = z * math.sqrt((phat * (1 - phat) + z * z / (4 * n)) / n) / denom
+    return max(0.0, centre - margin), min(1.0, centre + margin)
+
+
+def format_statistical_weight(p_value: float | None) -> str:
+    if p_value is None or (isinstance(p_value, float) and math.isnan(p_value)):
+        return "N/A"
+    if p_value < 0.0001:
+        return "p < 0.0001"
+    return f"p = {p_value:.4g}"
+
+
+def validate_matches_dataframe(df: pd.DataFrame) -> None:
+    missing = [c for c in SPIRIT_REQUIRED_COLUMNS if c not in df.columns]
+    if missing:
+        raise ValueError(
+            f"Matches CSV missing required columns for Spirit: {missing}. "
+            f"Expected: {list(SPIRIT_REQUIRED_COLUMNS)}"
+        )
+
+
+def _json_float(x: Any) -> Any:
+    if isinstance(x, (np.floating, float)):
+        v = float(x)
+        if math.isnan(v) or math.isinf(v):
+            return None
+        return v
+    if isinstance(x, (np.integer,)):
+        return int(x)
+    return x
+
+
+def _normalize_viz_path_for_json(val: str) -> str:
+    """Store repo-relative paths for web static URLs."""
+    s = str(val).replace("\\", "/")
+    marker = "assets/spirit/"
+    if marker in s:
+        return marker + s.split(marker, 1)[-1]
+    return s
+
+
+def finding_to_json_record(f: dict[str, Any]) -> dict[str, Any]:
+    """Serialize one investigation dict for findings.json (JSON-safe)."""
+    out: dict[str, Any] = {}
+    for key, val in f.items():
+        if key == "viz_path" and val is not None:
+            out[key] = _normalize_viz_path_for_json(str(val))
+            continue
+        if val is None:
+            out[key] = None
+            continue
+        if isinstance(val, (np.bool_, bool)) and not isinstance(val, bool):
+            out[key] = bool(val)
+            continue
+        jv = _json_float(val)
+        out[key] = jv if jv is not None or key in ("p_value", "ci_low", "ci_high") else val
+    if "statistical_weight" not in out and "p_value" in f:
+        out["statistical_weight"] = format_statistical_weight(
+            float(f["p_value"]) if isinstance(f.get("p_value"), (float, np.floating)) else None
+        )
+    return out
+
+
+def annotate_findings(findings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    for i, f in enumerate(findings):
+        f["id"] = i + 1
+        f["slug"] = SPIRIT_SLUGS[i]
+        if "statistical_weight" not in f:
+            p = f.get("p_value")
+            pv: float | None = None
+            if isinstance(p, (float, np.floating)) and not (isinstance(p, float) and math.isnan(p)):
+                pv = float(p)
+            f["statistical_weight"] = format_statistical_weight(pv)
+    return findings
+
+
+def write_findings_json(findings: list[dict[str, Any]], paths: SpiritPaths) -> Path:
+    """Machine-readable summary for web adapters (DATA_SCHEMA.md)."""
+    path = paths.spirit_data_dir / "findings.json"
+    payload = {
+        "season_id": paths.season_id,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "investigations": [finding_to_json_record(f) for f in findings],
+    }
+    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    print(f"\nfindings.json written to {path}")
+    return path
+
+
+def generate_report(
+    findings: list[dict[str, Any]],
+    paths: SpiritPaths,
+    *,
+    write_root_spirit_findings: bool = False,
+) -> None:
+    """Write auto-generated markdown. Default: data/spirit/SPIRIT_FINDINGS_auto.md only."""
+    lines = [
+        "# Spirit of the Law Investigations (auto-generated)",
+        "",
+        f"Season: {paths.season_id}. Source: `{paths.matches_csv}`.",
+        "Curated narrative with evidence framing: repo-root `SPIRIT_FINDINGS.md` (do not overwrite).",
+        "",
+        "---",
+        "",
+    ]
+
+    lines.append("## Summary")
+    lines.append("")
+    lines.append("| Investigation | Verdict | p-value |")
+    lines.append("|---------------|---------|---------|")
+    for f in findings:
+        p = f.get("p_value")
+        p_str = f"{float(p):.4f}" if isinstance(p, (float, np.floating)) and not math.isnan(float(p)) else "N/A"
+        lines.append(f"| {f['title']} | {f['verdict']} | {p_str} |")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    for i, f in enumerate(findings, 1):
+        lines.append(f"## {i}. {f['title']}")
+        lines.append("")
+        lines.append(f"**Hypothesis:** {f['hypothesis']}")
+        lines.append("")
+        lines.append(f"**Method:** {f['method']}")
+        lines.append("")
+        lines.append(f"**Finding:** {f['finding']}")
+        lines.append("")
+        p = f.get("p_value")
+        if isinstance(p, (float, np.floating)) and not math.isnan(float(p)):
+            lines.append(f"**p-value:** {float(p):.4f}")
+            lines.append("")
+        if f.get("test_name"):
+            lines.append(f"**Test:** {f['test_name']}")
+            lines.append("")
+        if f.get("n") is not None:
+            lines.append(f"**n:** {f['n']}")
+            lines.append("")
+        lo, hi = f.get("ci_low"), f.get("ci_high")
+        if lo is not None and hi is not None:
+            lines.append(f"**95% Wilson CI (proportion):** {float(lo):.1%} - {float(hi):.1%}")
+            lines.append("")
+        lines.append(f"**Verdict:** {f['verdict']}")
+        lines.append("")
+        vp = f.get("viz_path")
+        if vp:
+            rel = _normalize_viz_path_for_json(str(vp))
+            lines.append(f"![{f['title']}]({rel})")
+            lines.append("")
+        lines.append("---")
+        lines.append("")
+
+    auto_path = paths.spirit_data_dir / "SPIRIT_FINDINGS_auto.md"
+    auto_path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"\nAuto report written to {auto_path}")
+
+    if write_root_spirit_findings:
+        root_path = Path("SPIRIT_FINDINGS.md")
+        root_path.write_text("\n".join(lines), encoding="utf-8")
+        print(f"Also wrote {root_path} (--write-root-spirit-findings)")
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Spirit of the Law investigations")
+    p.add_argument(
+        "--season",
+        default="s5",
+        help="Season id slug (default s5), used for default paths and findings.json",
+    )
+    p.add_argument(
+        "--matches",
+        default=None,
+        type=Path,
+        help="Path to ttl_s5_matches.csv (default: data/seasons/{season}/ttl_s5_matches.csv or data/ttl_s5_matches.csv)",
+    )
+    p.add_argument(
+        "--spirit-dir",
+        default=None,
+        type=Path,
+        help="Spirit CSV/JSON output directory (default: data/seasons/{season}/spirit or data/spirit)",
+    )
+    p.add_argument(
+        "--assets-dir",
+        default=None,
+        type=Path,
+        help="PNG output directory (default: assets/spirit)",
+    )
+    p.add_argument(
+        "--write-root-spirit-findings",
+        action="store_true",
+        help="Also overwrite repo-root SPIRIT_FINDINGS.md (discouraged; use curated file)",
+    )
+    return p.parse_args(argv)
+
+
+def resolve_paths(args: argparse.Namespace) -> SpiritPaths:
+    season = args.season.strip().lower()
+    repo = Path.cwd()
+
+    if args.matches is not None:
+        matches_csv = args.matches
+    else:
+        season_matches = repo / "data" / "seasons" / season / "ttl_s5_matches.csv"
+        root_matches = repo / "data" / "ttl_s5_matches.csv"
+        matches_csv = season_matches if season_matches.is_file() else root_matches
+
+    if args.spirit_dir is not None:
+        spirit_data_dir = args.spirit_dir
+    else:
+        season_spirit = repo / "data" / "seasons" / season / "spirit"
+        legacy = repo / "data" / "spirit"
+        spirit_data_dir = season_spirit if (repo / "data" / "seasons" / season).is_dir() else legacy
+
+    assets_dir = args.assets_dir if args.assets_dir is not None else repo / "assets" / "spirit"
+
+    return SpiritPaths(
+        season_id=season,
+        matches_csv=matches_csv.resolve(),
+        spirit_data_dir=spirit_data_dir.resolve(),
+        assets_dir=assets_dir.resolve(),
+    )
 
 
 # ============================================================================
@@ -39,10 +311,12 @@ def _ensure_dirs() -> None:
 # ============================================================================
 
 
-def load_data() -> pd.DataFrame:
-    """Load match data."""
-    df = pd.read_csv("data/ttl_s5_matches.csv")
-    print(f"Loaded {len(df)} games across {df['match_id'].nunique()} matches")
+def load_data(paths: SpiritPaths) -> pd.DataFrame:
+    """Load match data from configured CSV path."""
+    if not paths.matches_csv.is_file():
+        raise FileNotFoundError(f"Matches file not found: {paths.matches_csv}")
+    df = pd.read_csv(paths.matches_csv)
+    print(f"Loaded {len(df)} games across {df['match_id'].nunique()} matches from {paths.matches_csv}")
     return df
 
 
@@ -51,7 +325,7 @@ def load_data() -> pd.DataFrame:
 # ============================================================================
 
 
-def investigate_snowball_effect(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_snowball_effect(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Does winning game 1 predict winning the series?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 1: Snowball Effect")
@@ -101,10 +375,11 @@ def investigate_snowball_effect(df: pd.DataFrame) -> dict[str, Any]:
     for i, v in enumerate(sizes):
         ax.text(i, v + 0.3, str(v), ha="center", fontweight="bold")
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "snowball_effect.png")
+    viz_path = str(paths.assets_dir / "snowball_effect.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
+    ci_lo, ci_hi = proportion_wilson_ci(int(n_g1_won), int(n_total))
     return {
         "title": "Snowball Effect",
         "hypothesis": "Game-1 winners take the series at a rate significantly above 50%",
@@ -113,6 +388,11 @@ def investigate_snowball_effect(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Fisher exact (one-sided, vs symmetric table)",
+        "n": int(n_total),
+        "ci_low": ci_lo,
+        "ci_high": ci_hi,
+        "effect_size": f"{pct:.1%} series rate after Game 1 win",
     }
 
 
@@ -121,7 +401,7 @@ def investigate_snowball_effect(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_draft_order(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_draft_order(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Does the first-listed player (player 1) have a positional advantage?
 
     The civ_drafts data has both players drafting at the same round number,
@@ -169,10 +449,11 @@ def investigate_draft_order(df: pd.DataFrame) -> dict[str, Any]:
     ax.set_title("Player 1 vs Player 2 Win Count")
     ax.legend()
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "draft_order.png")
+    viz_path = str(paths.assets_dir / "draft_order.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
+    ci_lo, ci_hi = proportion_wilson_ci(int(p1_wins), int(n_total))
     return {
         "title": "Positional Advantage",
         "hypothesis": "The first-listed player (Player 1) wins at a rate significantly different from 50%",
@@ -181,6 +462,11 @@ def investigate_draft_order(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Binomial test (two-sided vs 50%)",
+        "n": int(n_total),
+        "ci_low": ci_lo,
+        "ci_high": ci_hi,
+        "effect_size": f"{p1_wr:.1%} Player-1 win rate",
     }
 
 
@@ -189,7 +475,7 @@ def investigate_draft_order(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_fatigue_factor(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_fatigue_factor(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Does performance decay across a series?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 3: Fatigue Factor")
@@ -241,10 +527,11 @@ def investigate_fatigue_factor(df: pd.DataFrame) -> dict[str, Any]:
     ax.set_title("Does the Favorite Fade as the Series Goes On?")
     ax.set_ylim(0, 1)
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "fatigue_factor.png")
+    viz_path = str(paths.assets_dir / "fatigue_factor.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
+    n_all = int(bucket_df["n"].sum())
     return {
         "title": "Fatigue Factor",
         "hypothesis": "Higher-ELO player win rate declines in later games of a series",
@@ -257,6 +544,9 @@ def investigate_fatigue_factor(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Chi-square test on 3x2 contingency (higher-ELO win/loss by bucket)",
+        "n": n_all,
+        "effect_size": "No decline in later games",
     }
 
 
@@ -265,7 +555,7 @@ def investigate_fatigue_factor(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_comfort_picks(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_comfort_picks(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Do players win more on their most-played civs?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 4: Comfort Picks vs. Wild Cards")
@@ -307,6 +597,9 @@ def investigate_comfort_picks(df: pd.DataFrame) -> dict[str, Any]:
             "p_value": None,
             "verdict": "INCONCLUSIVE",
             "viz_path": None,
+            "test_name": None,
+            "n": None,
+            "effect_size": "Insufficient paired players",
         }
 
     comfort_arr = np.array(comfort_wrs)
@@ -332,7 +625,7 @@ def investigate_comfort_picks(df: pd.DataFrame) -> dict[str, Any]:
     ax.set_ylabel("Win Rate")
     ax.set_title("Comfort Picks vs. Wild Card Win Rates")
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "comfort_picks.png")
+    viz_path = str(paths.assets_dir / "comfort_picks.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
@@ -344,6 +637,9 @@ def investigate_comfort_picks(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Wilcoxon signed-rank (one-sided)",
+        "n": len(comfort_wrs),
+        "effect_size": "Wild cards outperform comfort picks",
     }
 
 
@@ -352,7 +648,7 @@ def investigate_comfort_picks(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_clutch_factor(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_clutch_factor(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Who over/underperforms in deciding games?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 5: Clutch Factor")
@@ -410,7 +706,7 @@ def investigate_clutch_factor(df: pd.DataFrame) -> dict[str, Any]:
     print(f"\n  Players with significant clutch deviation: {n_sig}")
     print(f"  Verdict: {verdict}")
 
-    results_df.to_csv(DATA_DIR / "clutch_factor.csv", index=False)
+    results_df.to_csv(paths.spirit_data_dir / "clutch_factor.csv", index=False)
 
     fig, ax = plt.subplots(figsize=(10, 5))
     colors = ["#2ecc71" if d >= 0 else "#e74c3c" for d in results_df["delta"]]
@@ -420,10 +716,11 @@ def investigate_clutch_factor(df: pd.DataFrame) -> dict[str, Any]:
     ax.set_title("Clutch Factor: Deciding Game Performance vs. Baseline")
     ax.invert_yaxis()
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "clutch_factor.png")
+    viz_path = str(paths.assets_dir / "clutch_factor.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
+    n_tested = len(results_df)
     return {
         "title": "Clutch Factor",
         "hypothesis": "Some players significantly over/underperform in deciding games",
@@ -432,6 +729,13 @@ def investigate_clutch_factor(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": min_p,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Per-player binomial vs overall WR (two-sided); multiple comparisons",
+        "n": n_tested,
+        "n_significant": int(n_sig),
+        "multiple_testing_note": (
+            f"{n_tested} implicit tests; Bonferroni alpha ~{0.05 / max(n_tested, 1):.4f} would be stricter than 0.05 per test"
+        ),
+        "effect_size": f"{n_sig} player with significant deviation" if n_sig <= 1 else f"{n_sig} players with significant deviation",
     }
 
 
@@ -440,7 +744,7 @@ def investigate_clutch_factor(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_civ_matchups(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_civ_matchups(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Which civ pairings are most imbalanced?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 6: One-Sided Civ Matchups")
@@ -481,7 +785,7 @@ def investigate_civ_matchups(df: pd.DataFrame) -> dict[str, Any]:
         })
 
     matchup_df = pd.DataFrame(rows).sort_values("win_rate", ascending=False)
-    matchup_df.to_csv(DATA_DIR / "civ_matchup_matrix.csv", index=False)
+    matchup_df.to_csv(paths.spirit_data_dir / "civ_matchup_matrix.csv", index=False)
 
     sig_matchups = matchup_df[matchup_df["p_value"] < 0.05]
 
@@ -510,20 +814,26 @@ def investigate_civ_matchups(df: pd.DataFrame) -> dict[str, Any]:
         ax.set_xlim(0.4, 1.0)
         ax.invert_yaxis()
         fig.tight_layout()
-        viz_path = str(ASSETS_DIR / "civ_matchups.png")
+        viz_path = str(paths.assets_dir / "civ_matchups.png")
         fig.savefig(viz_path, dpi=150)
         plt.close(fig)
     else:
         viz_path = None
 
+    n_pairs = len(matchup_df)
+    min_p = float(sig_matchups["p_value"].min()) if len(sig_matchups) > 0 else 1.0
     return {
         "title": "One-Sided Civ Matchups",
         "hypothesis": "Some civ pairings have significantly imbalanced win rates",
         "method": "Civ-vs-civ win rate matrix (min 3 games), binomial test per pair",
-        "finding": f"{len(sig_matchups)} matchup(s) significantly one-sided out of {len(matchup_df)} tested",
-        "p_value": sig_matchups["p_value"].min() if len(sig_matchups) > 0 else 1.0,
+        "finding": f"{len(sig_matchups)} matchup(s) significantly one-sided out of {n_pairs} tested",
+        "p_value": min_p,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Binomial per pair (one-sided vs 50%); multiple comparisons across pairs",
+        "n": n_pairs,
+        "n_significant": int(len(sig_matchups)),
+        "effect_size": f"{len(sig_matchups)}/{n_pairs} pairs imbalanced" if n_pairs else "0 pairs tested",
     }
 
 
@@ -532,7 +842,7 @@ def investigate_civ_matchups(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_map_specialists(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_map_specialists(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Which players over/underperform on specific maps?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 7: Map Specialists")
@@ -571,7 +881,7 @@ def investigate_map_specialists(df: pd.DataFrame) -> dict[str, Any]:
             })
 
     affinity_df = pd.DataFrame(results).sort_values("delta", ascending=False)
-    affinity_df.to_csv(DATA_DIR / "player_map_affinity.csv", index=False)
+    affinity_df.to_csv(paths.spirit_data_dir / "player_map_affinity.csv", index=False)
 
     sig = affinity_df[affinity_df["p_value"] < 0.05]
 
@@ -603,20 +913,27 @@ def investigate_map_specialists(df: pd.DataFrame) -> dict[str, Any]:
         ax.set_title("Map Specialists: Largest Deviations from Baseline")
         ax.invert_yaxis()
         fig.tight_layout()
-        viz_path = str(ASSETS_DIR / "map_specialists.png")
+        viz_path = str(paths.assets_dir / "map_specialists.png")
         fig.savefig(viz_path, dpi=150)
         plt.close(fig)
     else:
         viz_path = None
 
+    n_cells = len(affinity_df)
+    min_p = float(sig["p_value"].min()) if len(sig) > 0 else 1.0
     return {
         "title": "Map Specialists",
         "hypothesis": "Certain players have statistically significant map affinities",
         "method": "Per-player per-map win rate vs. baseline, binomial test (min 3 games)",
-        "finding": f"{len(sig)} significant map affinity pair(s) out of {len(affinity_df)}",
-        "p_value": sig["p_value"].min() if len(sig) > 0 else 1.0,
+        "finding": f"{len(sig)} significant map affinity pair(s) out of {n_cells}",
+        "p_value": min_p,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Per cell binomial vs player baseline (two-sided); multiple comparisons",
+        "n": n_cells,
+        "n_significant": int(len(sig)),
+        "multiple_testing_note": f"~{n_cells} cells; expect ~{max(int(0.05 * n_cells), 0)} false positives at alpha 0.05 under global null",
+        "effect_size": f"{len(sig)}/{n_cells} player-map combos" if n_cells else "0 cells",
     }
 
 
@@ -625,7 +942,7 @@ def investigate_map_specialists(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_upset_probability(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_upset_probability(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Do underdogs win more often than ELO theory predicts?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 8: Upset Probability")
@@ -668,7 +985,7 @@ def investigate_upset_probability(df: pd.DataFrame) -> dict[str, Any]:
         })
 
     bin_df = pd.DataFrame(bin_stats)
-    bin_df.to_csv(DATA_DIR / "upset_probability_by_elo_bin.csv", index=False)
+    bin_df.to_csv(paths.spirit_data_dir / "upset_probability_by_elo_bin.csv", index=False)
 
     print("\n  Upset rates by ELO difference bin:")
     print(f"    {'ELO Diff':<10} {'n':>5} {'Actual Upset':>14} {'Expected Upset':>16} {'Volatility':>12}")
@@ -705,10 +1022,11 @@ def investigate_upset_probability(df: pd.DataFrame) -> dict[str, Any]:
     ax.set_title("Actual vs. Expected Upset Rates by ELO Difference")
     ax.legend()
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "upset_probability.png")
+    viz_path = str(paths.assets_dir / "upset_probability.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
+    ci_lo, ci_hi = proportion_wilson_ci(int(n_upsets), int(n_total))
     return {
         "title": "Upset Probability",
         "hypothesis": "Tournament upsets exceed the logistic ELO model expectation",
@@ -717,6 +1035,11 @@ def investigate_upset_probability(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Binomial test (upset count vs mean expected upset rate)",
+        "n": int(n_total),
+        "ci_low": ci_lo,
+        "ci_high": ci_hi,
+        "effect_size": f"{overall_volatility:.2f}x volatility vs ELO model",
     }
 
 
@@ -725,7 +1048,7 @@ def investigate_upset_probability(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_tempo_control(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_tempo_control(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """Does controlling game length correlate with winning?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 9: Tempo Control")
@@ -762,6 +1085,9 @@ def investigate_tempo_control(df: pd.DataFrame) -> dict[str, Any]:
             "p_value": None,
             "verdict": "INCONCLUSIVE",
             "viz_path": None,
+            "test_name": None,
+            "n": None,
+            "effect_size": "Insufficient players",
         }
 
     terciles = ps_df["mean_duration"].quantile([1 / 3, 2 / 3]).values
@@ -805,7 +1131,7 @@ def investigate_tempo_control(df: pd.DataFrame) -> dict[str, Any]:
     axes[1].set_title("Duration Consistency vs. Win Rate")
 
     fig.tight_layout()
-    viz_path = str(ASSETS_DIR / "tempo_control.png")
+    viz_path = str(paths.assets_dir / "tempo_control.png")
     fig.savefig(viz_path, dpi=150)
     plt.close(fig)
 
@@ -817,6 +1143,9 @@ def investigate_tempo_control(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Spearman correlation (duration CV vs win rate across players)",
+        "n": len(ps_df),
+        "effect_size": f"No correlation (rho = {float(corr):.3f})",
     }
 
 
@@ -825,7 +1154,7 @@ def investigate_tempo_control(df: pd.DataFrame) -> dict[str, Any]:
 # ============================================================================
 
 
-def investigate_meta_evolution(df: pd.DataFrame) -> dict[str, Any]:
+def investigate_meta_evolution(df: pd.DataFrame, paths: SpiritPaths) -> dict[str, Any]:
     """How do civ picks shift as tournament stakes increase?"""
     print("\n" + "=" * 70)
     print("INVESTIGATION 10: Meta Evolution")
@@ -845,6 +1174,9 @@ def investigate_meta_evolution(df: pd.DataFrame) -> dict[str, Any]:
             "p_value": None,
             "verdict": "INCONCLUSIVE",
             "viz_path": None,
+            "test_name": None,
+            "n": len(df),
+            "effect_size": "Single-stage data",
         }
 
     stage_civ_counts: dict[str, dict[str, int]] = {}
@@ -907,7 +1239,7 @@ def investigate_meta_evolution(df: pd.DataFrame) -> dict[str, Any]:
         ax.set_title("Meta Evolution: Biggest Civ Pick Rate Shifts")
         ax.invert_yaxis()
         fig.tight_layout()
-        viz_path = str(ASSETS_DIR / "meta_evolution.png")
+        viz_path = str(paths.assets_dir / "meta_evolution.png")
         fig.savefig(viz_path, dpi=150)
         plt.close(fig)
     else:
@@ -921,62 +1253,10 @@ def investigate_meta_evolution(df: pd.DataFrame) -> dict[str, Any]:
         "p_value": p_value,
         "verdict": verdict,
         "viz_path": viz_path,
+        "test_name": "Chi-square test (civ counts vs stage)",
+        "n": len(df),
+        "effect_size": "Pick-rate shift across stages" if verdict == "CONFIRMED" else "No significant distributional shift",
     }
-
-
-# ============================================================================
-# REPORT GENERATION
-# ============================================================================
-
-
-def generate_report(findings: list[dict[str, Any]]) -> None:
-    """Write SPIRIT_FINDINGS.md from investigation results."""
-    lines = [
-        "# Spirit of the Law Investigations -- T90 Titans League Season 5",
-        "",
-        "Deep investigative analysis: 10 questions the standard pipeline does not cover.",
-        "",
-        "---",
-        "",
-    ]
-
-    lines.append("## Summary")
-    lines.append("")
-    lines.append("| Investigation | Verdict | p-value |")
-    lines.append("|---------------|---------|---------|")
-    for f in findings:
-        p = f.get("p_value")
-        p_str = f"{p:.4f}" if isinstance(p, float) else "N/A"
-        lines.append(f"| {f['title']} | {f['verdict']} | {p_str} |")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-
-    for i, f in enumerate(findings, 1):
-        lines.append(f"## {i}. {f['title']}")
-        lines.append("")
-        lines.append(f"**Hypothesis:** {f['hypothesis']}")
-        lines.append("")
-        lines.append(f"**Method:** {f['method']}")
-        lines.append("")
-        lines.append(f"**Finding:** {f['finding']}")
-        lines.append("")
-        p = f.get("p_value")
-        if isinstance(p, float):
-            lines.append(f"**p-value:** {p:.4f}")
-            lines.append("")
-        lines.append(f"**Verdict:** {f['verdict']}")
-        lines.append("")
-        if f.get("viz_path"):
-            lines.append(f"![{f['title']}]({f['viz_path']})")
-            lines.append("")
-        lines.append("---")
-        lines.append("")
-
-    with open("SPIRIT_FINDINGS.md", "w", encoding="utf-8") as fh:
-        fh.write("\n".join(lines))
-
-    print(f"\nReport written to SPIRIT_FINDINGS.md ({len(findings)} investigations)")
 
 
 # ============================================================================
@@ -984,30 +1264,39 @@ def generate_report(findings: list[dict[str, Any]]) -> None:
 # ============================================================================
 
 
-def main() -> None:
-    """Run all 10 investigations and generate the report."""
-    _ensure_dirs()
+def main(argv: list[str] | None = None) -> None:
+    """Run all 10 investigations, write findings.json and auto markdown."""
+    args = parse_args(argv)
+    paths = resolve_paths(args)
+    paths.ensure_dirs()
 
     print("=" * 70)
     print("SPIRIT OF THE LAW INVESTIGATIONS")
-    print("T90 Titans League Season 5")
+    print(f"Season {paths.season_id} | matches: {paths.matches_csv}")
     print("=" * 70)
 
-    df = load_data()
+    df = load_data(paths)
+    validate_matches_dataframe(df)
+
     findings: list[dict[str, Any]] = []
+    findings.append(investigate_snowball_effect(df, paths))
+    findings.append(investigate_draft_order(df, paths))
+    findings.append(investigate_fatigue_factor(df, paths))
+    findings.append(investigate_comfort_picks(df, paths))
+    findings.append(investigate_clutch_factor(df, paths))
+    findings.append(investigate_civ_matchups(df, paths))
+    findings.append(investigate_map_specialists(df, paths))
+    findings.append(investigate_upset_probability(df, paths))
+    findings.append(investigate_tempo_control(df, paths))
+    findings.append(investigate_meta_evolution(df, paths))
 
-    findings.append(investigate_snowball_effect(df))
-    findings.append(investigate_draft_order(df))
-    findings.append(investigate_fatigue_factor(df))
-    findings.append(investigate_comfort_picks(df))
-    findings.append(investigate_clutch_factor(df))
-    findings.append(investigate_civ_matchups(df))
-    findings.append(investigate_map_specialists(df))
-    findings.append(investigate_upset_probability(df))
-    findings.append(investigate_tempo_control(df))
-    findings.append(investigate_meta_evolution(df))
-
-    generate_report(findings)
+    annotate_findings(findings)
+    write_findings_json(findings, paths)
+    generate_report(
+        findings,
+        paths,
+        write_root_spirit_findings=bool(args.write_root_spirit_findings),
+    )
 
     print("\n" + "=" * 70)
     print("ALL INVESTIGATIONS COMPLETE")
@@ -1021,4 +1310,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

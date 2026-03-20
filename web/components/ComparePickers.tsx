@@ -28,13 +28,13 @@ function ComparePickersInner({
   );
 
   return (
-    <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-4 mb-10">
-      <label className="flex flex-col gap-1 text-fluid-xs text-muted min-w-[12rem]">
-        Player A
+    <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-5 md:gap-4 mb-10">
+      <label className="flex flex-col gap-1.5 text-fluid-sm md:text-fluid-xs text-muted w-full md:min-w-[12rem] md:w-auto">
+        First player
         <select
           value={nameA}
           onChange={(e) => push(e.target.value, nameB)}
-          className="h-10 rounded border border-ttl-border bg-ttl-slate px-2 text-primary"
+          className="select-interactive w-full min-h-11 md:min-h-10 h-11 md:h-10 rounded border border-ttl-border bg-ttl-slate px-3 md:px-2 text-fluid-sm text-primary focus:outline-none focus:ring-2 focus:ring-ttl-accent/40 focus:border-ttl-accent/50"
         >
           {allPlayers.map((p) => (
             <option key={`a-${p}`} value={p}>
@@ -43,15 +43,15 @@ function ComparePickersInner({
           ))}
         </select>
       </label>
-      <span className="text-fluid-lg text-muted font-display font-bold self-center hidden md:block">
+      <span className="text-fluid-base md:text-fluid-lg text-muted font-display font-bold self-center text-center py-1 md:py-0 -my-1 md:my-0">
         vs
       </span>
-      <label className="flex flex-col gap-1 text-fluid-xs text-muted min-w-[12rem]">
-        Player B
+      <label className="flex flex-col gap-1.5 text-fluid-sm md:text-fluid-xs text-muted w-full md:min-w-[12rem] md:w-auto">
+        Second player
         <select
           value={nameB}
           onChange={(e) => push(nameA, e.target.value)}
-          className="h-10 rounded border border-ttl-border bg-ttl-slate px-2 text-primary"
+          className="select-interactive w-full min-h-11 md:min-h-10 h-11 md:h-10 rounded border border-ttl-border bg-ttl-slate px-3 md:px-2 text-fluid-sm text-primary focus:outline-none focus:ring-2 focus:ring-ttl-accent/40 focus:border-ttl-accent/50"
         >
           {allPlayers.map((p) => (
             <option key={`b-${p}`} value={p}>

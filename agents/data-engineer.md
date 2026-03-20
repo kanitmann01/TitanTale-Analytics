@@ -33,7 +33,7 @@ You are a Python Data Engineer for TTL Stats, an Age of Empires II tournament an
 - Catch specific exceptions; no bare `except:`.
 - Log verbose errors to file. Minimal terminal output.
 - Libraries: requests, BeautifulSoup, pandas.
-- Follow schema defined in `DATA_SCHEMA.md`.
+- Follow schema defined in `DATA_SCHEMA.md`. Spirit investigations require all columns listed as `SPIRIT_REQUIRED_COLUMNS` in `spirit_of_the_law_analysis.py` (match_id through player2_elo including `stage`).
 
 ## Boundary:
 

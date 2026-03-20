@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   getMatches,
   getPlayerStats,
@@ -18,6 +19,8 @@ import ResidualChart from "@/components/charts/ResidualChart";
 import GroupedBarChart from "@/components/charts/GroupedBarChart";
 import MiniBar from "@/components/charts/MiniBar";
 import { getSeasonId } from "@/lib/season-server";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import { pageTitle } from "@/lib/site-metadata";
 
 const LEAGUE_COLORS: Record<string, string> = {
@@ -165,7 +168,7 @@ export default async function AnalysisPage() {
 
   return (
     <main className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-14">
         <header className="mb-6 anim-fade-up">
           <p className="section-label-gold mb-3">Deep Dive</p>
           <h1 className="font-display text-fluid-2xl font-bold text-primary">
@@ -184,40 +187,76 @@ export default async function AnalysisPage() {
             <p className="text-fluid-xl font-display font-bold text-ttl-gold leading-none">
               {(avgWinRate * 100).toFixed(1)}%
             </p>
-            <p className="text-fluid-xs text-muted mt-1.5">avg win rate</p>
+            <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1">
+              avg win rate
+              <StatHelp
+                text={STAT_HELP.analysisAvgWinRateField}
+                ariaLabel={helpAria("Average win rate")}
+              />
+            </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
               {avgDuration.toFixed(0)}
               <span className="text-fluid-lg text-muted ml-0.5">min</span>
             </p>
-            <p className="text-fluid-xs text-muted mt-1.5">avg game length</p>
+            <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1">
+              avg game length
+              <StatHelp
+                text={STAT_HELP.analysisAvgGameLength}
+                ariaLabel={helpAria("Average game length")}
+              />
+            </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-ttl-accent leading-none">
               {(snowballPct * 100).toFixed(0)}%
             </p>
-            <p className="text-fluid-xs text-muted mt-1.5">
+            <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1 flex-wrap">
               game-1 winners take series
+              <StatHelp
+                text={STAT_HELP.analysisSnowball}
+                ariaLabel={helpAria("Game-1 winners take series")}
+              />
             </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-ttl-gold-light leading-none">
               {(p1Pct * 100).toFixed(0)}%
             </p>
-            <p className="text-fluid-xs text-muted mt-1.5">
+            <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1 flex-wrap">
               Player 1 win rate
+              <StatHelp
+                text={STAT_HELP.analysisPlayer1WinRate}
+                ariaLabel={helpAria("Player 1 win rate")}
+              />
             </p>
           </div>
         </div>
+
+        <p className="callout mb-6 text-fluid-xs text-secondary leading-relaxed max-w-3xl">
+          Snowball and Player-1 rates match Spirit findings in{" "}
+          <code className="text-ttl-gold">ANALYTICAL_BRIEF.md</code> (sections
+          12.1-12.2). Treat the Player-1 edge as a strong listing/structural
+          signal in this data; causality may include seeding or metadata, not
+          only in-game position. Full caveats and narrative:{" "}
+          <Link href="/research" className="text-ttl-accent hover:text-ttl-gold">
+            /research
+          </Link>
+          .
+        </p>
 
         <div className="divider mb-14" />
 
         {/* Row 1: ELO Residuals + Duration histogram */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           <section className="anim-scale-in d2">
-            <h2 className="section-label mb-4">
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
               Performance vs ELO Expectation
+              <StatHelp
+                text={STAT_HELP.analysisPerformanceVsElo}
+                ariaLabel={helpAria("Performance vs ELO Expectation")}
+              />
             </h2>
             <div className="panel">
               <ResidualChart
@@ -242,28 +281,65 @@ export default async function AnalysisPage() {
                 accentColor="var(--color-chart-2)"
               />
             </div>
-            <p className="callout mt-4 text-fluid-xs text-secondary">
-              Most games cluster between 20-39 minutes. Extremely long games
-              are rare outliers.
-            </p>
           </section>
         </div>
 
         {/* Row 2: Civ Matchup Table + Upset Probability */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
           <section className="lg:col-span-2 anim-fade-up d4">
-            <h2 className="section-label mb-4">
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
               Top Civilization Matchups
+              <StatHelp
+                text={STAT_HELP.analysisTopCivMatchups}
+                ariaLabel={helpAria("Top Civilization Matchups")}
+              />
             </h2>
-            <div className="panel overflow-x-auto">
-              <table className="w-full text-fluid-sm">
+            <div className="panel overflow-x-auto min-w-0 touch-pan-x overscroll-x-contain scroll-pl-4">
+              <table className="w-full text-fluid-sm min-w-[640px]">
                 <thead>
                   <tr className="border-b border-ttl-border text-left text-muted uppercase tracking-wider text-fluid-xs">
-                    <th className="py-2.5 pr-3">Matchup</th>
-                    <th className="py-2.5 pr-3 text-right">Games</th>
-                    <th className="py-2.5 pr-3 text-right">Civ 1 WR</th>
-                    <th className="py-2.5 pr-3 w-28">Balance</th>
-                    <th className="py-2.5 text-right">Avg Dur.</th>
+                    <th className="py-2.5 pr-3 min-w-[10rem] max-w-[14rem] max-lg:sticky max-lg:left-0 max-lg:z-20 max-lg:bg-ttl-raised max-lg:shadow-[2px_0_10px_-4px_rgba(0,0,0,0.45)]">
+                      Matchup
+                    </th>
+                    <th className="py-2.5 pr-3 text-right">
+                      <span className="inline-flex items-center justify-end gap-1 w-full">
+                        Games
+                        <StatHelp
+                          text={STAT_HELP.civMatchupGames}
+                          ariaLabel={helpAria("Games")}
+                          align="end"
+                        />
+                      </span>
+                    </th>
+                    <th className="py-2.5 pr-3 text-right">
+                      <span className="inline-flex items-center justify-end gap-1 w-full">
+                        Civ 1 WR
+                        <StatHelp
+                          text={STAT_HELP.analysisCiv1WR}
+                          ariaLabel={helpAria("Civ 1 WR")}
+                          align="end"
+                        />
+                      </span>
+                    </th>
+                    <th className="py-2.5 pr-3 w-28">
+                      <span className="inline-flex items-center gap-1">
+                        Balance
+                        <StatHelp
+                          text={STAT_HELP.analysisMatchupBalance}
+                          ariaLabel={helpAria("Balance")}
+                        />
+                      </span>
+                    </th>
+                    <th className="py-2.5 text-right">
+                      <span className="inline-flex items-center justify-end gap-1 w-full">
+                        Avg Dur.
+                        <StatHelp
+                          text={STAT_HELP.civMatchupAvgDur}
+                          ariaLabel={helpAria("Avg Dur.")}
+                          align="end"
+                        />
+                      </span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -273,12 +349,14 @@ export default async function AnalysisPage() {
                     return (
                       <tr
                         key={`${cm.civilization1}-${cm.civilization2}`}
-                        className="border-b border-ttl-border-subtle/60 hover:bg-ttl-slate/40 transition-colors"
+                        className="group border-b border-ttl-border-subtle/60 hover:bg-ttl-slate/40 transition-colors"
                       >
-                        <td className="py-2.5 pr-3 text-primary font-medium">
-                          {cm.civilization1}{" "}
-                          <span className="text-muted">vs</span>{" "}
-                          {cm.civilization2}
+                        <td className="py-2.5 pr-3 text-primary font-medium max-lg:sticky max-lg:left-0 max-lg:z-10 max-lg:max-w-[14rem] max-lg:bg-ttl-raised max-lg:shadow-[3px_0_12px_-5px_rgba(0,0,0,0.5)] max-lg:group-hover:bg-ttl-slate/40">
+                          <span className="line-clamp-3 max-lg:line-clamp-4">
+                            {cm.civilization1}{" "}
+                            <span className="text-muted">vs</span>{" "}
+                            {cm.civilization2}
+                          </span>
                         </td>
                         <td className="py-2.5 pr-3 text-right text-secondary">
                           {cm.games_played}
@@ -319,17 +397,26 @@ export default async function AnalysisPage() {
                   })}
                 </tbody>
               </table>
+              <p className="md:hidden text-fluid-xs text-muted text-center px-3 py-2.5 border-t border-ttl-border-subtle/60 bg-ttl-navy/20">
+                Swipe sideways for games, win rate, balance, and duration.
+              </p>
               <p className="text-fluid-xs text-muted mt-3 px-1">
-                No civ matchup reached statistical significance (p &lt; 0.05)
-                at these sample sizes. Treat as observed outcomes, not
-                predictions.
+                None of these civilization pairings reached statistical
+                significance (p &lt; 0.05) in Spirit tests at these sample
+                sizes. That means we did not detect imbalance under limited
+                power -- not proof of perfect balance. Treat cells as observed
+                outcomes, not predictions.
               </p>
             </div>
           </section>
 
           <section className="anim-scale-in d5">
-            <h2 className="section-label mb-4">
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
               Upset Probability by ELO Gap
+              <StatHelp
+                text={STAT_HELP.analysisUpsetByEloBin}
+                ariaLabel={helpAria("Upset Probability by ELO Gap")}
+              />
             </h2>
             <div className="panel p-4">
               <GroupedBarChart
@@ -352,9 +439,11 @@ export default async function AnalysisPage() {
               />
             </div>
             <p className="callout mt-4 text-fluid-xs text-secondary">
-              Tournament upsets exceed ELO predictions by a factor of 1.62x
-              across all ELO bins. The wider the gap, the more volatile
-              the outcome.
+              Tournament upsets exceed logistic ELO predictions by a factor of
+              about 1.62 (p &lt; 0.0001 in Spirit analysis). Binomial tests by
+              ELO-gap bin support extra volatility versus the model; see{" "}
+              <code className="text-ttl-gold">ANALYTICAL_BRIEF.md</code> section
+              12.8.
             </p>
           </section>
         </div>
@@ -362,8 +451,12 @@ export default async function AnalysisPage() {
         {/* Row 3: Clutch Leaderboard + Snowball/Positional callouts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           <section className="anim-slide-in d6">
-            <h2 className="section-label mb-5">
+            <h2 className="section-label mb-5 flex flex-wrap items-center gap-1">
               Clutch Factor - Deciding Game Performance
+              <StatHelp
+                text={STAT_HELP.analysisClutchSection}
+                ariaLabel={helpAria("Clutch Factor")}
+              />
             </h2>
             <div className="space-y-2">
               {clutchFactors.map((cf, i) => {
@@ -431,17 +524,21 @@ export default async function AnalysisPage() {
                 );
               })}
               <p className="text-fluid-xs text-muted mt-3 leading-relaxed">
-                * = statistically significant (p &lt; 0.05). Clutch delta is
-                win rate in deciding games minus overall win rate; it is not a
-                measure of overall skill. A top player can rank low here if they
-                rarely drop deciding games or underperform in those spots.
+                * = per-test p &lt; 0.05. With many players, Bonferroni-style
+                correction would tighten thresholds; interpret significant
+                cells as suggestive. Clutch delta is deciding-game WR minus
+                overall WR, not overall skill.
               </p>
             </div>
           </section>
 
           <section className="anim-fade-up d7">
-            <h2 className="section-label mb-5">
+            <h2 className="section-label mb-5 flex flex-wrap items-center gap-1">
               Map Balance (lower = more balanced)
+              <StatHelp
+                text={STAT_HELP.analysisMapBalanceChart}
+                ariaLabel={helpAria("Map Balance")}
+              />
             </h2>
             <div className="panel">
               <HBarChart
@@ -485,7 +582,13 @@ export default async function AnalysisPage() {
                 </div>
 
                 <div className="mt-5 pt-4 border-t border-ttl-border-subtle w-full">
-                  <p className="section-label mb-2">Unique Civs by League</p>
+                  <p className="section-label mb-2 flex flex-wrap items-center gap-1">
+                    Unique Civs by League
+                    <StatHelp
+                      text={STAT_HELP.analysisUniqueCivsByLeague}
+                      ariaLabel={helpAria("Unique Civs by League")}
+                    />
+                  </p>
                   {Object.entries(civsByLeague)
                     .sort((a, b) => b[1].size - a[1].size)
                     .map(([league, civSet]) => (
@@ -508,8 +611,12 @@ export default async function AnalysisPage() {
         {/* Row 4: Draft Position Analysis */}
         <div className="divider my-12" />
         <section className="anim-fade-up d8">
-          <h2 className="section-label mb-5">
+          <h2 className="section-label mb-5 flex flex-wrap items-center gap-1">
             Draft Position Analysis
+            <StatHelp
+              text={STAT_HELP.analysisDraftPosition}
+              ariaLabel={helpAria("Draft Position Analysis")}
+            />
           </h2>
           <p className="text-fluid-sm text-secondary mb-4 max-w-xl">
             Civilization distribution by pick order across 141 games with
@@ -536,14 +643,26 @@ export default async function AnalysisPage() {
                   </span>
                 </div>
                 <div className="space-y-2 text-fluid-xs">
-                  <div className="flex justify-between">
-                    <span className="text-muted">Total picks</span>
+                  <div className="flex justify-between items-start gap-2">
+                    <span className="text-muted inline-flex items-center gap-1">
+                      Total picks
+                      <StatHelp
+                        text={STAT_HELP.draftTotalPicks}
+                        ariaLabel={helpAria("Total picks")}
+                      />
+                    </span>
                     <span className="text-primary font-medium">
                       {d.total_picks}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted">Unique civs</span>
+                  <div className="flex justify-between items-start gap-2">
+                    <span className="text-muted inline-flex items-center gap-1">
+                      Unique civs
+                      <StatHelp
+                        text={STAT_HELP.draftUniqueCivs}
+                        ariaLabel={helpAria("Unique civs")}
+                      />
+                    </span>
                     <span className="text-primary font-medium">
                       {d.unique_civs}
                     </span>

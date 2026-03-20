@@ -80,7 +80,7 @@ export default function RankedHBarChart({
   if (data.length === 0) {
     return (
       <p className="text-fluid-sm text-muted px-1 py-8 text-center">
-        No data to plot.
+        Not enough data to draw this chart for the current filters or season.
       </p>
     );
   }

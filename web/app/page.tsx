@@ -6,8 +6,11 @@ import {
   getCivStats,
   getMapStats,
   getMatches,
+  getUpsetProbabilities,
 } from "@/lib/data";
 import MiniBar from "@/components/charts/MiniBar";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import { getSeasonId } from "@/lib/season-server";
 import { pageTitle } from "@/lib/site-metadata";
 
@@ -47,10 +50,18 @@ export default async function Home() {
     "",
   );
 
+  const upsetBins = getUpsetProbabilities(seasonId);
+  const upsetWeightN = upsetBins.reduce((s, b) => s + b.n, 0);
+  const weightedUpsetVol =
+    upsetWeightN > 0
+      ? upsetBins.reduce((s, b) => s + b.volatility_factor * b.n, 0) /
+        upsetWeightN
+      : null;
+
   return (
     <main className="min-h-screen">
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-ttl-gold-dim/10 via-transparent to-ttl-accent-dim/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-ttl-gold-dim/10 via-transparent to-ttl-accent-dim/5 hero-ambient" />
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-ttl-gold-dim/[0.04] to-transparent" />
         <div className="max-w-6xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-16 relative">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-10 lg:gap-12 items-center">
@@ -72,8 +83,12 @@ export default async function Home() {
                   <p className="text-fluid-2xl font-display font-bold text-ttl-gold leading-none">
                     {totalGames}
                   </p>
-                  <p className="text-fluid-xs text-muted mt-1.5">
+                  <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1">
                     games in match log
+                    <StatHelp
+                      text={STAT_HELP.gamesInMatchLog}
+                      ariaLabel={helpAria("Games in match log")}
+                    />
                   </p>
                 </div>
                 <div>
@@ -81,14 +96,24 @@ export default async function Home() {
                     {avgDuration.toFixed(0)}
                     <span className="text-fluid-lg text-muted ml-0.5">min</span>
                   </p>
-                  <p className="text-fluid-xs text-muted mt-1.5">avg duration</p>
+                  <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1">
+                    avg duration
+                    <StatHelp
+                      text={STAT_HELP.avgDuration}
+                      ariaLabel={helpAria("Average duration")}
+                    />
+                  </p>
                 </div>
                 <div>
                   <p className="text-fluid-2xl font-display font-bold text-ttl-gold-light leading-none">
                     {(topWr.win_rate * 100).toFixed(0)}%
                   </p>
-                  <p className="text-fluid-xs text-muted mt-1.5">
+                  <p className="text-fluid-xs text-muted mt-1.5 inline-flex items-center gap-1 flex-wrap">
                     top win rate ({topWr.player})
+                    <StatHelp
+                      text={STAT_HELP.topWinRate}
+                      ariaLabel={helpAria("Top win rate")}
+                    />
                   </p>
                 </div>
               </div>
@@ -99,7 +124,7 @@ export default async function Home() {
                     href={tournament.links.youtube}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center rounded border border-ttl-gold/40 bg-ttl-gold/10 px-4 py-2 text-fluid-sm text-ttl-gold hover:bg-ttl-gold/20 transition-colors"
+                    className="cta-shimmer btn-press inline-flex items-center justify-center min-h-11 sm:min-h-0 rounded border border-ttl-gold/40 bg-ttl-gold/10 px-5 sm:px-4 py-2.5 sm:py-2 text-fluid-sm text-ttl-gold hover:bg-ttl-gold/20 hover:border-ttl-gold/55 hover:shadow-[0_0_24px_-6px_rgba(212,175,55,0.22)]"
                   >
                     Watch on YouTube
                   </a>
@@ -109,7 +134,7 @@ export default async function Home() {
                     href={tournament.links.liquipedia}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center rounded border border-ttl-border-subtle px-4 py-2 text-fluid-sm text-secondary hover:text-primary transition-colors"
+                    className="btn-press inline-flex items-center justify-center min-h-11 sm:min-h-0 rounded border border-ttl-border-subtle px-5 sm:px-4 py-2.5 sm:py-2 text-fluid-sm text-secondary hover:text-primary hover:border-ttl-accent/35 hover:bg-ttl-surface/30"
                   >
                     Full bracket on Liquipedia
                   </a>
@@ -119,7 +144,13 @@ export default async function Home() {
 
             {latest && (
               <div className="panel border-ttl-border-subtle anim-fade-up d3 lg:justify-self-end w-full max-w-md">
-                <p className="section-label mb-3">Latest match (log)</p>
+                <p className="section-label mb-3 flex flex-wrap items-center gap-1">
+                  Latest match (log)
+                  <StatHelp
+                    text={STAT_HELP.latestMatchLog}
+                    ariaLabel={helpAria("Latest match")}
+                  />
+                </p>
                 <p className="font-display text-fluid-base font-bold text-primary">
                   {latest.player1}{" "}
                   <span className="text-muted font-body font-normal text-fluid-sm">
@@ -140,14 +171,63 @@ export default async function Home() {
 
       <div className="divider" />
 
+      <section className="max-w-6xl mx-auto px-4 md:px-6 py-10">
+        <div className="panel border-ttl-gold/20 anim-fade-up flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-10">
+          <div className="flex-1 min-w-0">
+            <p className="section-label-gold mb-2 flex flex-wrap items-center gap-1">
+              Tournament ledger
+              <StatHelp
+                text={STAT_HELP.researchLedgerTeaser}
+                ariaLabel={helpAria("Tournament ledger")}
+              />
+            </p>
+            <p className="text-fluid-sm text-secondary leading-relaxed max-w-xl">
+              Myths checked against the data, upset rates by rating gap, and ten
+              formal hypothesis verdicts with caveats.
+            </p>
+            <Link
+              href="/research"
+              className="btn-press inline-flex mt-5 min-h-11 items-center rounded border border-ttl-gold/35 bg-ttl-gold/10 px-4 py-2 text-fluid-sm text-ttl-gold hover:bg-ttl-gold/18 hover:border-ttl-gold/50"
+            >
+              Open investigations &rarr;
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-x-10 gap-y-6 lg:border-l lg:border-ttl-border-subtle lg:pl-10">
+            {weightedUpsetVol != null && (
+              <div>
+                <p className="text-fluid-2xl font-display font-bold text-ttl-accent leading-none">
+                  {weightedUpsetVol.toFixed(2)}x
+                </p>
+                <p className="text-fluid-xs text-muted mt-2 max-w-[11rem] leading-relaxed">
+                  Weighted upset volatility vs a simple ELO curve (this season)
+                </p>
+              </div>
+            )}
+            <div>
+              <p className="text-fluid-2xl font-display font-bold text-ttl-gold leading-none">
+                89%
+              </p>
+              <p className="text-fluid-xs text-muted mt-2 max-w-[11rem] leading-relaxed">
+                Series taken by the game-1 winner (research run that produced
+                the written findings)
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="max-w-6xl mx-auto px-4 md:px-6 pt-12 pb-12">
         <div className="flex items-baseline justify-between mb-8 anim-slide-in">
-          <h2 className="font-display text-fluid-lg font-bold text-primary">
+          <h2 className="h2-section font-display text-fluid-lg font-bold text-primary flex flex-wrap items-center gap-1">
             Top Players
+            <StatHelp
+              text={STAT_HELP.topPlayersHome}
+              ariaLabel={helpAria("Top Players")}
+            />
           </h2>
           <Link
             href="/players"
-            className="text-fluid-xs text-ttl-accent hover:text-ttl-gold transition-colors"
+            className="btn-press text-fluid-xs text-ttl-accent hover:text-ttl-gold"
           >
             All players &rarr;
           </Link>
@@ -208,12 +288,16 @@ export default async function Home() {
       <section className="bg-gradient-to-b from-transparent via-ttl-raised/40 to-transparent">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-12">
           <div className="flex items-baseline justify-between mb-8 anim-slide-in d3">
-            <h2 className="font-display text-fluid-lg font-bold text-primary">
+            <h2 className="h2-section font-display text-fluid-lg font-bold text-primary flex flex-wrap items-center gap-1">
               Civilization Meta
+              <StatHelp
+                text={STAT_HELP.civilizationMetaHome}
+                ariaLabel={helpAria("Civilization Meta")}
+              />
             </h2>
             <Link
               href="/civilizations"
-              className="text-fluid-xs text-ttl-accent hover:text-ttl-gold transition-colors"
+              className="btn-press text-fluid-xs text-ttl-accent hover:text-ttl-gold"
             >
               All civilizations &rarr;
             </Link>
@@ -230,7 +314,7 @@ export default async function Home() {
                   className={`lift rounded-lg border px-5 py-4 ${
                     isTop
                       ? "panel-accent"
-                      : "border-ttl-border-subtle bg-ttl-raised"
+                      : "border-ttl-border-subtle bg-ttl-raised hover:border-ttl-accent/30"
                   }`}
                 >
                   <p className="font-display text-fluid-sm font-bold text-ttl-gold mb-1">
@@ -255,12 +339,16 @@ export default async function Home() {
 
       <section className="max-w-6xl mx-auto px-4 md:px-6 pt-12 pb-16">
         <div className="flex items-baseline justify-between mb-8 anim-slide-in d5">
-          <h2 className="font-display text-fluid-lg font-bold text-primary">
+          <h2 className="h2-section font-display text-fluid-lg font-bold text-primary flex flex-wrap items-center gap-1">
             Map Pool
+            <StatHelp
+              text={STAT_HELP.mapPoolHome}
+              ariaLabel={helpAria("Map Pool")}
+            />
           </h2>
           <Link
             href="/maps"
-            className="text-fluid-xs text-ttl-accent hover:text-ttl-gold transition-colors"
+            className="btn-press text-fluid-xs text-ttl-accent hover:text-ttl-gold"
           >
             All maps &rarr;
           </Link>

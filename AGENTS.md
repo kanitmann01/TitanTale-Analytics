@@ -10,14 +10,6 @@ tournament data (T90 Titans League). It has two layers:
 - **Python analytics pipeline** -- ETL, EDA, and statistical modeling at the repo root.
 - **Next.js web app** (planned) -- full-stack UI in `web/` that presents the data.
 
-### Analytics Agents
-
-| Agent | Script | Purpose |
-|-------|--------|---------|
-| Data Engineer | `scraper.py`, `parse_html.py` | ETL: extract and normalize tournament data into `data/` CSVs |
-| Statistical Modeler | `analyze_ttl_s5.py`, `analyze_real_data.py`, `advanced_statistical_analysis.py` | Standard EDA: descriptive stats, correlations, outlier detection, variance analysis |
-| Spirit_of_the_Law | `spirit_of_the_law_analysis.py` | Deep investigative analysis modeled on the AoE2 YouTuber's methodology: question-driven, empirical, assumption-challenging. Runs 10 targeted investigations that the standard pipeline does not cover (snowball effect, positional advantage, fatigue factor, comfort picks, clutch factor, civ matchup imbalance, map specialization, upset probability, tempo control, meta evolution). Outputs to `SPIRIT_FINDINGS.md`, `assets/spirit/`, `data/spirit/`. |
-
 ## 2. Read This First
 
 Before making changes, read in this order:

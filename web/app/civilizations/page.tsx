@@ -3,6 +3,8 @@ import { getCivStats } from "@/lib/data";
 import MetaScatterChart from "@/components/charts/MetaScatterChart";
 import RankedHBarChart from "@/components/charts/RankedHBarChart";
 import PageLabel from "@/components/PageLabel";
+import StatHelp from "@/components/StatHelp";
+import { STAT_HELP, helpAria } from "@/lib/stat-tooltips";
 import { getSeasonId } from "@/lib/season-server";
 import { pageTitle } from "@/lib/site-metadata";
 
@@ -75,28 +77,48 @@ export default async function CivilizationsPage() {
             <p className="text-fluid-xl font-display font-bold text-ttl-gold leading-none">
               {topPick.civilization}
             </p>
-            <p className="text-fluid-xs text-muted mt-1">
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1 flex-wrap">
               most picked ({(topPick.pick_rate * 100).toFixed(1)}%)
+              <StatHelp
+                text={STAT_HELP.mostPickedCiv}
+                ariaLabel={helpAria("Most picked")}
+              />
             </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-ttl-gold-light leading-none">
               {topWin.civilization}
             </p>
-            <p className="text-fluid-xs text-muted mt-1">
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1 flex-wrap">
               highest win rate ({(topWin.win_rate * 100).toFixed(0)}%)
+              <StatHelp
+                text={STAT_HELP.highestWinRateCiv}
+                ariaLabel={helpAria("Highest win rate")}
+              />
             </p>
           </div>
           <div>
             <p className="text-fluid-xl font-display font-bold text-primary leading-none">
               {(avgWr * 100).toFixed(1)}%
             </p>
-            <p className="text-fluid-xs text-muted mt-1">field avg win rate</p>
+            <p className="text-fluid-xs text-muted mt-1 inline-flex items-center gap-1">
+              field avg win rate
+              <StatHelp
+                text={STAT_HELP.fieldAvgWinRate}
+                ariaLabel={helpAria("Field average win rate")}
+              />
+            </p>
           </div>
         </div>
 
         <section className="mb-14 anim-scale-in d2">
-          <h2 className="section-label mb-4">Pick Rate vs Win Rate</h2>
+          <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+            Pick Rate vs Win Rate
+            <StatHelp
+              text={STAT_HELP.pickVsWinScatter}
+              ariaLabel={helpAria("Pick Rate vs Win Rate")}
+            />
+          </h2>
           <div className="panel overflow-x-auto min-w-0">
             <MetaScatterChart
               data={scatterData}
@@ -115,7 +137,13 @@ export default async function CivilizationsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
           <section className="anim-slide-in d3">
-            <h2 className="section-label mb-4">Most Picked - Top 15</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              Most Picked - Top 15
+              <StatHelp
+                text={STAT_HELP.mostPickedTop15}
+                ariaLabel={helpAria("Most Picked")}
+              />
+            </h2>
             <div className="panel overflow-x-auto min-w-0">
               <RankedHBarChart
                 data={pickBars}
@@ -127,7 +155,13 @@ export default async function CivilizationsPage() {
           </section>
 
           <section className="anim-fade-up d4">
-            <h2 className="section-label mb-4">Highest Win Rate - Top 15</h2>
+            <h2 className="section-label mb-4 flex flex-wrap items-center gap-1">
+              Highest Win Rate - Top 15
+              <StatHelp
+                text={STAT_HELP.highestWinRateTop15}
+                ariaLabel={helpAria("Highest Win Rate")}
+              />
+            </h2>
             <div className="panel overflow-x-auto min-w-0">
               <RankedHBarChart
                 data={winBars}
@@ -142,7 +176,13 @@ export default async function CivilizationsPage() {
         <div className="divider my-10" />
 
         <section className="anim-fade-up d5">
-          <h2 className="section-label mb-6">All Civilizations</h2>
+          <h2 className="h2-section font-display text-fluid-lg font-bold text-primary mb-6 flex flex-wrap items-center gap-1">
+            All Civilizations
+            <StatHelp
+              text={STAT_HELP.allCivsGrid}
+              ariaLabel={helpAria("All Civilizations")}
+            />
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {civs.map((c, i) => {
               const winPct = (c.win_rate * 100).toFixed(1);
@@ -159,7 +199,7 @@ export default async function CivilizationsPage() {
               return (
                 <div
                   key={c.civilization}
-                  className="lift rounded-lg border border-ttl-border-subtle bg-ttl-raised px-4 py-3 flex flex-col gap-2"
+                  className="lift list-card-tile rounded-lg border border-ttl-border-subtle bg-ttl-raised px-4 py-3 flex flex-col gap-2"
                 >
                   <div className="flex items-center gap-2">
                     <span className={`rank-badge ${rankClass}`}>{i + 1}</span>

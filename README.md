@@ -126,6 +126,8 @@ TTL Stats/
 
 ## Key Findings
 
+Standard pipeline (see [ANALYTICAL_BRIEF.md](ANALYTICAL_BRIEF.md)):
+
 - **TheViper, Hera, and Liereyy** form a statistically distinct
   performance tier (win rates exceeding the 95% confidence interval)
 - **Poles and Byzantines** emerge as S-tier civilizations (win rates
@@ -135,8 +137,31 @@ TTL Stats/
 - **No civilization-map synergy** in the current meta -- players select
   civs independently of map context
 
-See [ANALYTICAL_BRIEF.md](ANALYTICAL_BRIEF.md) for the full statistical
-narrative.
+Spirit investigations (brief sections 12-13; details in
+[SPIRIT_FINDINGS.md](SPIRIT_FINDINGS.md)):
+
+- **Tournament volatility** exceeds logistic ELO upset predictions by about
+  **1.62x** (p &lt; 0.0001)
+- **Snowball effect:** Game-1 winners take the series **~89%** of the time
+- **Player-1 listing** wins **~74.2%** of games -- strong structural signal in
+  data; interpret with seeding/listing caveats (see brief 12.2)
+- **Map specialization** is **rare** (1/196 significant at p &lt; 0.05);
+  **clutch** shows one significant player with multiple-testing caveats
+- **Civ matchup imbalance:** none of **25** tested pairs (min 3 games) was
+  significant -- not proof of perfect balance (low power)
+- **Busted here:** fatigue-by-game-index, comfort-pick superiority, tempo
+  (duration CV) vs win rate; **inconclusive:** meta evolution (single stage)
+
+## Web app integration (brief section 11)
+
+Structured outputs under `data/` (per-season under `data/seasons/{id}/` when
+used) are loaded by typed adapters in [web/lib/data/](web/lib/data/). The
+Next.js app exposes routes including `/`, `/players`, `/civilizations`,
+`/maps`, `/analysis`, `/matchups`, `/compare`, `/research`, and `/test-data`.
+Exports consumed for advanced views include among others:
+`player_statistics.csv`, `player_advanced_metrics.csv`, `player_h2h.csv`,
+`scouting_reports.csv`, `draft_position_outcomes.csv`, and Spirit CSVs under
+`spirit/`. See the brief for the full file list and narrative.
 
 ---
 

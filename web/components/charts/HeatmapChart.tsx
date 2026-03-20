@@ -17,7 +17,6 @@ interface HeatmapChartProps {
   colorScale?: { min: string; mid: string; max: string };
   valueFormat?: (v: number) => string;
   cellSize?: number;
-  title?: string;
   /** When set, hide cells with count below this (affinity use). */
   minCount?: number;
   /** Show gradient legend for value range */
@@ -64,7 +63,6 @@ export default function HeatmapChart({
   colorScale = { min: "#ef4444", mid: "#1e293b", max: "#22c55e" },
   valueFormat = (v) => `${(v * 100).toFixed(0)}%`,
   cellSize = 36,
-  title,
   minCount = 0,
   showLegend = false,
 }: HeatmapChartProps) {
@@ -106,7 +104,6 @@ export default function HeatmapChart({
 
   return (
     <div className="overflow-x-auto min-w-0">
-      {title && <p className="text-fluid-xs text-muted mb-2">{title}</p>}
       <svg
         viewBox={`0 0 ${totalW} ${totalH}`}
         className="w-full"

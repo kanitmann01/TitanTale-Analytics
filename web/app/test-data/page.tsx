@@ -95,13 +95,18 @@ export default async function TestDataPage() {
 
   return (
     <main className="min-h-screen bg-gray-950 text-gray-100 p-8 font-mono">
-      <h1 className="text-2xl font-bold mb-2">Data Adapter Verification</h1>
-      <p className="text-gray-400 text-sm mb-6">Season: {seasonId}</p>
+      <h1 className="text-2xl font-bold mb-2">Data adapter verification</h1>
+      <p className="text-gray-400 text-sm mb-6">
+        Developer check: CSV adapters for season{" "}
+        <span className="text-gray-300">{seasonId}</span>.
+      </p>
 
       <section className="mb-8 p-4 rounded border border-gray-700 bg-gray-900">
         <h2 className="text-lg font-semibold mb-2">Tournament Info</h2>
         {tournament.error ? (
-          <p className="text-red-400">Error: {tournament.error}</p>
+          <p className="text-red-400">
+            Could not load tournament metadata: {tournament.error}
+          </p>
         ) : (
           <pre className="text-sm text-gray-300 overflow-x-auto">
             {JSON.stringify(tournament.data, null, 2)}
@@ -116,7 +121,7 @@ export default async function TestDataPage() {
             <tr className="border-b border-gray-700 text-left">
               <th className="py-2 pr-4">Adapter</th>
               <th className="py-2 pr-4">Rows</th>
-              <th className="py-2 pr-4">Status</th>
+              <th className="py-2 pr-4">Load status</th>
               <th className="py-2">Sample (first row)</th>
             </tr>
           </thead>
@@ -127,9 +132,9 @@ export default async function TestDataPage() {
                 <td className="py-2 pr-4">{a.count}</td>
                 <td className="py-2 pr-4">
                   {a.error ? (
-                    <span className="text-red-400">FAIL</span>
+                    <span className="text-red-400">Failed</span>
                   ) : (
-                    <span className="text-green-400">OK</span>
+                    <span className="text-green-400">Loaded</span>
                   )}
                 </td>
                 <td className="py-2 text-xs text-gray-400 max-w-md truncate">
@@ -151,8 +156,8 @@ export default async function TestDataPage() {
         }`}
       >
         {allPassed
-          ? "All adapters passed."
-          : "Some adapters failed. Check errors above."}
+          ? "All adapters loaded successfully."
+          : "One or more adapters failed. See the error text in each row above."}
       </div>
     </main>
   );

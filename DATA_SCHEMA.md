@@ -3,17 +3,73 @@
 ## Overview
 This document defines the data schema for T90 Titans League Season 5 analytics. Data is extracted from Liquipedia and local tournament sources.
 
+Interpretation and headline conclusions for Spirit outputs and integrated
+narrative are documented in [ANALYTICAL_BRIEF.md](ANALYTICAL_BRIEF.md)
+(sections 11-13) and summarized for investigators in
+[SPIRIT_FINDINGS.md](SPIRIT_FINDINGS.md). When building UI copy, keep
+statistical caveats (multiple testing, sparse civ pairs, structural Player-1
+effects) aligned with those docs.
+
 ## Multi-season layout and web resolution
 
 The Next.js app in `web/` loads CSV/JSON via `web/lib/data/paths.ts`.
 
-- **Season folders**: Put the same filenames the adapters expect under `data/seasons/{seasonId}/`, for example `data/seasons/s5/ttl_s5_matches.csv`, `players.csv`, `tournament_info.json`, etc. Optional per-season Spirit outputs: `data/seasons/{seasonId}/spirit/*.csv`.
+- **Season folders**: Put the same filenames the adapters expect under `data/seasons/{seasonId}/`, for example `data/seasons/s5/ttl_s5_matches.csv`, `players.csv`, `tournament_info.json`, etc. Optional per-season Spirit outputs: `data/seasons/{seasonId}/spirit/*.csv` and `findings.json` (see Spirit outputs below).
 - **Slug**: Season IDs are lowercase slugs such as `s5`. Default season is `s5` when a folder or cookie is missing.
 - **Fallback chain**: For a file `F` and season `S`, resolution tries `data/seasons/S/F`, then `data/seasons/s5/F`, then `data/F` (repo root `data/`).
 - **DATA_DIR**: Set the `DATA_DIR` environment variable to point at the directory that contains `seasons/` (or flat CSVs). If unset, the app resolves from the repo: parent of `web/` (`../data`) when present, else `web/data`.
 - **URL and cookie**: `?season=s5` sets the `ttl-season` cookie (see `web/middleware.ts`). Adapters receive `seasonId` from server helpers (`getSeasonId()`).
 
 Python ETL should write per-season outputs into `data/seasons/{id}/` using the same column layouts as documented below so the web layer can switch seasons without code changes.
+
+## Spirit outputs (`spirit_of_the_law_analysis.py`)
+
+Produced by the Spirit script (not the Liquipedia ETL). Resolution order matches `spiritDataPath` / `trySpiritDataPath` in `web/lib/data/paths.ts`: `data/seasons/{seasonId}/spirit/`, then `data/seasons/s5/spirit/`, then `data/spirit/`.
+
+### findings.json (machine-readable investigations)
+
+Top-level object:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| season_id | string | Season slug (e.g. `s5`) |
+| generated_at | string | ISO-8601 UTC timestamp |
+| investigations | array | Ten entries, stable order I-X matching `SPIRIT_SLUGS` in the Python script |
+
+Each investigation object (snake_case from Python):
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | int | 1-10 |
+| slug | string | Stable key (e.g. `snowball`, `positional_advantage`) |
+| title | string | Short label |
+| hypothesis | string | Tested claim |
+| method | string | Procedure summary |
+| finding | string | Primary numeric result line |
+| effect_size | string | Matrix-style effect summary |
+| statistical_weight | string | Human-readable p phrasing (e.g. `p < 0.0001`) |
+| verdict | string | `CONFIRMED`, `BUSTED`, or `INCONCLUSIVE` |
+| p_value | float or null | Raw p when defined |
+| test_name | string or null | Named test family |
+| n | int or null | Primary sample size or cell count where applicable |
+| ci_low, ci_high | float or null | 95% Wilson interval for key proportions when computed |
+| viz_path | string or null | Repo-relative PNG path (e.g. `assets/spirit/snowball_effect.png`) |
+| n_significant | int | Optional; count of significant cells (clutch, civ grid) |
+| multiple_testing_note | string | Optional caution for many tests |
+
+TypeScript: `SpiritFindingsFileSchema` in `web/lib/schemas/spirit.ts`. The Research page merges this file with editorial fields from `web/lib/data/spirit-findings-fallback.ts` via `getSpiritFindings()`.
+
+### Spirit CSVs (unchanged)
+
+- `clutch_factor.csv`, `civ_matchup_matrix.csv`, `player_map_affinity.csv`, `upset_probability_by_elo_bin.csv` -- column layouts unchanged; see existing adapters in `web/lib/data/spirit.ts`.
+
+### Operator markdown
+
+- `SPIRIT_FINDINGS_auto.md` -- auto-generated summary next to `findings.json`; does not replace curated `SPIRIT_FINDINGS.md` at repo root.
+
+### Drift check (optional CI)
+
+- `scripts/check_spirit_findings_drift.py` (repo root) -- validates `findings.json` shape (10 investigations, required keys). With `--strict-verdicts`, exits non-zero if the verdict sequence differs from the frozen Season 5 reference tuple in that script (update the tuple when the pipeline output is intentionally changed).
 
 ## Data Files
 

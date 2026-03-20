@@ -1,6 +1,11 @@
 export default function PlayerProfileLoading() {
   return (
-    <main className="min-h-screen max-w-6xl mx-auto px-6 py-14 space-y-8 animate-pulse">
+    <main
+      className="min-h-screen max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-14 space-y-8 animate-pulse"
+      aria-busy="true"
+      aria-live="polite"
+    >
+      <p className="sr-only">Loading player profile</p>
       <div className="h-4 w-24 bg-ttl-slate rounded" />
       <div className="h-10 w-64 bg-ttl-slate rounded" />
       <div className="flex flex-wrap gap-8">

@@ -623,13 +623,13 @@ def create_visualizations(df, player_stats, civ_stats, map_stats):
     p = np.poly1d(z)
     ax5.plot(player_stats["elo"], p(player_stats["elo"]), "r--", alpha=0.8, linewidth=2)
 
-    # Calculate R²
+    # Calculate R^2
     correlation_matrix = np.corrcoef(player_stats["elo"], player_stats["win_rate"])
     r_squared = correlation_matrix[0, 1] ** 2
 
     ax5.set_xlabel("ELO Rating")
     ax5.set_ylabel("Win Rate")
-    ax5.set_title(f"ELO vs Win Rate\n(R² = {r_squared:.3f})")
+    ax5.set_title(f"ELO vs Win Rate\n(R^2 = {r_squared:.3f})")
     ax5.grid(True, alpha=0.3)
     ax5.axhline(y=0.5, color="r", linestyle="--", alpha=0.5)
 
@@ -681,7 +681,7 @@ def create_visualizations(df, player_stats, civ_stats, map_stats):
         ax=ax6,
         cbar_kws={"label": "Win Rate"},
     )
-    ax6.set_title("Civilization Win Rates by Map\n(Top 15 Civs × Top 10 Maps)")
+    ax6.set_title("Civilization Win Rates by Map\n(Top 15 Civs x Top 10 Maps)")
     plt.setp(ax6.xaxis.get_majorticklabels(), rotation=45, ha="right")
 
     plt.tight_layout()
@@ -801,7 +801,7 @@ Key Findings:
 2. Top performer: {player_stats.loc[player_stats["win_rate"].idxmax(), "player"]} ({player_stats["win_rate"].max():.1%} win rate)
 3. Most picked civilization: {civ_stats.loc[civ_stats["pick_rate"].idxmax(), "civilization"]} ({civ_stats["pick_rate"].max():.1%} pick rate)
 4. Most played map: {map_stats.loc[map_stats["total_games"].idxmax(), "map"]} ({map_stats["total_games"].max()} games)
-5. ELO-Win Rate correlation: R² = {np.corrcoef(player_stats["elo"], player_stats["win_rate"])[0, 1] ** 2:.3f}
+5. ELO-Win Rate correlation: R^2 = {np.corrcoef(player_stats["elo"], player_stats["win_rate"])[0, 1] ** 2:.3f}
 """)
 
     # Player Performance Analysis
@@ -934,7 +934,7 @@ Limitations:
     # Save report
     report_text = "\n".join(report)
 
-    with open("STATS_REPORT.md", "w") as f:
+    with open("STATS_REPORT.md", "w", encoding="utf-8") as f:
         f.write(report_text)
 
     print("\n" + "=" * 80)

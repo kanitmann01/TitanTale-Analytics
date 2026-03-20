@@ -1,0 +1,547 @@
+match_id,game_number,player1,player2,winner,loser,player1_civ,player2_civ,map,duration_minutes,stage,player1_elo,player2_elo
+1,1,TheViper,Hera,Hera,TheViper,Aztecs,Chinese,Mixed,43.6,Group Stage,2262.425643352381,2257.4025660236007
+1,2,TheViper,Hera,Hera,TheViper,Poles,Spanish,Steppe,38.1,Group Stage,2262.425643352381,2257.4025660236007
+1,3,TheViper,Hera,TheViper,Hera,Huns,Huns,Islands,28.2,Group Stage,2262.425643352381,2257.4025660236007
+1,4,TheViper,Hera,TheViper,Hera,Incas,Berbers,Hill Fort,30.6,Group Stage,2262.425643352381,2257.4025660236007
+1,5,TheViper,Hera,Hera,TheViper,Ethiopians,Persians,Coast Arena,33.0,Group Stage,2262.425643352381,2257.4025660236007
+2,1,TheViper,Liereyy,TheViper,Liereyy,Celts,Italians,Team Islands,30.5,Group Stage,2262.425643352381,2207.5083007367407
+2,2,TheViper,Liereyy,Liereyy,TheViper,Persians,Gurjaras,Serengeti,40.4,Group Stage,2262.425643352381,2207.5083007367407
+2,3,TheViper,Liereyy,TheViper,Liereyy,Poles,Sicilians,Team Islands,43.8,Group Stage,2262.425643352381,2207.5083007367407
+2,4,TheViper,Liereyy,TheViper,Liereyy,Khmer,Mongols,Hill Fort,46.8,Group Stage,2262.425643352381,2207.5083007367407
+3,1,TheViper,TaToH,TheViper,TaToH,Incas,Gurjaras,Valley,46.3,Group Stage,2262.425643352381,2145.252754116871
+3,2,TheViper,TaToH,TheViper,TaToH,Teutons,Franks,Serengeti,44.8,Group Stage,2262.425643352381,2145.252754116871
+3,3,TheViper,TaToH,TheViper,TaToH,Chinese,Malians,Megarandom,39.7,Group Stage,2262.425643352381,2145.252754116871
+3,4,TheViper,TaToH,TheViper,TaToH,Persians,Koreans,Cup,38.6,Group Stage,2262.425643352381,2145.252754116871
+3,5,TheViper,TaToH,TaToH,TheViper,Bulgarians,Khmer,Wade,48.9,Group Stage,2262.425643352381,2145.252754116871
+4,1,TheViper,TheMax,TheViper,TheMax,Britons,Goths,Steppe,26.4,Group Stage,2262.425643352381,2055.527774088808
+4,2,TheViper,TheMax,TheViper,TheMax,Indians,Vikings,Megarandom,15.4,Group Stage,2262.425643352381,2055.527774088808
+4,3,TheViper,TheMax,TheViper,TheMax,Malay,Portuguese,Valley,52.6,Group Stage,2262.425643352381,2055.527774088808
+4,4,TheViper,TheMax,TheViper,TheMax,Saracens,Magyars,Coast Arena,48.5,Group Stage,2262.425643352381,2055.527774088808
+5,1,TheViper,DauT,TheViper,DauT,Burgundians,Indians,Ghost Lake,27.6,Group Stage,2262.425643352381,2261.7230374808723
+5,2,TheViper,DauT,TheViper,DauT,Goths,Dravidians,Gold Rush,48.6,Group Stage,2262.425643352381,2261.7230374808723
+5,3,TheViper,DauT,TheViper,DauT,Koreans,Portuguese,Mixed,25.8,Group Stage,2262.425643352381,2261.7230374808723
+5,4,TheViper,DauT,TheViper,DauT,Bulgarians,Britons,Megarandom,26.2,Group Stage,2262.425643352381,2261.7230374808723
+6,1,TheViper,Mbla,TheViper,Mbla,Persians,Japanese,Cliffbound,38.6,Group Stage,2262.425643352381,2231.577434005387
+6,2,TheViper,Mbla,TheViper,Mbla,Malay,Saracens,Arabia,34.1,Group Stage,2262.425643352381,2231.577434005387
+6,3,TheViper,Mbla,TheViper,Mbla,Britons,Malay,Wade,39.4,Group Stage,2262.425643352381,2231.577434005387
+6,4,TheViper,Mbla,TheViper,Mbla,Koreans,Mongols,Steppe,30.1,Group Stage,2262.425643352381,2231.577434005387
+6,5,TheViper,Mbla,TheViper,Mbla,Teutons,Ethiopians,Arabia,25.4,Group Stage,2262.425643352381,2231.577434005387
+7,1,TheViper,Nicov,TheViper,Nicov,Britons,Ethiopians,Mixed,27.5,Group Stage,2262.425643352381,2091.6281099188063
+7,2,TheViper,Nicov,TheViper,Nicov,Khmer,Koreans,Islands,37.4,Group Stage,2262.425643352381,2091.6281099188063
+7,3,TheViper,Nicov,TheViper,Nicov,Japanese,Lithuanians,Megarandom,25.6,Group Stage,2262.425643352381,2091.6281099188063
+7,4,TheViper,Nicov,TheViper,Nicov,Berbers,Celts,Acropolis,55.6,Group Stage,2262.425643352381,2091.6281099188063
+8,1,TheViper,Capoch,TheViper,Capoch,Bulgarians,Italians,Steppe,15.0,Group Stage,2262.425643352381,2185.5038904099365
+8,2,TheViper,Capoch,TheViper,Capoch,Ethiopians,Franks,Steppe,47.3,Group Stage,2262.425643352381,2185.5038904099365
+8,3,TheViper,Capoch,TheViper,Capoch,Celts,Portuguese,Valley,45.8,Group Stage,2262.425643352381,2185.5038904099365
+8,4,TheViper,Capoch,TheViper,Capoch,Malians,Ethiopians,Gold Rush,41.1,Group Stage,2262.425643352381,2185.5038904099365
+8,5,TheViper,Capoch,TheViper,Capoch,Malians,Cumans,Wade,36.6,Group Stage,2262.425643352381,2185.5038904099365
+9,1,TheViper,Sitaux,TheViper,Sitaux,Berbers,Malians,Team Islands,46.9,Group Stage,2262.425643352381,2193.0105246632106
+9,2,TheViper,Sitaux,TheViper,Sitaux,Mayans,Turks,Team Islands,26.5,Group Stage,2262.425643352381,2193.0105246632106
+9,3,TheViper,Sitaux,TheViper,Sitaux,Italians,Berbers,Wade,28.7,Group Stage,2262.425643352381,2193.0105246632106
+10,1,TheViper,BacT,TheViper,BacT,Tatars,Khmer,Cup,24.4,Group Stage,2262.425643352381,2288.142486338677
+10,2,TheViper,BacT,TheViper,BacT,Mongols,Vikings,Hill Fort,26.4,Group Stage,2262.425643352381,2288.142486338677
+10,3,TheViper,BacT,TheViper,BacT,Cumans,Gurjaras,Ghost Lake,21.0,Group Stage,2262.425643352381,2288.142486338677
+10,4,TheViper,BacT,TheViper,BacT,Koreans,Italians,Acropolis,35.0,Group Stage,2262.425643352381,2288.142486338677
+11,1,TheViper,Valas,TheViper,Valas,Indians,Portuguese,Islands,36.1,Group Stage,2262.425643352381,2283.8323754782473
+11,2,TheViper,Valas,TheViper,Valas,Ethiopians,Britons,Serengeti,39.0,Group Stage,2262.425643352381,2283.8323754782473
+11,3,TheViper,Valas,TheViper,Valas,Chinese,Chinese,Hill Fort,42.0,Group Stage,2262.425643352381,2283.8323754782473
+11,4,TheViper,Valas,TheViper,Valas,Gurjaras,Malians,Meadow,31.2,Group Stage,2262.425643352381,2283.8323754782473
+12,1,TheViper,Mangonel,TheViper,Mangonel,Lithuanians,Turks,Mediterranean,33.6,Group Stage,2262.425643352381,2310.1151285430938
+12,2,TheViper,Mangonel,TheViper,Mangonel,Poles,Indians,Valley,29.5,Group Stage,2262.425643352381,2310.1151285430938
+12,3,TheViper,Mangonel,TheViper,Mangonel,Khmer,Mongols,Acropolis,29.7,Group Stage,2262.425643352381,2310.1151285430938
+12,4,TheViper,Mangonel,TheViper,Mangonel,Turks,Koreans,Mediterranean,35.0,Group Stage,2262.425643352381,2310.1151285430938
+13,1,TheViper,Barles,TheViper,Barles,Magyars,Italians,Serengeti,26.7,Group Stage,2262.425643352381,2369.223265460425
+13,2,TheViper,Barles,TheViper,Barles,Chinese,Vikings,Mixed,34.2,Group Stage,2262.425643352381,2369.223265460425
+13,3,TheViper,Barles,TheViper,Barles,Bulgarians,Malians,Meadow,15.0,Group Stage,2262.425643352381,2369.223265460425
+13,4,TheViper,Barles,TheViper,Barles,Persians,Tatars,Acropolis,44.1,Group Stage,2262.425643352381,2369.223265460425
+14,1,TheViper,Spring,TheViper,Spring,Koreans,Saracens,Mediterranean,36.4,Group Stage,2262.425643352381,2275.6536903748965
+14,2,TheViper,Spring,TheViper,Spring,Khmer,Cumans,Hideout,27.4,Group Stage,2262.425643352381,2275.6536903748965
+14,3,TheViper,Spring,TheViper,Spring,Berbers,Celts,Meadow,38.4,Group Stage,2262.425643352381,2275.6536903748965
+14,4,TheViper,Spring,TheViper,Spring,Gurjaras,Celts,Cup,39.3,Group Stage,2262.425643352381,2275.6536903748965
+14,5,TheViper,Spring,TheViper,Spring,Malay,Italians,Hill Fort,50.4,Group Stage,2262.425643352381,2275.6536903748965
+15,1,Hera,Mr_Yo,Mr_Yo,Hera,Ethiopians,Incas,Meadow,34.9,Group Stage,2257.4025660236007,2149.9402208709103
+15,2,Hera,Mr_Yo,Hera,Mr_Yo,Vikings,Burgundians,Meadow,27.9,Group Stage,2257.4025660236007,2149.9402208709103
+15,3,Hera,Mr_Yo,Mr_Yo,Hera,Chinese,Slavs,Mediterranean,45.3,Group Stage,2257.4025660236007,2149.9402208709103
+15,4,Hera,Mr_Yo,Mr_Yo,Hera,Lithuanians,Dravidians,Wade,27.1,Group Stage,2257.4025660236007,2149.9402208709103
+15,5,Hera,Mr_Yo,Hera,Mr_Yo,Huns,Vikings,Hill Fort,33.1,Group Stage,2257.4025660236007,2149.9402208709103
+16,1,Hera,TaToH,Hera,TaToH,Huns,Japanese,Acropolis,33.8,Group Stage,2257.4025660236007,2145.252754116871
+16,2,Hera,TaToH,Hera,TaToH,Dravidians,Japanese,Ghost Lake,21.6,Group Stage,2257.4025660236007,2145.252754116871
+16,3,Hera,TaToH,Hera,TaToH,Aztecs,Mongols,Ghost Lake,37.7,Group Stage,2257.4025660236007,2145.252754116871
+16,4,Hera,TaToH,Hera,TaToH,Italians,Burgundians,Atacama,26.9,Group Stage,2257.4025660236007,2145.252754116871
+16,5,Hera,TaToH,Hera,TaToH,Japanese,Chinese,Coast Arena,41.0,Group Stage,2257.4025660236007,2145.252754116871
+17,1,Hera,DauT,Hera,DauT,Dravidians,Chinese,Mediterranean,51.4,Group Stage,2257.4025660236007,2261.7230374808723
+17,2,Hera,DauT,Hera,DauT,Saracens,Burgundians,Team Islands,16.8,Group Stage,2257.4025660236007,2261.7230374808723
+17,3,Hera,DauT,Hera,DauT,Malay,Chinese,Serengeti,49.4,Group Stage,2257.4025660236007,2261.7230374808723
+17,4,Hera,DauT,Hera,DauT,Persians,Goths,Arabia,32.2,Group Stage,2257.4025660236007,2261.7230374808723
+18,1,Hera,Mbla,Hera,Mbla,Malay,Slavs,Wade,32.9,Group Stage,2257.4025660236007,2231.577434005387
+18,2,Hera,Mbla,Hera,Mbla,Indians,Lithuanians,Acropolis,37.6,Group Stage,2257.4025660236007,2231.577434005387
+18,3,Hera,Mbla,Hera,Mbla,Incas,Persians,Mixed,30.7,Group Stage,2257.4025660236007,2231.577434005387
+18,4,Hera,Mbla,Hera,Mbla,Ethiopians,Sicilians,Hideout,31.4,Group Stage,2257.4025660236007,2231.577434005387
+18,5,Hera,Mbla,Mbla,Hera,Khmer,Khmer,Acropolis,41.2,Group Stage,2257.4025660236007,2231.577434005387
+19,1,Hera,Villese,Hera,Villese,Magyars,Italians,Mixed,27.0,Group Stage,2257.4025660236007,2247.278946077502
+19,2,Hera,Villese,Hera,Villese,Chinese,Portuguese,Hill Fort,40.2,Group Stage,2257.4025660236007,2247.278946077502
+19,3,Hera,Villese,Villese,Hera,Malians,Magyars,Hideout,25.2,Group Stage,2257.4025660236007,2247.278946077502
+19,4,Hera,Villese,Hera,Villese,Saracens,Magyars,Hill Fort,37.3,Group Stage,2257.4025660236007,2247.278946077502
+19,5,Hera,Villese,Hera,Villese,Ethiopians,Dravidians,Ghost Lake,26.1,Group Stage,2257.4025660236007,2247.278946077502
+20,1,Hera,ACCM,ACCM,Hera,Malians,Ethiopians,Islands,37.3,Group Stage,2257.4025660236007,2074.5319737768023
+20,2,Hera,ACCM,Hera,ACCM,Khmer,Japanese,Hill Fort,20.5,Group Stage,2257.4025660236007,2074.5319737768023
+20,3,Hera,ACCM,Hera,ACCM,Mongols,Britons,Mixed,35.3,Group Stage,2257.4025660236007,2074.5319737768023
+20,4,Hera,ACCM,Hera,ACCM,Turks,Ethiopians,Islands,33.9,Group Stage,2257.4025660236007,2074.5319737768023
+20,5,Hera,ACCM,Hera,ACCM,Mongols,Sicilians,Atacama,45.9,Group Stage,2257.4025660236007,2074.5319737768023
+21,1,Hera,Nicov,Hera,Nicov,Malians,Vikings,Gold Rush,32.5,Group Stage,2257.4025660236007,2091.6281099188063
+21,2,Hera,Nicov,Hera,Nicov,Teutons,Britons,Cup,22.1,Group Stage,2257.4025660236007,2091.6281099188063
+21,3,Hera,Nicov,Nicov,Hera,Saracens,Mongols,Hill Fort,27.1,Group Stage,2257.4025660236007,2091.6281099188063
+21,4,Hera,Nicov,Hera,Nicov,Dravidians,Persians,Megarandom,43.0,Group Stage,2257.4025660236007,2091.6281099188063
+22,1,Hera,Capoch,Hera,Capoch,Japanese,Cumans,Serengeti,47.6,Group Stage,2257.4025660236007,2185.5038904099365
+22,2,Hera,Capoch,Hera,Capoch,Cumans,Cumans,Serengeti,31.7,Group Stage,2257.4025660236007,2185.5038904099365
+22,3,Hera,Capoch,Hera,Capoch,Goths,Koreans,Valley,37.6,Group Stage,2257.4025660236007,2185.5038904099365
+23,1,Hera,Sitaux,Hera,Sitaux,Poles,Poles,Meadow,35.5,Group Stage,2257.4025660236007,2193.0105246632106
+23,2,Hera,Sitaux,Hera,Sitaux,Celts,Mongols,Coast Arena,25.9,Group Stage,2257.4025660236007,2193.0105246632106
+23,3,Hera,Sitaux,Hera,Sitaux,Byzantines,Khmer,Islands,40.3,Group Stage,2257.4025660236007,2193.0105246632106
+23,4,Hera,Sitaux,Sitaux,Hera,Saracens,Byzantines,Steppe,31.2,Group Stage,2257.4025660236007,2193.0105246632106
+23,5,Hera,Sitaux,Hera,Sitaux,Mongols,Chinese,Valley,39.7,Group Stage,2257.4025660236007,2193.0105246632106
+24,1,Hera,BacT,Hera,BacT,Sicilians,Celts,Ghost Lake,22.1,Group Stage,2257.4025660236007,2288.142486338677
+24,2,Hera,BacT,Hera,BacT,Mongols,Slavs,Islands,37.1,Group Stage,2257.4025660236007,2288.142486338677
+24,3,Hera,BacT,Hera,BacT,Britons,Huns,Valley,40.2,Group Stage,2257.4025660236007,2288.142486338677
+24,4,Hera,BacT,Hera,BacT,Huns,Koreans,Coast Arena,15.0,Group Stage,2257.4025660236007,2288.142486338677
+25,1,Hera,Valas,Hera,Valas,Turks,Franks,Team Islands,41.1,Group Stage,2257.4025660236007,2283.8323754782473
+25,2,Hera,Valas,Hera,Valas,Italians,Sicilians,Team Islands,36.4,Group Stage,2257.4025660236007,2283.8323754782473
+25,3,Hera,Valas,Hera,Valas,Aztecs,Japanese,Hideout,30.5,Group Stage,2257.4025660236007,2283.8323754782473
+26,1,Hera,Mangonel,Hera,Mangonel,Ethiopians,Slavs,Serengeti,20.9,Group Stage,2257.4025660236007,2310.1151285430938
+26,2,Hera,Mangonel,Hera,Mangonel,Poles,Mongols,Wade,31.3,Group Stage,2257.4025660236007,2310.1151285430938
+26,3,Hera,Mangonel,Hera,Mangonel,Lithuanians,Japanese,Islands,38.4,Group Stage,2257.4025660236007,2310.1151285430938
+27,1,Hera,Barles,Hera,Barles,Cumans,Aztecs,Mixed,28.8,Group Stage,2257.4025660236007,2369.223265460425
+27,2,Hera,Barles,Barles,Hera,Dravidians,Spanish,Meadow,42.1,Group Stage,2257.4025660236007,2369.223265460425
+27,3,Hera,Barles,Hera,Barles,Portuguese,Celts,Valley,44.1,Group Stage,2257.4025660236007,2369.223265460425
+28,1,Hera,Pete,Hera,Pete,Persians,Berbers,Coast Arena,35.6,Group Stage,2257.4025660236007,2347.935548916674
+28,2,Hera,Pete,Hera,Pete,Tatars,Gurjaras,Islands,46.4,Group Stage,2257.4025660236007,2347.935548916674
+28,3,Hera,Pete,Hera,Pete,Ethiopians,Celts,Mixed,35.6,Group Stage,2257.4025660236007,2347.935548916674
+28,4,Hera,Pete,Hera,Pete,Vietnamese,Celts,Islands,50.7,Group Stage,2257.4025660236007,2347.935548916674
+29,1,Hera,Spring,Hera,Spring,Portuguese,Malians,Hill Fort,24.2,Group Stage,2257.4025660236007,2275.6536903748965
+29,2,Hera,Spring,Hera,Spring,Lithuanians,Slavs,Megarandom,54.3,Group Stage,2257.4025660236007,2275.6536903748965
+29,3,Hera,Spring,Hera,Spring,Lithuanians,Turks,Team Islands,45.7,Group Stage,2257.4025660236007,2275.6536903748965
+29,4,Hera,Spring,Hera,Spring,Gurjaras,Aztecs,Meadow,31.6,Group Stage,2257.4025660236007,2275.6536903748965
+30,1,Liereyy,Mr_Yo,Mr_Yo,Liereyy,Cumans,Franks,Atacama,20.3,Group Stage,2207.5083007367407,2149.9402208709103
+30,2,Liereyy,Mr_Yo,Mr_Yo,Liereyy,Vietnamese,Cumans,Acropolis,33.9,Group Stage,2207.5083007367407,2149.9402208709103
+30,3,Liereyy,Mr_Yo,Liereyy,Mr_Yo,Sicilians,Huns,Wade,24.7,Group Stage,2207.5083007367407,2149.9402208709103
+30,4,Liereyy,Mr_Yo,Liereyy,Mr_Yo,Malians,Burgundians,Serengeti,42.0,Group Stage,2207.5083007367407,2149.9402208709103
+31,1,Liereyy,TaToH,Liereyy,TaToH,Bulgarians,Malians,Ghost Lake,15.5,Group Stage,2207.5083007367407,2145.252754116871
+31,2,Liereyy,TaToH,TaToH,Liereyy,Koreans,Khmer,Team Islands,36.4,Group Stage,2207.5083007367407,2145.252754116871
+31,3,Liereyy,TaToH,Liereyy,TaToH,Malians,Burgundians,Coast Arena,39.4,Group Stage,2207.5083007367407,2145.252754116871
+32,1,Liereyy,TheMax,Liereyy,TheMax,Magyars,Huns,Megarandom,23.0,Group Stage,2207.5083007367407,2055.527774088808
+32,2,Liereyy,TheMax,Liereyy,TheMax,Slavs,Slavs,Cup,34.1,Group Stage,2207.5083007367407,2055.527774088808
+32,3,Liereyy,TheMax,Liereyy,TheMax,Vietnamese,Ethiopians,Coast Arena,43.6,Group Stage,2207.5083007367407,2055.527774088808
+32,4,Liereyy,TheMax,TheMax,Liereyy,Teutons,Italians,Team Islands,15.0,Group Stage,2207.5083007367407,2055.527774088808
+33,1,Liereyy,Vinchester,Liereyy,Vinchester,Indians,Malians,Meadow,15.0,Group Stage,2207.5083007367407,2150.428836462642
+33,2,Liereyy,Vinchester,Liereyy,Vinchester,Huns,Malians,Gold Rush,33.8,Group Stage,2207.5083007367407,2150.428836462642
+33,3,Liereyy,Vinchester,Liereyy,Vinchester,Saracens,Vikings,Islands,47.8,Group Stage,2207.5083007367407,2150.428836462642
+34,1,Liereyy,DauT,Liereyy,DauT,Tatars,Koreans,Mediterranean,15.0,Group Stage,2207.5083007367407,2261.7230374808723
+34,2,Liereyy,DauT,Liereyy,DauT,Saracens,Teutons,Coast Arena,33.5,Group Stage,2207.5083007367407,2261.7230374808723
+34,3,Liereyy,DauT,Liereyy,DauT,Berbers,Malians,Team Islands,26.1,Group Stage,2207.5083007367407,2261.7230374808723
+35,1,Liereyy,Mbla,Liereyy,Mbla,Poles,Japanese,Hill Fort,30.4,Group Stage,2207.5083007367407,2231.577434005387
+35,2,Liereyy,Mbla,Liereyy,Mbla,Ethiopians,Franks,Arabia,29.6,Group Stage,2207.5083007367407,2231.577434005387
+35,3,Liereyy,Mbla,Liereyy,Mbla,Vikings,Berbers,Cliffbound,40.8,Group Stage,2207.5083007367407,2231.577434005387
+35,4,Liereyy,Mbla,Liereyy,Mbla,Ethiopians,Teutons,Hideout,34.6,Group Stage,2207.5083007367407,2231.577434005387
+36,1,Liereyy,ACCM,Liereyy,ACCM,Poles,Persians,Gold Rush,27.2,Group Stage,2207.5083007367407,2074.5319737768023
+36,2,Liereyy,ACCM,ACCM,Liereyy,Koreans,Bulgarians,Mediterranean,37.3,Group Stage,2207.5083007367407,2074.5319737768023
+36,3,Liereyy,ACCM,Liereyy,ACCM,Gurjaras,Celts,Atacama,28.5,Group Stage,2207.5083007367407,2074.5319737768023
+36,4,Liereyy,ACCM,Liereyy,ACCM,Goths,Magyars,Megarandom,33.2,Group Stage,2207.5083007367407,2074.5319737768023
+37,1,Liereyy,Valas,Liereyy,Valas,Goths,Tatars,Arabia,28.1,Group Stage,2207.5083007367407,2283.8323754782473
+37,2,Liereyy,Valas,Liereyy,Valas,Franks,Saracens,Atacama,42.9,Group Stage,2207.5083007367407,2283.8323754782473
+37,3,Liereyy,Valas,Liereyy,Valas,Khmer,Italians,Cliffbound,36.4,Group Stage,2207.5083007367407,2283.8323754782473
+38,1,Liereyy,Mangonel,Liereyy,Mangonel,Britons,Sicilians,Islands,50.4,Group Stage,2207.5083007367407,2310.1151285430938
+38,2,Liereyy,Mangonel,Liereyy,Mangonel,Incas,Malay,Mixed,24.3,Group Stage,2207.5083007367407,2310.1151285430938
+38,3,Liereyy,Mangonel,Liereyy,Mangonel,Britons,Tatars,Valley,29.2,Group Stage,2207.5083007367407,2310.1151285430938
+38,4,Liereyy,Mangonel,Liereyy,Mangonel,Dravidians,Celts,Valley,50.1,Group Stage,2207.5083007367407,2310.1151285430938
+38,5,Liereyy,Mangonel,Liereyy,Mangonel,Franks,Indians,Team Islands,35.6,Group Stage,2207.5083007367407,2310.1151285430938
+39,1,Liereyy,Pete,Liereyy,Pete,Ethiopians,Burgundians,Coast Arena,26.9,Group Stage,2207.5083007367407,2347.935548916674
+39,2,Liereyy,Pete,Liereyy,Pete,Byzantines,Mongols,Arabia,59.1,Group Stage,2207.5083007367407,2347.935548916674
+39,3,Liereyy,Pete,Liereyy,Pete,Mongols,Vikings,Coast Arena,17.0,Group Stage,2207.5083007367407,2347.935548916674
+40,1,Liereyy,Spring,Liereyy,Spring,Aztecs,Aztecs,Gold Rush,45.7,Group Stage,2207.5083007367407,2275.6536903748965
+40,2,Liereyy,Spring,Spring,Liereyy,Saracens,Koreans,Steppe,26.6,Group Stage,2207.5083007367407,2275.6536903748965
+40,3,Liereyy,Spring,Liereyy,Spring,Saracens,Bulgarians,Gold Rush,35.8,Group Stage,2207.5083007367407,2275.6536903748965
+40,4,Liereyy,Spring,Liereyy,Spring,Italians,Incas,Ghost Lake,33.5,Group Stage,2207.5083007367407,2275.6536903748965
+41,1,Mr_Yo,TaToH,Mr_Yo,TaToH,Ethiopians,Turks,Wade,26.7,Group Stage,2149.9402208709103,2145.252754116871
+41,2,Mr_Yo,TaToH,Mr_Yo,TaToH,Indians,Persians,Hideout,27.3,Group Stage,2149.9402208709103,2145.252754116871
+41,3,Mr_Yo,TaToH,TaToH,Mr_Yo,Koreans,Dravidians,Mediterranean,39.8,Group Stage,2149.9402208709103,2145.252754116871
+41,4,Mr_Yo,TaToH,TaToH,Mr_Yo,Spanish,Mongols,Ghost Lake,32.2,Group Stage,2149.9402208709103,2145.252754116871
+41,5,Mr_Yo,TaToH,Mr_Yo,TaToH,Bulgarians,Malay,Mixed,42.0,Group Stage,2149.9402208709103,2145.252754116871
+42,1,Mr_Yo,Vinchester,Vinchester,Mr_Yo,Saracens,Berbers,Ghost Lake,28.8,Group Stage,2149.9402208709103,2150.428836462642
+42,2,Mr_Yo,Vinchester,Vinchester,Mr_Yo,Lithuanians,Spanish,Steppe,21.8,Group Stage,2149.9402208709103,2150.428836462642
+42,3,Mr_Yo,Vinchester,Mr_Yo,Vinchester,Koreans,Turks,Wade,45.1,Group Stage,2149.9402208709103,2150.428836462642
+42,4,Mr_Yo,Vinchester,Mr_Yo,Vinchester,Magyars,Magyars,Valley,36.7,Group Stage,2149.9402208709103,2150.428836462642
+43,1,Mr_Yo,Mbla,Mr_Yo,Mbla,Japanese,Sicilians,Acropolis,30.3,Group Stage,2149.9402208709103,2231.577434005387
+43,2,Mr_Yo,Mbla,Mr_Yo,Mbla,Chinese,Britons,Acropolis,34.8,Group Stage,2149.9402208709103,2231.577434005387
+43,3,Mr_Yo,Mbla,Mr_Yo,Mbla,Bulgarians,Bulgarians,Hill Fort,56.9,Group Stage,2149.9402208709103,2231.577434005387
+43,4,Mr_Yo,Mbla,Mr_Yo,Mbla,Malay,Vikings,Mixed,25.8,Group Stage,2149.9402208709103,2231.577434005387
+43,5,Mr_Yo,Mbla,Mbla,Mr_Yo,Incas,Vietnamese,Coast Arena,23.6,Group Stage,2149.9402208709103,2231.577434005387
+44,1,Mr_Yo,Villese,Mr_Yo,Villese,Spanish,Vikings,Hideout,22.2,Group Stage,2149.9402208709103,2247.278946077502
+44,2,Mr_Yo,Villese,Mr_Yo,Villese,Huns,Chinese,Cup,17.4,Group Stage,2149.9402208709103,2247.278946077502
+44,3,Mr_Yo,Villese,Mr_Yo,Villese,Teutons,Vietnamese,Islands,18.4,Group Stage,2149.9402208709103,2247.278946077502
+44,4,Mr_Yo,Villese,Villese,Mr_Yo,Celts,Mayans,Atacama,33.1,Group Stage,2149.9402208709103,2247.278946077502
+45,1,Mr_Yo,Nicov,Mr_Yo,Nicov,Tatars,Gurjaras,Mixed,39.4,Group Stage,2149.9402208709103,2091.6281099188063
+45,2,Mr_Yo,Nicov,Mr_Yo,Nicov,Huns,Dravidians,Cliffbound,25.0,Group Stage,2149.9402208709103,2091.6281099188063
+45,3,Mr_Yo,Nicov,Mr_Yo,Nicov,Italians,Mayans,Islands,37.5,Group Stage,2149.9402208709103,2091.6281099188063
+45,4,Mr_Yo,Nicov,Mr_Yo,Nicov,Malians,Teutons,Arabia,36.2,Group Stage,2149.9402208709103,2091.6281099188063
+45,5,Mr_Yo,Nicov,Nicov,Mr_Yo,Aztecs,Koreans,Team Islands,36.3,Group Stage,2149.9402208709103,2091.6281099188063
+46,1,Mr_Yo,Capoch,Mr_Yo,Capoch,Bulgarians,Malay,Hill Fort,43.5,Group Stage,2149.9402208709103,2185.5038904099365
+46,2,Mr_Yo,Capoch,Mr_Yo,Capoch,Malay,Franks,Acropolis,33.2,Group Stage,2149.9402208709103,2185.5038904099365
+46,3,Mr_Yo,Capoch,Capoch,Mr_Yo,Byzantines,Indians,Cliffbound,53.6,Group Stage,2149.9402208709103,2185.5038904099365
+46,4,Mr_Yo,Capoch,Mr_Yo,Capoch,Aztecs,Poles,Hideout,27.5,Group Stage,2149.9402208709103,2185.5038904099365
+46,5,Mr_Yo,Capoch,Capoch,Mr_Yo,Spanish,Aztecs,Steppe,36.3,Group Stage,2149.9402208709103,2185.5038904099365
+47,1,Mr_Yo,Sitaux,Mr_Yo,Sitaux,Burgundians,Japanese,Meadow,45.1,Group Stage,2149.9402208709103,2193.0105246632106
+47,2,Mr_Yo,Sitaux,Sitaux,Mr_Yo,Mongols,Spanish,Serengeti,54.8,Group Stage,2149.9402208709103,2193.0105246632106
+47,3,Mr_Yo,Sitaux,Mr_Yo,Sitaux,Tatars,Goths,Cliffbound,28.6,Group Stage,2149.9402208709103,2193.0105246632106
+48,1,Mr_Yo,Mangonel,Mr_Yo,Mangonel,Poles,Aztecs,Ghost Lake,50.0,Group Stage,2149.9402208709103,2310.1151285430938
+48,2,Mr_Yo,Mangonel,Mr_Yo,Mangonel,Slavs,Incas,Team Islands,37.9,Group Stage,2149.9402208709103,2310.1151285430938
+48,3,Mr_Yo,Mangonel,Mr_Yo,Mangonel,Magyars,Chinese,Arabia,25.7,Group Stage,2149.9402208709103,2310.1151285430938
+48,4,Mr_Yo,Mangonel,Mr_Yo,Mangonel,Berbers,Aztecs,Cup,41.1,Group Stage,2149.9402208709103,2310.1151285430938
+49,1,Mr_Yo,Barles,Mr_Yo,Barles,Mayans,Aztecs,Gold Rush,24.8,Group Stage,2149.9402208709103,2369.223265460425
+49,2,Mr_Yo,Barles,Mr_Yo,Barles,Italians,Khmer,Arabia,46.1,Group Stage,2149.9402208709103,2369.223265460425
+49,3,Mr_Yo,Barles,Barles,Mr_Yo,Magyars,Aztecs,Team Islands,19.6,Group Stage,2149.9402208709103,2369.223265460425
+49,4,Mr_Yo,Barles,Barles,Mr_Yo,Britons,Vikings,Acropolis,39.2,Group Stage,2149.9402208709103,2369.223265460425
+50,1,Mr_Yo,Pete,Mr_Yo,Pete,Incas,Britons,Ghost Lake,40.6,Group Stage,2149.9402208709103,2347.935548916674
+50,2,Mr_Yo,Pete,Mr_Yo,Pete,Japanese,Tatars,Megarandom,31.1,Group Stage,2149.9402208709103,2347.935548916674
+50,3,Mr_Yo,Pete,Mr_Yo,Pete,Poles,Aztecs,Arabia,39.2,Group Stage,2149.9402208709103,2347.935548916674
+51,1,Mr_Yo,Spring,Mr_Yo,Spring,Byzantines,Koreans,Cliffbound,30.8,Group Stage,2149.9402208709103,2275.6536903748965
+51,2,Mr_Yo,Spring,Mr_Yo,Spring,Burgundians,Italians,Meadow,32.3,Group Stage,2149.9402208709103,2275.6536903748965
+51,3,Mr_Yo,Spring,Mr_Yo,Spring,Gurjaras,Byzantines,Coast Arena,63.6,Group Stage,2149.9402208709103,2275.6536903748965
+51,4,Mr_Yo,Spring,Mr_Yo,Spring,Dravidians,Bulgarians,Meadow,48.1,Group Stage,2149.9402208709103,2275.6536903748965
+51,5,Mr_Yo,Spring,Spring,Mr_Yo,Britons,Khmer,Team Islands,42.5,Group Stage,2149.9402208709103,2275.6536903748965
+52,1,TaToH,TheMax,TaToH,TheMax,Vietnamese,Mayans,Atacama,30.1,Group Stage,2145.252754116871,2055.527774088808
+52,2,TaToH,TheMax,TheMax,TaToH,Spanish,Teutons,Islands,44.0,Group Stage,2145.252754116871,2055.527774088808
+52,3,TaToH,TheMax,TaToH,TheMax,Vikings,Slavs,Hill Fort,33.3,Group Stage,2145.252754116871,2055.527774088808
+52,4,TaToH,TheMax,TaToH,TheMax,Huns,Malay,Coast Arena,29.2,Group Stage,2145.252754116871,2055.527774088808
+53,1,TaToH,DauT,TaToH,DauT,Gurjaras,Sicilians,Mediterranean,28.2,Group Stage,2145.252754116871,2261.7230374808723
+53,2,TaToH,DauT,TaToH,DauT,Slavs,Indians,Cup,21.6,Group Stage,2145.252754116871,2261.7230374808723
+53,3,TaToH,DauT,TaToH,DauT,Malay,Goths,Steppe,41.1,Group Stage,2145.252754116871,2261.7230374808723
+53,4,TaToH,DauT,DauT,TaToH,Celts,Byzantines,Meadow,28.1,Group Stage,2145.252754116871,2261.7230374808723
+54,1,TaToH,Mbla,Mbla,TaToH,Celts,Teutons,Coast Arena,34.8,Group Stage,2145.252754116871,2231.577434005387
+54,2,TaToH,Mbla,Mbla,TaToH,Malay,Franks,Serengeti,27.0,Group Stage,2145.252754116871,2231.577434005387
+54,3,TaToH,Mbla,Mbla,TaToH,Chinese,Malay,Islands,32.7,Group Stage,2145.252754116871,2231.577434005387
+54,4,TaToH,Mbla,TaToH,Mbla,Portuguese,Magyars,Gold Rush,15.0,Group Stage,2145.252754116871,2231.577434005387
+55,1,TaToH,Villese,TaToH,Villese,Vietnamese,Mayans,Arabia,35.7,Group Stage,2145.252754116871,2247.278946077502
+55,2,TaToH,Villese,TaToH,Villese,Slavs,Huns,Coast Arena,21.2,Group Stage,2145.252754116871,2247.278946077502
+55,3,TaToH,Villese,Villese,TaToH,Khmer,Poles,Mixed,16.6,Group Stage,2145.252754116871,2247.278946077502
+55,4,TaToH,Villese,TaToH,Villese,Portuguese,Malay,Mixed,15.0,Group Stage,2145.252754116871,2247.278946077502
+55,5,TaToH,Villese,TaToH,Villese,Poles,Koreans,Wade,30.8,Group Stage,2145.252754116871,2247.278946077502
+56,1,TaToH,Nicov,Nicov,TaToH,Vikings,Portuguese,Cliffbound,40.9,Group Stage,2145.252754116871,2091.6281099188063
+56,2,TaToH,Nicov,TaToH,Nicov,Persians,Lithuanians,Mixed,56.8,Group Stage,2145.252754116871,2091.6281099188063
+56,3,TaToH,Nicov,TaToH,Nicov,Slavs,Britons,Wade,30.5,Group Stage,2145.252754116871,2091.6281099188063
+57,1,TaToH,Capoch,TaToH,Capoch,Italians,Vikings,Cliffbound,40.9,Group Stage,2145.252754116871,2185.5038904099365
+57,2,TaToH,Capoch,TaToH,Capoch,Britons,Italians,Gold Rush,38.1,Group Stage,2145.252754116871,2185.5038904099365
+57,3,TaToH,Capoch,TaToH,Capoch,Byzantines,Vikings,Team Islands,30.4,Group Stage,2145.252754116871,2185.5038904099365
+57,4,TaToH,Capoch,Capoch,TaToH,Persians,Lithuanians,Wade,22.0,Group Stage,2145.252754116871,2185.5038904099365
+58,1,TaToH,Sitaux,TaToH,Sitaux,Khmer,Byzantines,Mixed,34.5,Group Stage,2145.252754116871,2193.0105246632106
+58,2,TaToH,Sitaux,Sitaux,TaToH,Slavs,Bulgarians,Hideout,56.3,Group Stage,2145.252754116871,2193.0105246632106
+58,3,TaToH,Sitaux,TaToH,Sitaux,Chinese,Celts,Gold Rush,29.8,Group Stage,2145.252754116871,2193.0105246632106
+58,4,TaToH,Sitaux,TaToH,Sitaux,Khmer,Berbers,Arabia,31.0,Group Stage,2145.252754116871,2193.0105246632106
+59,1,TaToH,Valas,TaToH,Valas,Chinese,Incas,Wade,31.4,Group Stage,2145.252754116871,2283.8323754782473
+59,2,TaToH,Valas,Valas,TaToH,Magyars,Gurjaras,Steppe,37.1,Group Stage,2145.252754116871,2283.8323754782473
+59,3,TaToH,Valas,Valas,TaToH,Japanese,Malians,Islands,30.8,Group Stage,2145.252754116871,2283.8323754782473
+59,4,TaToH,Valas,TaToH,Valas,Incas,Goths,Meadow,41.0,Group Stage,2145.252754116871,2283.8323754782473
+60,1,TaToH,Mangonel,Mangonel,TaToH,Slavs,Turks,Ghost Lake,41.2,Group Stage,2145.252754116871,2310.1151285430938
+60,2,TaToH,Mangonel,TaToH,Mangonel,Japanese,Huns,Meadow,24.7,Group Stage,2145.252754116871,2310.1151285430938
+60,3,TaToH,Mangonel,TaToH,Mangonel,Portuguese,Mongols,Wade,45.9,Group Stage,2145.252754116871,2310.1151285430938
+60,4,TaToH,Mangonel,TaToH,Mangonel,Incas,Vikings,Team Islands,35.4,Group Stage,2145.252754116871,2310.1151285430938
+61,1,TaToH,Barles,TaToH,Barles,Mongols,Italians,Steppe,36.6,Group Stage,2145.252754116871,2369.223265460425
+61,2,TaToH,Barles,TaToH,Barles,Franks,Celts,Steppe,15.0,Group Stage,2145.252754116871,2369.223265460425
+61,3,TaToH,Barles,Barles,TaToH,Byzantines,Teutons,Steppe,44.8,Group Stage,2145.252754116871,2369.223265460425
+62,1,TaToH,Pete,TaToH,Pete,Ethiopians,Japanese,Islands,33.3,Group Stage,2145.252754116871,2347.935548916674
+62,2,TaToH,Pete,TaToH,Pete,Magyars,Gurjaras,Team Islands,39.2,Group Stage,2145.252754116871,2347.935548916674
+62,3,TaToH,Pete,TaToH,Pete,Magyars,Indians,Arabia,34.9,Group Stage,2145.252754116871,2347.935548916674
+63,1,TaToH,Spring,TaToH,Spring,Spanish,Mayans,Cup,40.9,Group Stage,2145.252754116871,2275.6536903748965
+63,2,TaToH,Spring,TaToH,Spring,Huns,Ethiopians,Cliffbound,36.5,Group Stage,2145.252754116871,2275.6536903748965
+63,3,TaToH,Spring,TaToH,Spring,Japanese,Spanish,Wade,43.2,Group Stage,2145.252754116871,2275.6536903748965
+63,4,TaToH,Spring,TaToH,Spring,Mayans,Portuguese,Wade,20.9,Group Stage,2145.252754116871,2275.6536903748965
+63,5,TaToH,Spring,TaToH,Spring,Huns,Lithuanians,Valley,40.2,Group Stage,2145.252754116871,2275.6536903748965
+64,1,TheMax,DauT,TheMax,DauT,Berbers,Magyars,Coast Arena,26.6,Group Stage,2055.527774088808,2261.7230374808723
+64,2,TheMax,DauT,TheMax,DauT,Mongols,Vietnamese,Acropolis,34.4,Group Stage,2055.527774088808,2261.7230374808723
+64,3,TheMax,DauT,DauT,TheMax,Teutons,Magyars,Serengeti,39.7,Group Stage,2055.527774088808,2261.7230374808723
+64,4,TheMax,DauT,DauT,TheMax,Vietnamese,Vietnamese,Arabia,16.8,Group Stage,2055.527774088808,2261.7230374808723
+64,5,TheMax,DauT,TheMax,DauT,Franks,Bulgarians,Coast Arena,36.0,Group Stage,2055.527774088808,2261.7230374808723
+65,1,TheMax,Villese,Villese,TheMax,Khmer,Gurjaras,Team Islands,49.6,Group Stage,2055.527774088808,2247.278946077502
+65,2,TheMax,Villese,TheMax,Villese,Gurjaras,Ethiopians,Atacama,53.5,Group Stage,2055.527774088808,2247.278946077502
+65,3,TheMax,Villese,TheMax,Villese,Lithuanians,Bulgarians,Atacama,36.4,Group Stage,2055.527774088808,2247.278946077502
+66,1,TheMax,ACCM,TheMax,ACCM,Incas,Berbers,Serengeti,32.5,Group Stage,2055.527774088808,2074.5319737768023
+66,2,TheMax,ACCM,TheMax,ACCM,Goths,Celts,Gold Rush,51.9,Group Stage,2055.527774088808,2074.5319737768023
+66,3,TheMax,ACCM,ACCM,TheMax,Japanese,Britons,Mixed,47.4,Group Stage,2055.527774088808,2074.5319737768023
+67,1,TheMax,Nicov,TheMax,Nicov,Aztecs,Burgundians,Cup,52.4,Group Stage,2055.527774088808,2091.6281099188063
+67,2,TheMax,Nicov,TheMax,Nicov,Cumans,Mayans,Mediterranean,46.2,Group Stage,2055.527774088808,2091.6281099188063
+67,3,TheMax,Nicov,TheMax,Nicov,Huns,Malians,Hideout,22.9,Group Stage,2055.527774088808,2091.6281099188063
+67,4,TheMax,Nicov,Nicov,TheMax,Lithuanians,Vietnamese,Serengeti,51.7,Group Stage,2055.527774088808,2091.6281099188063
+67,5,TheMax,Nicov,TheMax,Nicov,Lithuanians,Magyars,Acropolis,53.7,Group Stage,2055.527774088808,2091.6281099188063
+68,1,TheMax,Capoch,Capoch,TheMax,Goths,Portuguese,Mediterranean,32.1,Group Stage,2055.527774088808,2185.5038904099365
+68,2,TheMax,Capoch,TheMax,Capoch,Spanish,Indians,Cliffbound,22.9,Group Stage,2055.527774088808,2185.5038904099365
+68,3,TheMax,Capoch,TheMax,Capoch,Britons,Teutons,Cliffbound,30.7,Group Stage,2055.527774088808,2185.5038904099365
+68,4,TheMax,Capoch,TheMax,Capoch,Berbers,Mongols,Steppe,29.0,Group Stage,2055.527774088808,2185.5038904099365
+69,1,TheMax,Sitaux,TheMax,Sitaux,Byzantines,Saracens,Islands,26.7,Group Stage,2055.527774088808,2193.0105246632106
+69,2,TheMax,Sitaux,TheMax,Sitaux,Gurjaras,Khmer,Islands,25.2,Group Stage,2055.527774088808,2193.0105246632106
+69,3,TheMax,Sitaux,TheMax,Sitaux,Turks,Malay,Meadow,42.6,Group Stage,2055.527774088808,2193.0105246632106
+69,4,TheMax,Sitaux,TheMax,Sitaux,Berbers,Lithuanians,Arabia,36.8,Group Stage,2055.527774088808,2193.0105246632106
+70,1,TheMax,BacT,TheMax,BacT,Byzantines,Saracens,Acropolis,53.0,Group Stage,2055.527774088808,2288.142486338677
+70,2,TheMax,BacT,TheMax,BacT,Magyars,Gurjaras,Gold Rush,28.1,Group Stage,2055.527774088808,2288.142486338677
+70,3,TheMax,BacT,TheMax,BacT,Franks,Poles,Serengeti,35.4,Group Stage,2055.527774088808,2288.142486338677
+70,4,TheMax,BacT,BacT,TheMax,Portuguese,Poles,Gold Rush,26.3,Group Stage,2055.527774088808,2288.142486338677
+70,5,TheMax,BacT,TheMax,BacT,Spanish,Ethiopians,Gold Rush,40.5,Group Stage,2055.527774088808,2288.142486338677
+71,1,TheMax,Valas,TheMax,Valas,Franks,Khmer,Mediterranean,38.8,Group Stage,2055.527774088808,2283.8323754782473
+71,2,TheMax,Valas,TheMax,Valas,Turks,Malians,Valley,26.3,Group Stage,2055.527774088808,2283.8323754782473
+71,3,TheMax,Valas,TheMax,Valas,Magyars,Lithuanians,Meadow,42.4,Group Stage,2055.527774088808,2283.8323754782473
+72,1,TheMax,Barles,Barles,TheMax,Burgundians,Goths,Atacama,23.5,Group Stage,2055.527774088808,2369.223265460425
+72,2,TheMax,Barles,TheMax,Barles,Lithuanians,Dravidians,Cup,36.5,Group Stage,2055.527774088808,2369.223265460425
+72,3,TheMax,Barles,TheMax,Barles,Chinese,Gurjaras,Wade,31.8,Group Stage,2055.527774088808,2369.223265460425
+72,4,TheMax,Barles,TheMax,Barles,Franks,Britons,Valley,34.7,Group Stage,2055.527774088808,2369.223265460425
+73,1,TheMax,Pete,TheMax,Pete,Japanese,Aztecs,Mediterranean,15.0,Group Stage,2055.527774088808,2347.935548916674
+73,2,TheMax,Pete,Pete,TheMax,Gurjaras,Italians,Valley,26.0,Group Stage,2055.527774088808,2347.935548916674
+73,3,TheMax,Pete,TheMax,Pete,Franks,Franks,Gold Rush,35.3,Group Stage,2055.527774088808,2347.935548916674
+73,4,TheMax,Pete,Pete,TheMax,Ethiopians,Saracens,Arabia,44.9,Group Stage,2055.527774088808,2347.935548916674
+74,1,TheMax,Spring,Spring,TheMax,Gurjaras,Cumans,Atacama,45.9,Group Stage,2055.527774088808,2275.6536903748965
+74,2,TheMax,Spring,TheMax,Spring,Celts,Mongols,Arabia,40.6,Group Stage,2055.527774088808,2275.6536903748965
+74,3,TheMax,Spring,Spring,TheMax,Spanish,Bulgarians,Meadow,21.8,Group Stage,2055.527774088808,2275.6536903748965
+75,1,Vinchester,Mbla,Mbla,Vinchester,Vikings,Huns,Serengeti,45.7,Group Stage,2150.428836462642,2231.577434005387
+75,2,Vinchester,Mbla,Mbla,Vinchester,Byzantines,Britons,Mixed,41.7,Group Stage,2150.428836462642,2231.577434005387
+75,3,Vinchester,Mbla,Vinchester,Mbla,Teutons,Franks,Megarandom,26.2,Group Stage,2150.428836462642,2231.577434005387
+75,4,Vinchester,Mbla,Vinchester,Mbla,Italians,Berbers,Gold Rush,30.0,Group Stage,2150.428836462642,2231.577434005387
+75,5,Vinchester,Mbla,Vinchester,Mbla,Chinese,Ethiopians,Cliffbound,20.0,Group Stage,2150.428836462642,2231.577434005387
+76,1,Vinchester,ACCM,Vinchester,ACCM,Franks,Vikings,Coast Arena,40.5,Group Stage,2150.428836462642,2074.5319737768023
+76,2,Vinchester,ACCM,Vinchester,ACCM,Portuguese,Teutons,Coast Arena,38.6,Group Stage,2150.428836462642,2074.5319737768023
+76,3,Vinchester,ACCM,ACCM,Vinchester,Italians,Britons,Acropolis,36.4,Group Stage,2150.428836462642,2074.5319737768023
+77,1,Vinchester,Nicov,Vinchester,Nicov,Portuguese,Indians,Hideout,48.5,Group Stage,2150.428836462642,2091.6281099188063
+77,2,Vinchester,Nicov,Vinchester,Nicov,Vikings,Italians,Cliffbound,30.4,Group Stage,2150.428836462642,2091.6281099188063
+77,3,Vinchester,Nicov,Vinchester,Nicov,Huns,Chinese,Cliffbound,43.6,Group Stage,2150.428836462642,2091.6281099188063
+77,4,Vinchester,Nicov,Vinchester,Nicov,Vietnamese,Malay,Cup,38.7,Group Stage,2150.428836462642,2091.6281099188063
+78,1,Vinchester,Capoch,Capoch,Vinchester,Teutons,Poles,Meadow,38.7,Group Stage,2150.428836462642,2185.5038904099365
+78,2,Vinchester,Capoch,Vinchester,Capoch,Huns,Franks,Islands,24.7,Group Stage,2150.428836462642,2185.5038904099365
+78,3,Vinchester,Capoch,Vinchester,Capoch,Cumans,Vietnamese,Meadow,34.6,Group Stage,2150.428836462642,2185.5038904099365
+78,4,Vinchester,Capoch,Vinchester,Capoch,Huns,Persians,Mediterranean,32.9,Group Stage,2150.428836462642,2185.5038904099365
+79,1,Vinchester,BacT,BacT,Vinchester,Mayans,Mayans,Wade,38.1,Group Stage,2150.428836462642,2288.142486338677
+79,2,Vinchester,BacT,BacT,Vinchester,Huns,Gurjaras,Gold Rush,24.3,Group Stage,2150.428836462642,2288.142486338677
+79,3,Vinchester,BacT,Vinchester,BacT,Tatars,Bulgarians,Steppe,16.6,Group Stage,2150.428836462642,2288.142486338677
+80,1,Vinchester,Barles,Vinchester,Barles,Byzantines,Burgundians,Valley,25.0,Group Stage,2150.428836462642,2369.223265460425
+80,2,Vinchester,Barles,Vinchester,Barles,Burgundians,Mongols,Wade,42.9,Group Stage,2150.428836462642,2369.223265460425
+80,3,Vinchester,Barles,Vinchester,Barles,Chinese,Mongols,Gold Rush,30.1,Group Stage,2150.428836462642,2369.223265460425
+80,4,Vinchester,Barles,Vinchester,Barles,Poles,Malians,Cup,38.1,Group Stage,2150.428836462642,2369.223265460425
+80,5,Vinchester,Barles,Vinchester,Barles,Saracens,Cumans,Cliffbound,29.5,Group Stage,2150.428836462642,2369.223265460425
+81,1,Vinchester,Spring,Vinchester,Spring,Malians,Saracens,Coast Arena,40.3,Group Stage,2150.428836462642,2275.6536903748965
+81,2,Vinchester,Spring,Spring,Vinchester,Saracens,Chinese,Steppe,31.0,Group Stage,2150.428836462642,2275.6536903748965
+81,3,Vinchester,Spring,Spring,Vinchester,Poles,Turks,Wade,31.1,Group Stage,2150.428836462642,2275.6536903748965
+81,4,Vinchester,Spring,Vinchester,Spring,Slavs,Goths,Team Islands,35.8,Group Stage,2150.428836462642,2275.6536903748965
+81,5,Vinchester,Spring,Vinchester,Spring,Gurjaras,Vikings,Islands,23.9,Group Stage,2150.428836462642,2275.6536903748965
+82,1,DauT,Villese,DauT,Villese,Burgundians,Dravidians,Gold Rush,64.9,Group Stage,2261.7230374808723,2247.278946077502
+82,2,DauT,Villese,DauT,Villese,Tatars,Huns,Meadow,44.3,Group Stage,2261.7230374808723,2247.278946077502
+82,3,DauT,Villese,DauT,Villese,Turks,Berbers,Serengeti,28.0,Group Stage,2261.7230374808723,2247.278946077502
+82,4,DauT,Villese,DauT,Villese,Berbers,Turks,Serengeti,22.8,Group Stage,2261.7230374808723,2247.278946077502
+83,1,DauT,Nicov,DauT,Nicov,Poles,Italians,Wade,39.6,Group Stage,2261.7230374808723,2091.6281099188063
+83,2,DauT,Nicov,DauT,Nicov,Dravidians,Incas,Wade,48.7,Group Stage,2261.7230374808723,2091.6281099188063
+83,3,DauT,Nicov,DauT,Nicov,Cumans,Japanese,Mixed,22.0,Group Stage,2261.7230374808723,2091.6281099188063
+84,1,DauT,Capoch,DauT,Capoch,Koreans,Franks,Mixed,36.6,Group Stage,2261.7230374808723,2185.5038904099365
+84,2,DauT,Capoch,DauT,Capoch,Japanese,Malay,Arabia,28.8,Group Stage,2261.7230374808723,2185.5038904099365
+84,3,DauT,Capoch,DauT,Capoch,Khmer,Lithuanians,Hideout,39.5,Group Stage,2261.7230374808723,2185.5038904099365
+84,4,DauT,Capoch,DauT,Capoch,Bulgarians,Gurjaras,Cliffbound,52.7,Group Stage,2261.7230374808723,2185.5038904099365
+84,5,DauT,Capoch,DauT,Capoch,Byzantines,Lithuanians,Mixed,28.8,Group Stage,2261.7230374808723,2185.5038904099365
+85,1,DauT,BacT,DauT,BacT,Magyars,Tatars,Gold Rush,37.5,Group Stage,2261.7230374808723,2288.142486338677
+85,2,DauT,BacT,BacT,DauT,Franks,Slavs,Arabia,28.4,Group Stage,2261.7230374808723,2288.142486338677
+85,3,DauT,BacT,DauT,BacT,Japanese,Vietnamese,Cliffbound,33.4,Group Stage,2261.7230374808723,2288.142486338677
+85,4,DauT,BacT,DauT,BacT,Lithuanians,Cumans,Hill Fort,15.0,Group Stage,2261.7230374808723,2288.142486338677
+86,1,DauT,Valas,DauT,Valas,Mongols,Malay,Serengeti,36.8,Group Stage,2261.7230374808723,2283.8323754782473
+86,2,DauT,Valas,DauT,Valas,Franks,Tatars,Coast Arena,31.3,Group Stage,2261.7230374808723,2283.8323754782473
+86,3,DauT,Valas,Valas,DauT,Bulgarians,Huns,Hill Fort,43.4,Group Stage,2261.7230374808723,2283.8323754782473
+86,4,DauT,Valas,Valas,DauT,Malians,Poles,Team Islands,33.2,Group Stage,2261.7230374808723,2283.8323754782473
+86,5,DauT,Valas,DauT,Valas,Indians,Vikings,Gold Rush,28.6,Group Stage,2261.7230374808723,2283.8323754782473
+87,1,DauT,Mangonel,DauT,Mangonel,Italians,Goths,Mixed,32.1,Group Stage,2261.7230374808723,2310.1151285430938
+87,2,DauT,Mangonel,DauT,Mangonel,Khmer,Spanish,Mixed,26.9,Group Stage,2261.7230374808723,2310.1151285430938
+87,3,DauT,Mangonel,DauT,Mangonel,Teutons,Aztecs,Gold Rush,27.0,Group Stage,2261.7230374808723,2310.1151285430938
+88,1,DauT,Pete,DauT,Pete,Italians,Goths,Arabia,35.0,Group Stage,2261.7230374808723,2347.935548916674
+88,2,DauT,Pete,DauT,Pete,Italians,Bulgarians,Hideout,19.6,Group Stage,2261.7230374808723,2347.935548916674
+88,3,DauT,Pete,DauT,Pete,Spanish,Byzantines,Mediterranean,29.1,Group Stage,2261.7230374808723,2347.935548916674
+89,1,DauT,Spring,DauT,Spring,Incas,Vikings,Serengeti,43.4,Group Stage,2261.7230374808723,2275.6536903748965
+89,2,DauT,Spring,Spring,DauT,Slavs,Saracens,Gold Rush,28.1,Group Stage,2261.7230374808723,2275.6536903748965
+89,3,DauT,Spring,DauT,Spring,Britons,Tatars,Atacama,49.4,Group Stage,2261.7230374808723,2275.6536903748965
+89,4,DauT,Spring,DauT,Spring,Byzantines,Magyars,Arabia,46.2,Group Stage,2261.7230374808723,2275.6536903748965
+90,1,Mbla,Villese,Mbla,Villese,Aztecs,Huns,Valley,24.4,Group Stage,2231.577434005387,2247.278946077502
+90,2,Mbla,Villese,Mbla,Villese,Chinese,Spanish,Hill Fort,36.8,Group Stage,2231.577434005387,2247.278946077502
+90,3,Mbla,Villese,Mbla,Villese,Incas,Teutons,Hideout,30.4,Group Stage,2231.577434005387,2247.278946077502
+90,4,Mbla,Villese,Villese,Mbla,Britons,Poles,Arabia,35.9,Group Stage,2231.577434005387,2247.278946077502
+90,5,Mbla,Villese,Villese,Mbla,Malians,Slavs,Islands,33.0,Group Stage,2231.577434005387,2247.278946077502
+91,1,Mbla,ACCM,Mbla,ACCM,Spanish,Italians,Wade,30.1,Group Stage,2231.577434005387,2074.5319737768023
+91,2,Mbla,ACCM,Mbla,ACCM,Indians,Franks,Team Islands,20.4,Group Stage,2231.577434005387,2074.5319737768023
+91,3,Mbla,ACCM,Mbla,ACCM,Aztecs,Slavs,Islands,39.0,Group Stage,2231.577434005387,2074.5319737768023
+91,4,Mbla,ACCM,ACCM,Mbla,Mayans,Cumans,Coast Arena,23.0,Group Stage,2231.577434005387,2074.5319737768023
+92,1,Mbla,Sitaux,Mbla,Sitaux,Tatars,Malay,Team Islands,15.0,Group Stage,2231.577434005387,2193.0105246632106
+92,2,Mbla,Sitaux,Sitaux,Mbla,Malay,Goths,Cup,39.1,Group Stage,2231.577434005387,2193.0105246632106
+92,3,Mbla,Sitaux,Sitaux,Mbla,Lithuanians,Mayans,Team Islands,37.7,Group Stage,2231.577434005387,2193.0105246632106
+92,4,Mbla,Sitaux,Mbla,Sitaux,Magyars,Incas,Team Islands,39.7,Group Stage,2231.577434005387,2193.0105246632106
+93,1,Mbla,Valas,Valas,Mbla,Slavs,Goths,Team Islands,33.5,Group Stage,2231.577434005387,2283.8323754782473
+93,2,Mbla,Valas,Mbla,Valas,Spanish,Huns,Atacama,29.7,Group Stage,2231.577434005387,2283.8323754782473
+93,3,Mbla,Valas,Mbla,Valas,Vietnamese,Ethiopians,Arabia,38.7,Group Stage,2231.577434005387,2283.8323754782473
+94,1,Mbla,Mangonel,Mbla,Mangonel,Tatars,Celts,Wade,29.3,Group Stage,2231.577434005387,2310.1151285430938
+94,2,Mbla,Mangonel,Mangonel,Mbla,Indians,Vikings,Atacama,25.3,Group Stage,2231.577434005387,2310.1151285430938
+94,3,Mbla,Mangonel,Mbla,Mangonel,Vietnamese,Poles,Mixed,49.4,Group Stage,2231.577434005387,2310.1151285430938
+94,4,Mbla,Mangonel,Mbla,Mangonel,Poles,Spanish,Hideout,39.8,Group Stage,2231.577434005387,2310.1151285430938
+95,1,Mbla,Barles,Barles,Mbla,Mongols,Slavs,Cliffbound,16.4,Group Stage,2231.577434005387,2369.223265460425
+95,2,Mbla,Barles,Mbla,Barles,Teutons,Burgundians,Ghost Lake,45.8,Group Stage,2231.577434005387,2369.223265460425
+95,3,Mbla,Barles,Mbla,Barles,Portuguese,Cumans,Islands,24.2,Group Stage,2231.577434005387,2369.223265460425
+95,4,Mbla,Barles,Mbla,Barles,Goths,Vietnamese,Meadow,48.4,Group Stage,2231.577434005387,2369.223265460425
+96,1,Mbla,Pete,Mbla,Pete,Poles,Goths,Steppe,37.8,Group Stage,2231.577434005387,2347.935548916674
+96,2,Mbla,Pete,Mbla,Pete,Gurjaras,Incas,Wade,65.0,Group Stage,2231.577434005387,2347.935548916674
+96,3,Mbla,Pete,Mbla,Pete,Japanese,Japanese,Meadow,36.4,Group Stage,2231.577434005387,2347.935548916674
+96,4,Mbla,Pete,Mbla,Pete,Gurjaras,Malay,Coast Arena,33.0,Group Stage,2231.577434005387,2347.935548916674
+96,5,Mbla,Pete,Pete,Mbla,Japanese,Vietnamese,Hideout,41.5,Group Stage,2231.577434005387,2347.935548916674
+97,1,Villese,Capoch,Villese,Capoch,Sicilians,Koreans,Acropolis,45.7,Group Stage,2247.278946077502,2185.5038904099365
+97,2,Villese,Capoch,Villese,Capoch,Japanese,Teutons,Hill Fort,44.7,Group Stage,2247.278946077502,2185.5038904099365
+97,3,Villese,Capoch,Capoch,Villese,Persians,Goths,Steppe,28.8,Group Stage,2247.278946077502,2185.5038904099365
+98,1,Villese,Sitaux,Sitaux,Villese,Portuguese,Magyars,Coast Arena,40.9,Group Stage,2247.278946077502,2193.0105246632106
+98,2,Villese,Sitaux,Villese,Sitaux,Italians,Italians,Cliffbound,29.6,Group Stage,2247.278946077502,2193.0105246632106
+98,3,Villese,Sitaux,Sitaux,Villese,Khmer,Teutons,Gold Rush,42.6,Group Stage,2247.278946077502,2193.0105246632106
+99,1,Villese,BacT,Villese,BacT,Spanish,Ethiopians,Atacama,55.3,Group Stage,2247.278946077502,2288.142486338677
+99,2,Villese,BacT,Villese,BacT,Malay,Portuguese,Megarandom,28.5,Group Stage,2247.278946077502,2288.142486338677
+99,3,Villese,BacT,BacT,Villese,Malay,Vikings,Meadow,18.2,Group Stage,2247.278946077502,2288.142486338677
+99,4,Villese,BacT,BacT,Villese,Vietnamese,Aztecs,Mixed,32.1,Group Stage,2247.278946077502,2288.142486338677
+100,1,Villese,Valas,Villese,Valas,Indians,Slavs,Acropolis,49.5,Group Stage,2247.278946077502,2283.8323754782473
+100,2,Villese,Valas,Villese,Valas,Byzantines,Spanish,Meadow,50.2,Group Stage,2247.278946077502,2283.8323754782473
+100,3,Villese,Valas,Villese,Valas,Huns,Huns,Coast Arena,33.4,Group Stage,2247.278946077502,2283.8323754782473
+101,1,Villese,Mangonel,Villese,Mangonel,Berbers,Turks,Mediterranean,36.2,Group Stage,2247.278946077502,2310.1151285430938
+101,2,Villese,Mangonel,Villese,Mangonel,Bulgarians,Mayans,Atacama,25.6,Group Stage,2247.278946077502,2310.1151285430938
+101,3,Villese,Mangonel,Villese,Mangonel,Burgundians,Burgundians,Cliffbound,30.4,Group Stage,2247.278946077502,2310.1151285430938
+101,4,Villese,Mangonel,Villese,Mangonel,Cumans,Franks,Serengeti,48.0,Group Stage,2247.278946077502,2310.1151285430938
+101,5,Villese,Mangonel,Villese,Mangonel,Mongols,Berbers,Hill Fort,40.2,Group Stage,2247.278946077502,2310.1151285430938
+102,1,Villese,Barles,Barles,Villese,Turks,Turks,Hideout,33.9,Group Stage,2247.278946077502,2369.223265460425
+102,2,Villese,Barles,Villese,Barles,Saracens,Ethiopians,Megarandom,43.0,Group Stage,2247.278946077502,2369.223265460425
+102,3,Villese,Barles,Barles,Villese,Mayans,Malians,Mediterranean,41.0,Group Stage,2247.278946077502,2369.223265460425
+103,1,Villese,Pete,Pete,Villese,Bulgarians,Sicilians,Ghost Lake,20.9,Group Stage,2247.278946077502,2347.935548916674
+103,2,Villese,Pete,Villese,Pete,Ethiopians,Gurjaras,Islands,45.7,Group Stage,2247.278946077502,2347.935548916674
+103,3,Villese,Pete,Pete,Villese,Khmer,Huns,Megarandom,31.5,Group Stage,2247.278946077502,2347.935548916674
+103,4,Villese,Pete,Villese,Pete,Gurjaras,Incas,Team Islands,45.6,Group Stage,2247.278946077502,2347.935548916674
+104,1,Villese,Spring,Villese,Spring,Malians,Tatars,Cliffbound,33.1,Group Stage,2247.278946077502,2275.6536903748965
+104,2,Villese,Spring,Villese,Spring,Teutons,Aztecs,Gold Rush,40.5,Group Stage,2247.278946077502,2275.6536903748965
+104,3,Villese,Spring,Villese,Spring,Dravidians,Mayans,Islands,30.6,Group Stage,2247.278946077502,2275.6536903748965
+104,4,Villese,Spring,Villese,Spring,Khmer,Slavs,Hideout,60.0,Group Stage,2247.278946077502,2275.6536903748965
+105,1,ACCM,Sitaux,Sitaux,ACCM,Japanese,Mayans,Arabia,38.6,Group Stage,2074.5319737768023,2193.0105246632106
+105,2,ACCM,Sitaux,ACCM,Sitaux,Cumans,Chinese,Islands,42.1,Group Stage,2074.5319737768023,2193.0105246632106
+105,3,ACCM,Sitaux,Sitaux,ACCM,Lithuanians,Berbers,Mediterranean,47.0,Group Stage,2074.5319737768023,2193.0105246632106
+105,4,ACCM,Sitaux,ACCM,Sitaux,Sicilians,Saracens,Mixed,34.3,Group Stage,2074.5319737768023,2193.0105246632106
+106,1,ACCM,BacT,BacT,ACCM,Vikings,Malay,Islands,35.0,Group Stage,2074.5319737768023,2288.142486338677
+106,2,ACCM,BacT,ACCM,BacT,Magyars,Burgundians,Wade,38.1,Group Stage,2074.5319737768023,2288.142486338677
+106,3,ACCM,BacT,ACCM,BacT,Byzantines,Britons,Arabia,28.1,Group Stage,2074.5319737768023,2288.142486338677
+106,4,ACCM,BacT,ACCM,BacT,Khmer,Magyars,Mediterranean,22.6,Group Stage,2074.5319737768023,2288.142486338677
+106,5,ACCM,BacT,BacT,ACCM,Incas,Incas,Mediterranean,23.2,Group Stage,2074.5319737768023,2288.142486338677
+107,1,ACCM,Valas,ACCM,Valas,Sicilians,Turks,Steppe,57.8,Group Stage,2074.5319737768023,2283.8323754782473
+107,2,ACCM,Valas,ACCM,Valas,Spanish,Aztecs,Arabia,34.6,Group Stage,2074.5319737768023,2283.8323754782473
+107,3,ACCM,Valas,ACCM,Valas,Japanese,Vikings,Megarandom,33.6,Group Stage,2074.5319737768023,2283.8323754782473
+108,1,ACCM,Mangonel,ACCM,Mangonel,Bulgarians,Gurjaras,Atacama,29.3,Group Stage,2074.5319737768023,2310.1151285430938
+108,2,ACCM,Mangonel,ACCM,Mangonel,Dravidians,Incas,Hideout,20.5,Group Stage,2074.5319737768023,2310.1151285430938
+108,3,ACCM,Mangonel,ACCM,Mangonel,Mongols,Celts,Hill Fort,30.6,Group Stage,2074.5319737768023,2310.1151285430938
+108,4,ACCM,Mangonel,ACCM,Mangonel,Turks,Tatars,Arabia,36.6,Group Stage,2074.5319737768023,2310.1151285430938
+109,1,ACCM,Pete,ACCM,Pete,Malay,Burgundians,Mixed,54.3,Group Stage,2074.5319737768023,2347.935548916674
+109,2,ACCM,Pete,Pete,ACCM,Japanese,Turks,Steppe,31.1,Group Stage,2074.5319737768023,2347.935548916674
+109,3,ACCM,Pete,Pete,ACCM,Spanish,Byzantines,Team Islands,45.5,Group Stage,2074.5319737768023,2347.935548916674
+110,1,ACCM,Spring,ACCM,Spring,Cumans,Bulgarians,Mediterranean,15.0,Group Stage,2074.5319737768023,2275.6536903748965
+110,2,ACCM,Spring,Spring,ACCM,Burgundians,Koreans,Mixed,37.3,Group Stage,2074.5319737768023,2275.6536903748965
+110,3,ACCM,Spring,ACCM,Spring,Goths,Huns,Megarandom,27.3,Group Stage,2074.5319737768023,2275.6536903748965
+111,1,Nicov,Capoch,Capoch,Nicov,Ethiopians,Sicilians,Cup,28.6,Group Stage,2091.6281099188063,2185.5038904099365
+111,2,Nicov,Capoch,Capoch,Nicov,Vietnamese,Ethiopians,Gold Rush,37.0,Group Stage,2091.6281099188063,2185.5038904099365
+111,3,Nicov,Capoch,Nicov,Capoch,Persians,Indians,Coast Arena,23.3,Group Stage,2091.6281099188063,2185.5038904099365
+112,1,Nicov,Sitaux,Nicov,Sitaux,Mongols,Sicilians,Gold Rush,33.1,Group Stage,2091.6281099188063,2193.0105246632106
+112,2,Nicov,Sitaux,Sitaux,Nicov,Italians,Khmer,Meadow,31.8,Group Stage,2091.6281099188063,2193.0105246632106
+112,3,Nicov,Sitaux,Nicov,Sitaux,Bulgarians,Japanese,Team Islands,43.4,Group Stage,2091.6281099188063,2193.0105246632106
+112,4,Nicov,Sitaux,Sitaux,Nicov,Franks,Mayans,Hill Fort,17.8,Group Stage,2091.6281099188063,2193.0105246632106
+113,1,Nicov,BacT,BacT,Nicov,Gurjaras,Khmer,Islands,38.2,Group Stage,2091.6281099188063,2288.142486338677
+113,2,Nicov,BacT,Nicov,BacT,Malay,Aztecs,Coast Arena,45.4,Group Stage,2091.6281099188063,2288.142486338677
+113,3,Nicov,BacT,BacT,Nicov,Saracens,Poles,Hill Fort,22.8,Group Stage,2091.6281099188063,2288.142486338677
+113,4,Nicov,BacT,Nicov,BacT,Bulgarians,Magyars,Mixed,52.8,Group Stage,2091.6281099188063,2288.142486338677
+113,5,Nicov,BacT,BacT,Nicov,Teutons,Celts,Hill Fort,41.2,Group Stage,2091.6281099188063,2288.142486338677
+114,1,Nicov,Valas,Nicov,Valas,Goths,Poles,Megarandom,20.7,Group Stage,2091.6281099188063,2283.8323754782473
+114,2,Nicov,Valas,Nicov,Valas,Turks,Koreans,Acropolis,35.1,Group Stage,2091.6281099188063,2283.8323754782473
+114,3,Nicov,Valas,Nicov,Valas,Slavs,Britons,Mediterranean,32.0,Group Stage,2091.6281099188063,2283.8323754782473
+115,1,Nicov,Mangonel,Nicov,Mangonel,Tatars,Magyars,Coast Arena,25.9,Group Stage,2091.6281099188063,2310.1151285430938
+115,2,Nicov,Mangonel,Mangonel,Nicov,Persians,Mongols,Mediterranean,38.6,Group Stage,2091.6281099188063,2310.1151285430938
+115,3,Nicov,Mangonel,Nicov,Mangonel,Chinese,Tatars,Mixed,38.8,Group Stage,2091.6281099188063,2310.1151285430938
+115,4,Nicov,Mangonel,Nicov,Mangonel,Gurjaras,Koreans,Wade,43.9,Group Stage,2091.6281099188063,2310.1151285430938
+116,1,Nicov,Barles,Barles,Nicov,Bulgarians,Incas,Valley,39.6,Group Stage,2091.6281099188063,2369.223265460425
+116,2,Nicov,Barles,Nicov,Barles,Malay,Vietnamese,Hideout,42.5,Group Stage,2091.6281099188063,2369.223265460425
+116,3,Nicov,Barles,Barles,Nicov,Ethiopians,Chinese,Cliffbound,33.7,Group Stage,2091.6281099188063,2369.223265460425
+116,4,Nicov,Barles,Barles,Nicov,Franks,Berbers,Arabia,32.3,Group Stage,2091.6281099188063,2369.223265460425
+116,5,Nicov,Barles,Nicov,Barles,Vikings,Incas,Megarandom,35.8,Group Stage,2091.6281099188063,2369.223265460425
+117,1,Nicov,Pete,Nicov,Pete,Slavs,Gurjaras,Mediterranean,29.3,Group Stage,2091.6281099188063,2347.935548916674
+117,2,Nicov,Pete,Pete,Nicov,Saracens,Aztecs,Acropolis,49.3,Group Stage,2091.6281099188063,2347.935548916674
+117,3,Nicov,Pete,Nicov,Pete,Turks,Japanese,Steppe,26.1,Group Stage,2091.6281099188063,2347.935548916674
+117,4,Nicov,Pete,Nicov,Pete,Slavs,Franks,Hideout,31.2,Group Stage,2091.6281099188063,2347.935548916674
+118,1,Nicov,Spring,Spring,Nicov,Portuguese,Britons,Islands,35.5,Group Stage,2091.6281099188063,2275.6536903748965
+118,2,Nicov,Spring,Nicov,Spring,Saracens,Dravidians,Mediterranean,64.0,Group Stage,2091.6281099188063,2275.6536903748965
+118,3,Nicov,Spring,Nicov,Spring,Malians,Malay,Islands,18.8,Group Stage,2091.6281099188063,2275.6536903748965
+118,4,Nicov,Spring,Nicov,Spring,Berbers,Lithuanians,Gold Rush,37.1,Group Stage,2091.6281099188063,2275.6536903748965
+119,1,Capoch,Valas,Capoch,Valas,Slavs,Chinese,Ghost Lake,30.3,Group Stage,2185.5038904099365,2283.8323754782473
+119,2,Capoch,Valas,Capoch,Valas,Byzantines,Malay,Arabia,35.3,Group Stage,2185.5038904099365,2283.8323754782473
+119,3,Capoch,Valas,Valas,Capoch,Lithuanians,Lithuanians,Wade,36.9,Group Stage,2185.5038904099365,2283.8323754782473
+119,4,Capoch,Valas,Capoch,Valas,Aztecs,Tatars,Atacama,33.3,Group Stage,2185.5038904099365,2283.8323754782473
+119,5,Capoch,Valas,Valas,Capoch,Burgundians,Mongols,Mediterranean,26.1,Group Stage,2185.5038904099365,2283.8323754782473
+120,1,Capoch,Mangonel,Mangonel,Capoch,Saracens,Saracens,Cliffbound,23.8,Group Stage,2185.5038904099365,2310.1151285430938
+120,2,Capoch,Mangonel,Mangonel,Capoch,Vietnamese,Malay,Gold Rush,20.7,Group Stage,2185.5038904099365,2310.1151285430938
+120,3,Capoch,Mangonel,Capoch,Mangonel,Japanese,Malians,Acropolis,52.3,Group Stage,2185.5038904099365,2310.1151285430938
+120,4,Capoch,Mangonel,Capoch,Mangonel,Persians,Chinese,Megarandom,37.7,Group Stage,2185.5038904099365,2310.1151285430938
+121,1,Capoch,Barles,Barles,Capoch,Franks,Japanese,Mixed,27.3,Group Stage,2185.5038904099365,2369.223265460425
+121,2,Capoch,Barles,Barles,Capoch,Goths,Dravidians,Gold Rush,26.8,Group Stage,2185.5038904099365,2369.223265460425
+121,3,Capoch,Barles,Capoch,Barles,Dravidians,Vietnamese,Gold Rush,24.6,Group Stage,2185.5038904099365,2369.223265460425
+121,4,Capoch,Barles,Capoch,Barles,Ethiopians,Celts,Serengeti,33.9,Group Stage,2185.5038904099365,2369.223265460425
+122,1,Capoch,Pete,Capoch,Pete,Mongols,Incas,Cliffbound,42.8,Group Stage,2185.5038904099365,2347.935548916674
+122,2,Capoch,Pete,Capoch,Pete,Vietnamese,Aztecs,Coast Arena,20.0,Group Stage,2185.5038904099365,2347.935548916674
+122,3,Capoch,Pete,Pete,Capoch,Bulgarians,Slavs,Team Islands,38.6,Group Stage,2185.5038904099365,2347.935548916674
+122,4,Capoch,Pete,Pete,Capoch,Indians,Teutons,Hideout,39.2,Group Stage,2185.5038904099365,2347.935548916674
+122,5,Capoch,Pete,Capoch,Pete,Koreans,Khmer,Team Islands,15.0,Group Stage,2185.5038904099365,2347.935548916674
+123,1,Capoch,Spring,Spring,Capoch,Persians,Vietnamese,Meadow,24.3,Group Stage,2185.5038904099365,2275.6536903748965
+123,2,Capoch,Spring,Spring,Capoch,Turks,Byzantines,Serengeti,33.5,Group Stage,2185.5038904099365,2275.6536903748965
+123,3,Capoch,Spring,Capoch,Spring,Byzantines,Burgundians,Team Islands,47.9,Group Stage,2185.5038904099365,2275.6536903748965
+124,1,Sitaux,Mangonel,Sitaux,Mangonel,Berbers,Britons,Valley,41.6,Group Stage,2193.0105246632106,2310.1151285430938
+124,2,Sitaux,Mangonel,Sitaux,Mangonel,Persians,Gurjaras,Hill Fort,31.9,Group Stage,2193.0105246632106,2310.1151285430938
+124,3,Sitaux,Mangonel,Mangonel,Sitaux,Lithuanians,Slavs,Hill Fort,16.7,Group Stage,2193.0105246632106,2310.1151285430938
+124,4,Sitaux,Mangonel,Mangonel,Sitaux,Koreans,Malay,Steppe,38.7,Group Stage,2193.0105246632106,2310.1151285430938
+124,5,Sitaux,Mangonel,Mangonel,Sitaux,Byzantines,Vikings,Team Islands,20.9,Group Stage,2193.0105246632106,2310.1151285430938
+125,1,Sitaux,Barles,Sitaux,Barles,Poles,Aztecs,Serengeti,27.7,Group Stage,2193.0105246632106,2369.223265460425
+125,2,Sitaux,Barles,Barles,Sitaux,Vikings,Byzantines,Ghost Lake,22.6,Group Stage,2193.0105246632106,2369.223265460425
+125,3,Sitaux,Barles,Sitaux,Barles,Spanish,Tatars,Coast Arena,33.1,Group Stage,2193.0105246632106,2369.223265460425
+126,1,Sitaux,Pete,Sitaux,Pete,Koreans,Persians,Hideout,47.3,Group Stage,2193.0105246632106,2347.935548916674
+126,2,Sitaux,Pete,Sitaux,Pete,Japanese,Huns,Atacama,31.6,Group Stage,2193.0105246632106,2347.935548916674
+126,3,Sitaux,Pete,Pete,Sitaux,Slavs,Teutons,Arabia,46.5,Group Stage,2193.0105246632106,2347.935548916674
+126,4,Sitaux,Pete,Pete,Sitaux,Indians,Ethiopians,Serengeti,38.4,Group Stage,2193.0105246632106,2347.935548916674
+126,5,Sitaux,Pete,Pete,Sitaux,Franks,Bulgarians,Atacama,28.7,Group Stage,2193.0105246632106,2347.935548916674
+127,1,Sitaux,Spring,Spring,Sitaux,Aztecs,Celts,Coast Arena,18.9,Group Stage,2193.0105246632106,2275.6536903748965
+127,2,Sitaux,Spring,Sitaux,Spring,Italians,Persians,Atacama,29.3,Group Stage,2193.0105246632106,2275.6536903748965
+127,3,Sitaux,Spring,Sitaux,Spring,Mongols,Koreans,Hill Fort,41.2,Group Stage,2193.0105246632106,2275.6536903748965
+127,4,Sitaux,Spring,Spring,Sitaux,Britons,Aztecs,Atacama,44.0,Group Stage,2193.0105246632106,2275.6536903748965
+128,1,BacT,Mangonel,BacT,Mangonel,Ethiopians,Bulgarians,Hill Fort,32.8,Group Stage,2288.142486338677,2310.1151285430938
+128,2,BacT,Mangonel,Mangonel,BacT,Chinese,Celts,Hideout,25.8,Group Stage,2288.142486338677,2310.1151285430938
+128,3,BacT,Mangonel,BacT,Mangonel,Goths,Khmer,Islands,45.4,Group Stage,2288.142486338677,2310.1151285430938
+128,4,BacT,Mangonel,Mangonel,BacT,Franks,Chinese,Atacama,32.0,Group Stage,2288.142486338677,2310.1151285430938
+129,1,BacT,Barles,BacT,Barles,Teutons,Saracens,Ghost Lake,27.4,Group Stage,2288.142486338677,2369.223265460425
+129,2,BacT,Barles,BacT,Barles,Goths,Berbers,Coast Arena,15.0,Group Stage,2288.142486338677,2369.223265460425
+129,3,BacT,Barles,Barles,BacT,Berbers,Vikings,Ghost Lake,23.1,Group Stage,2288.142486338677,2369.223265460425
+130,1,BacT,Pete,BacT,Pete,Khmer,Mongols,Hill Fort,38.4,Group Stage,2288.142486338677,2347.935548916674
+130,2,BacT,Pete,Pete,BacT,Chinese,Goths,Atacama,16.1,Group Stage,2288.142486338677,2347.935548916674
+130,3,BacT,Pete,BacT,Pete,Turks,Gurjaras,Hideout,18.4,Group Stage,2288.142486338677,2347.935548916674
+130,4,BacT,Pete,Pete,BacT,Mayans,Chinese,Megarandom,39.8,Group Stage,2288.142486338677,2347.935548916674
+130,5,BacT,Pete,BacT,Pete,Persians,Lithuanians,Acropolis,37.5,Group Stage,2288.142486338677,2347.935548916674
+131,1,Valas,Mangonel,Valas,Mangonel,Japanese,Huns,Valley,44.5,Group Stage,2283.8323754782473,2310.1151285430938
+131,2,Valas,Mangonel,Valas,Mangonel,Khmer,Bulgarians,Serengeti,40.9,Group Stage,2283.8323754782473,2310.1151285430938
+131,3,Valas,Mangonel,Valas,Mangonel,Teutons,Mayans,Valley,48.0,Group Stage,2283.8323754782473,2310.1151285430938
+131,4,Valas,Mangonel,Mangonel,Valas,Sicilians,Vietnamese,Steppe,38.2,Group Stage,2283.8323754782473,2310.1151285430938
+131,5,Valas,Mangonel,Valas,Mangonel,Teutons,Koreans,Megarandom,33.6,Group Stage,2283.8323754782473,2310.1151285430938
+132,1,Mangonel,Barles,Mangonel,Barles,Khmer,Gurjaras,Atacama,36.7,Group Stage,2310.1151285430938,2369.223265460425
+132,2,Mangonel,Barles,Barles,Mangonel,Saracens,Lithuanians,Cup,23.7,Group Stage,2310.1151285430938,2369.223265460425
+132,3,Mangonel,Barles,Mangonel,Barles,Vikings,Portuguese,Valley,45.3,Group Stage,2310.1151285430938,2369.223265460425
+133,1,Mangonel,Pete,Mangonel,Pete,Malay,Cumans,Islands,32.8,Group Stage,2310.1151285430938,2347.935548916674
+133,2,Mangonel,Pete,Mangonel,Pete,Huns,Goths,Hill Fort,64.9,Group Stage,2310.1151285430938,2347.935548916674
+133,3,Mangonel,Pete,Mangonel,Pete,Mongols,Malians,Islands,36.3,Group Stage,2310.1151285430938,2347.935548916674
+134,1,Mangonel,Spring,Mangonel,Spring,Mongols,Vietnamese,Coast Arena,41.4,Group Stage,2310.1151285430938,2275.6536903748965
+134,2,Mangonel,Spring,Mangonel,Spring,Ethiopians,Aztecs,Hill Fort,39.8,Group Stage,2310.1151285430938,2275.6536903748965
+134,3,Mangonel,Spring,Mangonel,Spring,Portuguese,Britons,Serengeti,29.1,Group Stage,2310.1151285430938,2275.6536903748965
+134,4,Mangonel,Spring,Mangonel,Spring,Burgundians,Mongols,Atacama,53.4,Group Stage,2310.1151285430938,2275.6536903748965
+134,5,Mangonel,Spring,Mangonel,Spring,Huns,Bulgarians,Serengeti,40.5,Group Stage,2310.1151285430938,2275.6536903748965
+135,1,Barles,Pete,Pete,Barles,Vietnamese,Berbers,Team Islands,36.3,Group Stage,2369.223265460425,2347.935548916674
+135,2,Barles,Pete,Pete,Barles,Berbers,Indians,Coast Arena,28.4,Group Stage,2369.223265460425,2347.935548916674
+135,3,Barles,Pete,Pete,Barles,Cumans,Japanese,Atacama,56.0,Group Stage,2369.223265460425,2347.935548916674
+135,4,Barles,Pete,Pete,Barles,Dravidians,Tatars,Meadow,34.4,Group Stage,2369.223265460425,2347.935548916674
+136,1,Barles,Spring,Spring,Barles,Bulgarians,Vikings,Islands,51.5,Group Stage,2369.223265460425,2275.6536903748965
+136,2,Barles,Spring,Spring,Barles,Italians,Ethiopians,Arabia,34.7,Group Stage,2369.223265460425,2275.6536903748965
+136,3,Barles,Spring,Spring,Barles,Magyars,Tatars,Mediterranean,24.7,Group Stage,2369.223265460425,2275.6536903748965
+136,4,Barles,Spring,Barles,Spring,Indians,Malay,Valley,37.8,Group Stage,2369.223265460425,2275.6536903748965
+136,5,Barles,Spring,Barles,Spring,Malians,Franks,Atacama,36.3,Group Stage,2369.223265460425,2275.6536903748965

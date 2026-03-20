@@ -243,7 +243,7 @@ def generate_sample_data():
     }
     import json
 
-    with open(DATA_DIR / "tournament_info.json", "w") as f:
+    with open(DATA_DIR / "tournament_info.json", "w", encoding="utf-8") as f:
         json.dump(tournament_info, f, indent=2)
     print("Saved tournament info to tournament_info.json")
 

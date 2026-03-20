@@ -1,0 +1,137 @@
+player_a,player_b,series_winner,a_game_wins,b_game_wins,total_games,maps_played,a_civs,b_civs,avg_duration,elo_diff
+ACCM,BacT,ACCM,3,2,5,Islands;Wade;Arabia;Mediterranean;Mediterranean,Vikings;Magyars;Byzantines;Khmer;Incas,Malay;Burgundians;Britons;Magyars;Incas,29.4,-213.6
+ACCM,Hera,Hera,1,4,5,Islands;Hill Fort;Mixed;Islands;Atacama,Ethiopians;Japanese;Britons;Ethiopians;Sicilians,Malians;Khmer;Mongols;Turks;Mongols,34.6,-182.9
+ACCM,Liereyy,Liereyy,1,3,4,Gold Rush;Mediterranean;Atacama;Megarandom,Persians;Bulgarians;Celts;Magyars,Poles;Koreans;Gurjaras;Goths,31.6,-133.0
+ACCM,Mangonel,ACCM,4,0,4,Atacama;Hideout;Hill Fort;Arabia,Bulgarians;Dravidians;Mongols;Turks,Gurjaras;Incas;Celts;Tatars,29.2,-235.6
+ACCM,Mbla,Mbla,1,3,4,Wade;Team Islands;Islands;Coast Arena,Italians;Franks;Slavs;Cumans,Spanish;Indians;Aztecs;Mayans,28.1,-157.0
+ACCM,Pete,Pete,1,2,3,Mixed;Steppe;Team Islands,Malay;Japanese;Spanish,Burgundians;Turks;Byzantines,43.6,-273.4
+ACCM,Sitaux,Sitaux,2,2,4,Arabia;Islands;Mediterranean;Mixed,Japanese;Cumans;Lithuanians;Sicilians,Mayans;Chinese;Berbers;Saracens,40.5,-118.5
+ACCM,Spring,ACCM,2,1,3,Mediterranean;Mixed;Megarandom,Cumans;Burgundians;Goths,Bulgarians;Koreans;Huns,26.5,-201.1
+ACCM,TheMax,TheMax,1,2,3,Serengeti;Gold Rush;Mixed,Berbers;Celts;Britons,Incas;Goths;Japanese,43.9,19.0
+ACCM,Valas,ACCM,3,0,3,Steppe;Arabia;Megarandom,Sicilians;Spanish;Japanese,Turks;Aztecs;Vikings,42.0,-209.3
+ACCM,Vinchester,Vinchester,1,2,3,Coast Arena;Coast Arena;Acropolis,Vikings;Teutons;Britons,Franks;Portuguese;Italians,38.5,-75.9
+BacT,Barles,BacT,2,1,3,Ghost Lake;Coast Arena;Ghost Lake,Teutons;Goths;Berbers,Saracens;Berbers;Vikings,21.8,-81.1
+BacT,DauT,DauT,1,3,4,Gold Rush;Arabia;Cliffbound;Hill Fort,Tatars;Slavs;Vietnamese;Cumans,Magyars;Franks;Japanese;Lithuanians,28.6,26.4
+BacT,Hera,Hera,0,4,4,Ghost Lake;Islands;Valley;Coast Arena,Celts;Slavs;Huns;Koreans,Sicilians;Mongols;Britons;Huns,28.6,30.7
+BacT,Mangonel,Mangonel,2,2,4,Hill Fort;Hideout;Islands;Atacama,Ethiopians;Chinese;Goths;Franks,Bulgarians;Celts;Khmer;Chinese,34.0,-22.0
+BacT,Nicov,BacT,3,2,5,Islands;Coast Arena;Hill Fort;Mixed;Hill Fort,Khmer;Aztecs;Poles;Magyars;Celts,Gurjaras;Malay;Saracens;Bulgarians;Teutons,40.1,196.5
+BacT,Pete,BacT,3,2,5,Hill Fort;Atacama;Hideout;Megarandom;Acropolis,Khmer;Chinese;Turks;Mayans;Persians,Mongols;Goths;Gurjaras;Chinese;Lithuanians,30.0,-59.8
+BacT,TheMax,TheMax,1,4,5,Acropolis;Gold Rush;Serengeti;Gold Rush;Gold Rush,Saracens;Gurjaras;Poles;Poles;Ethiopians,Byzantines;Magyars;Franks;Portuguese;Spanish,36.7,232.6
+BacT,TheViper,TheViper,0,4,4,Cup;Hill Fort;Ghost Lake;Acropolis,Khmer;Vikings;Gurjaras;Italians,Tatars;Mongols;Cumans;Koreans,26.7,25.7
+BacT,Villese,Villese,2,2,4,Atacama;Megarandom;Meadow;Mixed,Ethiopians;Portuguese;Vikings;Aztecs,Spanish;Malay;Malay;Vietnamese,33.5,40.9
+BacT,Vinchester,BacT,2,1,3,Wade;Gold Rush;Steppe,Mayans;Gurjaras;Bulgarians,Mayans;Huns;Tatars,26.3,137.7
+Barles,Capoch,Capoch,2,2,4,Mixed;Gold Rush;Gold Rush;Serengeti,Japanese;Dravidians;Vietnamese;Celts,Franks;Goths;Dravidians;Ethiopians,28.2,183.7
+Barles,Hera,Hera,1,2,3,Mixed;Meadow;Valley,Aztecs;Spanish;Celts,Cumans;Dravidians;Portuguese,38.3,111.8
+Barles,Mangonel,Mangonel,1,2,3,Atacama;Cup;Valley,Gurjaras;Lithuanians;Portuguese,Khmer;Saracens;Vikings,35.2,59.1
+Barles,Mbla,Mbla,1,3,4,Cliffbound;Ghost Lake;Islands;Meadow,Slavs;Burgundians;Cumans;Vietnamese,Mongols;Teutons;Portuguese;Goths,33.7,137.6
+Barles,Mr_Yo,Mr_Yo,2,2,4,Gold Rush;Arabia;Team Islands;Acropolis,Aztecs;Khmer;Aztecs;Vikings,Mayans;Italians;Magyars;Britons,32.4,219.3
+Barles,Nicov,Barles,3,2,5,Valley;Hideout;Cliffbound;Arabia;Megarandom,Incas;Vietnamese;Chinese;Berbers;Incas,Bulgarians;Malay;Ethiopians;Franks;Vikings,36.8,277.6
+Barles,Pete,Pete,0,4,4,Team Islands;Coast Arena;Atacama;Meadow,Vietnamese;Berbers;Cumans;Dravidians,Berbers;Indians;Japanese;Tatars,38.8,21.3
+Barles,Sitaux,Sitaux,1,2,3,Serengeti;Ghost Lake;Coast Arena,Aztecs;Byzantines;Tatars,Poles;Vikings;Spanish,27.8,176.2
+Barles,Spring,Spring,2,3,5,Islands;Arabia;Mediterranean;Valley;Atacama,Bulgarians;Italians;Magyars;Indians;Malians,Vikings;Ethiopians;Tatars;Malay;Franks,37.0,93.6
+Barles,TaToH,TaToH,1,2,3,Steppe;Steppe;Steppe,Italians;Celts;Teutons,Mongols;Franks;Byzantines,32.1,224.0
+Barles,TheMax,TheMax,1,3,4,Atacama;Cup;Wade;Valley,Goths;Dravidians;Gurjaras;Britons,Burgundians;Lithuanians;Chinese;Franks,31.6,313.7
+Barles,TheViper,TheViper,0,4,4,Serengeti;Mixed;Meadow;Acropolis,Italians;Vikings;Malians;Tatars,Magyars;Chinese;Bulgarians;Persians,30.0,106.8
+Barles,Villese,Barles,2,1,3,Hideout;Megarandom;Mediterranean,Turks;Ethiopians;Malians,Turks;Saracens;Mayans,39.3,121.9
+Barles,Vinchester,Vinchester,0,5,5,Valley;Wade;Gold Rush;Cup;Cliffbound,Burgundians;Mongols;Mongols;Malians;Cumans,Byzantines;Burgundians;Chinese;Poles;Saracens,33.1,218.8
+Capoch,DauT,DauT,0,5,5,Mixed;Arabia;Hideout;Cliffbound;Mixed,Franks;Malay;Lithuanians;Gurjaras;Lithuanians,Koreans;Japanese;Khmer;Bulgarians;Byzantines,37.3,-76.2
+Capoch,Hera,Hera,0,3,3,Serengeti;Serengeti;Valley,Cumans;Cumans;Koreans,Japanese;Cumans;Goths,39.0,-71.9
+Capoch,Mangonel,Mangonel,2,2,4,Cliffbound;Gold Rush;Acropolis;Megarandom,Saracens;Vietnamese;Japanese;Persians,Saracens;Malay;Malians;Chinese,33.6,-124.6
+Capoch,Mr_Yo,Mr_Yo,2,3,5,Hill Fort;Acropolis;Cliffbound;Hideout;Steppe,Malay;Franks;Indians;Poles;Aztecs,Bulgarians;Malay;Byzantines;Aztecs;Spanish,38.8,35.6
+Capoch,Nicov,Capoch,2,1,3,Cup;Gold Rush;Coast Arena,Sicilians;Ethiopians;Indians,Ethiopians;Vietnamese;Persians,29.6,93.9
+Capoch,Pete,Capoch,3,2,5,Cliffbound;Coast Arena;Team Islands;Hideout;Team Islands,Mongols;Vietnamese;Bulgarians;Indians;Koreans,Incas;Aztecs;Slavs;Teutons;Khmer,31.1,-162.4
+Capoch,Spring,Spring,1,2,3,Meadow;Serengeti;Team Islands,Persians;Turks;Byzantines,Vietnamese;Byzantines;Burgundians,35.2,-90.1
+Capoch,TaToH,TaToH,1,3,4,Cliffbound;Gold Rush;Team Islands;Wade,Vikings;Italians;Vikings;Lithuanians,Italians;Britons;Byzantines;Persians,32.8,40.3
+Capoch,TheMax,TheMax,1,3,4,Mediterranean;Cliffbound;Cliffbound;Steppe,Portuguese;Indians;Teutons;Mongols,Goths;Spanish;Britons;Berbers,28.7,130.0
+Capoch,TheViper,TheViper,0,5,5,Steppe;Steppe;Valley;Gold Rush;Wade,Italians;Franks;Portuguese;Ethiopians;Cumans,Bulgarians;Ethiopians;Celts;Malians;Malians,37.2,-76.9
+Capoch,Valas,Capoch,3,2,5,Ghost Lake;Arabia;Wade;Atacama;Mediterranean,Slavs;Byzantines;Lithuanians;Aztecs;Burgundians,Chinese;Malay;Lithuanians;Tatars;Mongols,32.4,-98.3
+Capoch,Villese,Villese,1,2,3,Acropolis;Hill Fort;Steppe,Koreans;Teutons;Goths,Sicilians;Japanese;Persians,39.7,-61.8
+Capoch,Vinchester,Vinchester,1,3,4,Meadow;Islands;Meadow;Mediterranean,Poles;Franks;Vietnamese;Persians,Teutons;Huns;Cumans;Huns,32.7,35.1
+DauT,Hera,Hera,0,4,4,Mediterranean;Team Islands;Serengeti;Arabia,Chinese;Burgundians;Chinese;Goths,Dravidians;Saracens;Malay;Persians,37.4,4.3
+DauT,Liereyy,Liereyy,0,3,3,Mediterranean;Coast Arena;Team Islands,Koreans;Teutons;Malians,Tatars;Saracens;Berbers,24.9,54.2
+DauT,Mangonel,DauT,3,0,3,Mixed;Mixed;Gold Rush,Italians;Khmer;Teutons,Goths;Spanish;Aztecs,28.7,-48.4
+DauT,Nicov,DauT,3,0,3,Wade;Wade;Mixed,Poles;Dravidians;Cumans,Italians;Incas;Japanese,36.8,170.1
+DauT,Pete,DauT,3,0,3,Arabia;Hideout;Mediterranean,Italians;Italians;Spanish,Goths;Bulgarians;Byzantines,27.9,-86.2
+DauT,Spring,DauT,3,1,4,Serengeti;Gold Rush;Atacama;Arabia,Incas;Slavs;Britons;Byzantines,Vikings;Saracens;Tatars;Magyars,41.8,-13.9
+DauT,TaToH,TaToH,1,3,4,Mediterranean;Cup;Steppe;Meadow,Sicilians;Indians;Goths;Byzantines,Gurjaras;Slavs;Malay;Celts,29.8,116.5
+DauT,TheMax,TheMax,2,3,5,Coast Arena;Acropolis;Serengeti;Arabia;Coast Arena,Magyars;Vietnamese;Magyars;Vietnamese;Bulgarians,Berbers;Mongols;Teutons;Vietnamese;Franks,30.7,206.2
+DauT,TheViper,TheViper,0,4,4,Ghost Lake;Gold Rush;Mixed;Megarandom,Indians;Dravidians;Portuguese;Britons,Burgundians;Goths;Koreans;Bulgarians,32.0,-0.7
+DauT,Valas,DauT,3,2,5,Serengeti;Coast Arena;Hill Fort;Team Islands;Gold Rush,Mongols;Franks;Bulgarians;Malians;Indians,Malay;Tatars;Huns;Poles;Vikings,34.7,-22.1
+DauT,Villese,DauT,4,0,4,Gold Rush;Meadow;Serengeti;Serengeti,Burgundians;Tatars;Turks;Berbers,Dravidians;Huns;Berbers;Turks,40.0,14.4
+Hera,Mangonel,Hera,3,0,3,Serengeti;Wade;Islands,Ethiopians;Poles;Lithuanians,Slavs;Mongols;Japanese,30.2,-52.7
+Hera,Mbla,Hera,4,1,5,Wade;Acropolis;Mixed;Hideout;Acropolis,Malay;Indians;Incas;Ethiopians;Khmer,Slavs;Lithuanians;Persians;Sicilians;Khmer,34.8,25.8
+Hera,Mr_Yo,Mr_Yo,2,3,5,Meadow;Meadow;Mediterranean;Wade;Hill Fort,Ethiopians;Vikings;Chinese;Lithuanians;Huns,Incas;Burgundians;Slavs;Dravidians;Vikings,33.7,107.5
+Hera,Nicov,Hera,3,1,4,Gold Rush;Cup;Hill Fort;Megarandom,Malians;Teutons;Saracens;Dravidians,Vikings;Britons;Mongols;Persians,31.2,165.8
+Hera,Pete,Hera,4,0,4,Coast Arena;Islands;Mixed;Islands,Persians;Tatars;Ethiopians;Vietnamese,Berbers;Gurjaras;Celts;Celts,42.1,-90.5
+Hera,Sitaux,Hera,4,1,5,Meadow;Coast Arena;Islands;Steppe;Valley,Poles;Celts;Byzantines;Saracens;Mongols,Poles;Mongols;Khmer;Byzantines;Chinese,34.5,64.4
+Hera,Spring,Hera,4,0,4,Hill Fort;Megarandom;Team Islands;Meadow,Portuguese;Lithuanians;Lithuanians;Gurjaras,Malians;Slavs;Turks;Aztecs,39.0,-18.3
+Hera,TaToH,Hera,5,0,5,Acropolis;Ghost Lake;Ghost Lake;Atacama;Coast Arena,Huns;Dravidians;Aztecs;Italians;Japanese,Japanese;Japanese;Mongols;Burgundians;Chinese,32.2,112.1
+Hera,TheViper,Hera,3,2,5,Mixed;Steppe;Islands;Hill Fort;Coast Arena,Chinese;Spanish;Huns;Berbers;Persians,Aztecs;Poles;Huns;Incas;Ethiopians,34.7,-5.0
+Hera,Valas,Hera,3,0,3,Team Islands;Team Islands;Hideout,Turks;Italians;Aztecs,Franks;Sicilians;Japanese,36.0,-26.4
+Hera,Villese,Hera,4,1,5,Mixed;Hill Fort;Hideout;Hill Fort;Ghost Lake,Magyars;Chinese;Malians;Saracens;Ethiopians,Italians;Portuguese;Magyars;Magyars;Dravidians,31.2,10.1
+Liereyy,Mangonel,Liereyy,5,0,5,Islands;Mixed;Valley;Valley;Team Islands,Britons;Incas;Britons;Dravidians;Franks,Sicilians;Malay;Tatars;Celts;Indians,37.9,-102.6
+Liereyy,Mbla,Liereyy,4,0,4,Hill Fort;Arabia;Cliffbound;Hideout,Poles;Ethiopians;Vikings;Ethiopians,Japanese;Franks;Berbers;Teutons,33.8,-24.1
+Liereyy,Mr_Yo,Mr_Yo,2,2,4,Atacama;Acropolis;Wade;Serengeti,Cumans;Vietnamese;Sicilians;Malians,Franks;Cumans;Huns;Burgundians,30.2,57.6
+Liereyy,Pete,Liereyy,3,0,3,Coast Arena;Arabia;Coast Arena,Ethiopians;Byzantines;Mongols,Burgundians;Mongols;Vikings,34.3,-140.4
+Liereyy,Spring,Liereyy,3,1,4,Gold Rush;Steppe;Gold Rush;Ghost Lake,Aztecs;Saracens;Saracens;Italians,Aztecs;Koreans;Bulgarians;Incas,35.4,-68.1
+Liereyy,TaToH,Liereyy,2,1,3,Ghost Lake;Team Islands;Coast Arena,Bulgarians;Koreans;Malians,Malians;Khmer;Burgundians,30.4,62.3
+Liereyy,TheMax,Liereyy,3,1,4,Megarandom;Cup;Coast Arena;Team Islands,Magyars;Slavs;Vietnamese;Teutons,Huns;Slavs;Ethiopians;Italians,28.9,152.0
+Liereyy,TheViper,TheViper,1,3,4,Team Islands;Serengeti;Team Islands;Hill Fort,Italians;Gurjaras;Sicilians;Mongols,Celts;Persians;Poles;Khmer,40.4,-54.9
+Liereyy,Valas,Liereyy,3,0,3,Arabia;Atacama;Cliffbound,Goths;Franks;Khmer,Tatars;Saracens;Italians,35.8,-76.3
+Liereyy,Vinchester,Liereyy,3,0,3,Meadow;Gold Rush;Islands,Indians;Huns;Saracens,Malians;Malians;Vikings,32.2,57.1
+Mangonel,Mbla,Mbla,1,3,4,Wade;Atacama;Mixed;Hideout,Celts;Vikings;Poles;Spanish,Tatars;Indians;Vietnamese;Poles,36.0,78.5
+Mangonel,Mr_Yo,Mr_Yo,0,4,4,Ghost Lake;Team Islands;Arabia;Cup,Aztecs;Incas;Chinese;Aztecs,Poles;Slavs;Magyars;Berbers,38.7,160.2
+Mangonel,Nicov,Nicov,1,3,4,Coast Arena;Mediterranean;Mixed;Wade,Magyars;Mongols;Tatars;Koreans,Tatars;Persians;Chinese;Gurjaras,36.8,218.5
+Mangonel,Pete,Mangonel,3,0,3,Islands;Hill Fort;Islands,Malay;Huns;Mongols,Cumans;Goths;Malians,44.7,-37.8
+Mangonel,Sitaux,Mangonel,3,2,5,Valley;Hill Fort;Hill Fort;Steppe;Team Islands,Britons;Gurjaras;Slavs;Malay;Vikings,Berbers;Persians;Lithuanians;Koreans;Byzantines,30.0,117.1
+Mangonel,Spring,Mangonel,5,0,5,Coast Arena;Hill Fort;Serengeti;Atacama;Serengeti,Mongols;Ethiopians;Portuguese;Burgundians;Huns,Vietnamese;Aztecs;Britons;Mongols;Bulgarians,40.8,34.5
+Mangonel,TaToH,TaToH,1,3,4,Ghost Lake;Meadow;Wade;Team Islands,Turks;Huns;Mongols;Vikings,Slavs;Japanese;Portuguese;Incas,36.8,164.9
+Mangonel,TheViper,TheViper,0,4,4,Mediterranean;Valley;Acropolis;Mediterranean,Turks;Indians;Mongols;Koreans,Lithuanians;Poles;Khmer;Turks,32.0,47.7
+Mangonel,Valas,Valas,1,4,5,Valley;Serengeti;Valley;Steppe;Megarandom,Huns;Bulgarians;Mayans;Vietnamese;Koreans,Japanese;Khmer;Teutons;Sicilians;Teutons,41.0,26.3
+Mangonel,Villese,Villese,0,5,5,Mediterranean;Atacama;Cliffbound;Serengeti;Hill Fort,Turks;Mayans;Burgundians;Franks;Berbers,Berbers;Bulgarians;Burgundians;Cumans;Mongols,36.1,62.8
+Mbla,Mr_Yo,Mr_Yo,1,4,5,Acropolis;Acropolis;Hill Fort;Mixed;Coast Arena,Sicilians;Britons;Bulgarians;Vikings;Vietnamese,Japanese;Chinese;Bulgarians;Malay;Incas,34.3,81.6
+Mbla,Pete,Mbla,4,1,5,Steppe;Wade;Meadow;Coast Arena;Hideout,Poles;Gurjaras;Japanese;Gurjaras;Japanese,Goths;Incas;Japanese;Malay;Vietnamese,42.7,-116.4
+Mbla,Sitaux,Sitaux,2,2,4,Team Islands;Cup;Team Islands;Team Islands,Tatars;Malay;Lithuanians;Magyars,Malay;Goths;Mayans;Incas,32.9,38.6
+Mbla,TaToH,Mbla,3,1,4,Coast Arena;Serengeti;Islands;Gold Rush,Teutons;Franks;Malay;Magyars,Celts;Malay;Chinese;Portuguese,27.4,86.3
+Mbla,TheViper,TheViper,0,5,5,Cliffbound;Arabia;Wade;Steppe;Arabia,Japanese;Saracens;Malay;Mongols;Ethiopians,Persians;Malay;Britons;Koreans;Teutons,33.5,-30.8
+Mbla,Valas,Mbla,2,1,3,Team Islands;Atacama;Arabia,Slavs;Spanish;Vietnamese,Goths;Huns;Ethiopians,34.0,-52.3
+Mbla,Villese,Mbla,3,2,5,Valley;Hill Fort;Hideout;Arabia;Islands,Aztecs;Chinese;Incas;Britons;Malians,Huns;Spanish;Teutons;Poles;Slavs,32.1,-15.7
+Mbla,Vinchester,Vinchester,2,3,5,Serengeti;Mixed;Megarandom;Gold Rush;Cliffbound,Huns;Britons;Franks;Berbers;Ethiopians,Vikings;Byzantines;Teutons;Italians;Chinese,32.7,81.1
+Mr_Yo,Nicov,Mr_Yo,4,1,5,Mixed;Cliffbound;Islands;Arabia;Team Islands,Tatars;Huns;Italians;Malians;Aztecs,Gurjaras;Dravidians;Mayans;Teutons;Koreans,34.9,58.3
+Mr_Yo,Pete,Mr_Yo,3,0,3,Ghost Lake;Megarandom;Arabia,Incas;Japanese;Poles,Britons;Tatars;Aztecs,37.0,-198.0
+Mr_Yo,Sitaux,Mr_Yo,2,1,3,Meadow;Serengeti;Cliffbound,Burgundians;Mongols;Tatars,Japanese;Spanish;Goths,42.8,-43.1
+Mr_Yo,Spring,Mr_Yo,4,1,5,Cliffbound;Meadow;Coast Arena;Meadow;Team Islands,Byzantines;Burgundians;Gurjaras;Dravidians;Britons,Koreans;Italians;Byzantines;Bulgarians;Khmer,43.5,-125.7
+Mr_Yo,TaToH,Mr_Yo,3,2,5,Wade;Hideout;Mediterranean;Ghost Lake;Mixed,Ethiopians;Indians;Koreans;Spanish;Bulgarians,Turks;Persians;Dravidians;Mongols;Malay,33.6,4.7
+Mr_Yo,Villese,Mr_Yo,3,1,4,Hideout;Cup;Islands;Atacama,Spanish;Huns;Teutons;Celts,Vikings;Chinese;Vietnamese;Mayans,22.8,-97.3
+Mr_Yo,Vinchester,Vinchester,2,2,4,Ghost Lake;Steppe;Wade;Valley,Saracens;Lithuanians;Koreans;Magyars,Berbers;Spanish;Turks;Magyars,33.1,-0.5
+Nicov,Pete,Nicov,3,1,4,Mediterranean;Acropolis;Steppe;Hideout,Slavs;Saracens;Turks;Slavs,Gurjaras;Aztecs;Japanese;Franks,34.0,-256.3
+Nicov,Sitaux,Sitaux,2,2,4,Gold Rush;Meadow;Team Islands;Hill Fort,Mongols;Italians;Bulgarians;Franks,Sicilians;Khmer;Japanese;Mayans,31.5,-101.4
+Nicov,Spring,Nicov,3,1,4,Islands;Mediterranean;Islands;Gold Rush,Portuguese;Saracens;Malians;Berbers,Britons;Dravidians;Malay;Lithuanians,38.8,-184.0
+Nicov,TaToH,TaToH,1,2,3,Cliffbound;Mixed;Wade,Portuguese;Lithuanians;Britons,Vikings;Persians;Slavs,42.7,-53.6
+Nicov,TheMax,TheMax,1,4,5,Cup;Mediterranean;Hideout;Serengeti;Acropolis,Burgundians;Mayans;Malians;Vietnamese;Magyars,Aztecs;Cumans;Huns;Lithuanians;Lithuanians,45.4,36.1
+Nicov,TheViper,TheViper,0,4,4,Mixed;Islands;Megarandom;Acropolis,Ethiopians;Koreans;Lithuanians;Celts,Britons;Khmer;Japanese;Berbers,36.5,-170.8
+Nicov,Valas,Nicov,3,0,3,Megarandom;Acropolis;Mediterranean,Goths;Turks;Slavs,Poles;Koreans;Britons,29.3,-192.2
+Nicov,Vinchester,Vinchester,0,4,4,Hideout;Cliffbound;Cliffbound;Cup,Indians;Italians;Chinese;Malay,Portuguese;Vikings;Huns;Vietnamese,40.3,-58.8
+Pete,Sitaux,Pete,3,2,5,Hideout;Atacama;Arabia;Serengeti;Atacama,Persians;Huns;Teutons;Ethiopians;Bulgarians,Koreans;Japanese;Slavs;Indians;Franks,38.5,154.9
+Pete,TaToH,TaToH,0,3,3,Islands;Team Islands;Arabia,Japanese;Gurjaras;Indians,Ethiopians;Magyars;Magyars,35.8,202.7
+Pete,TheMax,TheMax,2,2,4,Mediterranean;Valley;Gold Rush;Arabia,Aztecs;Italians;Franks;Saracens,Japanese;Gurjaras;Franks;Ethiopians,30.3,292.4
+Pete,Villese,Villese,2,2,4,Ghost Lake;Islands;Megarandom;Team Islands,Sicilians;Gurjaras;Huns;Incas,Bulgarians;Ethiopians;Khmer;Gurjaras,35.9,100.7
+Sitaux,Spring,Spring,2,2,4,Coast Arena;Atacama;Hill Fort;Atacama,Aztecs;Italians;Mongols;Britons,Celts;Persians;Koreans;Aztecs,33.4,-82.6
+Sitaux,TaToH,TaToH,1,3,4,Mixed;Hideout;Gold Rush;Arabia,Byzantines;Bulgarians;Celts;Berbers,Khmer;Slavs;Chinese;Khmer,37.9,47.8
+Sitaux,TheMax,TheMax,0,4,4,Islands;Islands;Meadow;Arabia,Saracens;Khmer;Malay;Lithuanians,Byzantines;Gurjaras;Turks;Berbers,32.8,137.5
+Sitaux,TheViper,TheViper,0,3,3,Team Islands;Team Islands;Wade,Malians;Turks;Berbers,Berbers;Mayans;Italians,34.0,-69.4
+Sitaux,Villese,Sitaux,2,1,3,Coast Arena;Cliffbound;Gold Rush,Magyars;Italians;Teutons,Portuguese;Italians;Khmer,37.7,-54.3
+Spring,TaToH,TaToH,0,5,5,Cup;Cliffbound;Wade;Wade;Valley,Mayans;Ethiopians;Spanish;Portuguese;Lithuanians,Spanish;Huns;Japanese;Mayans;Huns,36.3,130.4
+Spring,TheMax,Spring,2,1,3,Atacama;Arabia;Meadow,Cumans;Mongols;Bulgarians,Gurjaras;Celts;Spanish,36.1,220.1
+Spring,TheViper,TheViper,0,5,5,Mediterranean;Hideout;Meadow;Cup;Hill Fort,Saracens;Cumans;Celts;Celts;Italians,Koreans;Khmer;Berbers;Gurjaras;Malay,38.4,13.2
+Spring,Villese,Villese,0,4,4,Cliffbound;Gold Rush;Islands;Hideout,Tatars;Aztecs;Mayans;Slavs,Malians;Teutons;Dravidians;Khmer,41.0,28.4
+Spring,Vinchester,Vinchester,2,3,5,Coast Arena;Steppe;Wade;Team Islands;Islands,Saracens;Chinese;Turks;Goths;Vikings,Malians;Saracens;Poles;Slavs;Gurjaras,32.4,125.2
+TaToH,TheMax,TaToH,3,1,4,Atacama;Islands;Hill Fort;Coast Arena,Vietnamese;Spanish;Vikings;Huns,Mayans;Teutons;Slavs;Malay,34.2,89.7
+TaToH,TheViper,TheViper,1,4,5,Valley;Serengeti;Megarandom;Cup;Wade,Gurjaras;Franks;Malians;Koreans;Khmer,Incas;Teutons;Chinese;Persians;Bulgarians,43.7,-117.2
+TaToH,Valas,Valas,2,2,4,Wade;Steppe;Islands;Meadow,Chinese;Magyars;Japanese;Incas,Incas;Gurjaras;Malians;Goths,35.1,-138.6
+TaToH,Villese,TaToH,4,1,5,Arabia;Coast Arena;Mixed;Mixed;Wade,Vietnamese;Slavs;Khmer;Portuguese;Poles,Mayans;Huns;Poles;Malay;Koreans,23.9,-102.0
+TheMax,TheViper,TheViper,0,4,4,Steppe;Megarandom;Valley;Coast Arena,Goths;Vikings;Portuguese;Magyars,Britons;Indians;Malay;Saracens,35.7,-206.9
+TheMax,Valas,TheMax,3,0,3,Mediterranean;Valley;Meadow,Franks;Turks;Magyars,Khmer;Malians;Lithuanians,35.8,-228.3
+TheMax,Villese,TheMax,2,1,3,Team Islands;Atacama;Atacama,Khmer;Gurjaras;Lithuanians,Gurjaras;Ethiopians;Bulgarians,46.5,-191.8
+TheViper,Valas,TheViper,4,0,4,Islands;Serengeti;Hill Fort;Meadow,Indians;Ethiopians;Chinese;Gurjaras,Portuguese;Britons;Chinese;Malians,37.1,-21.4
+Valas,Villese,Villese,0,3,3,Acropolis;Meadow;Coast Arena,Slavs;Spanish;Huns,Indians;Byzantines;Huns,44.4,36.6

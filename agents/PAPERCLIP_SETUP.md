@@ -302,6 +302,14 @@ YOU (the board)
 | ON (60 min) | Change Logkeeper | Periodic cleanup of task statuses and changelog |
 | OFF | All others | On-demand only -- wake when assigned a task or @-mentioned |
 
+## Windows: UTF-8 vs WIN1252
+
+If an adapter or database step fails with a message like `character with byte sequence 0xe2 ... has no equivalent in encoding "WIN1252"`, the payload contains UTF-8 characters (for example U+25B2) but the store or connection is using WIN1252.
+
+**Fix:** Use a UTF-8 database and set the client to UTF-8 (for PostgreSQL, `PGCLIENTENCODING=UTF8` or `client_encoding=UTF8` in the connection string). Full steps: `ops/runbooks/WINDOWS_ENCODING.md`.
+
+**Workaround:** Keep issue bodies and pasted logs ASCII-only (matches this repo's markdown rule).
+
 ## Field Notes
 
 - **Thinking effort**: left on `Auto` for all. Override to `High` for CEO/Architect if you want deeper reasoning, or `Low` for Logkeeper to save cost.

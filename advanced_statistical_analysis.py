@@ -261,7 +261,7 @@ def perform_correlation_analysis(df, player_metrics):
     print("\n3. Civilization-Map Association (Chi-square):")
     print(f"   Chi-square: {chi2:.4f}")
     print(f"   p-value: {p_chi2:.4f}")
-    print(f"   Cramér's V: {cramers_v:.4f} (effect size)")
+    print(f"   Cramer's V: {cramers_v:.4f} (effect size)")
     print(
         f"   Interpretation: {'Significant association' if p_chi2 < 0.05 else 'Independent'}"
     )
@@ -769,7 +769,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     r_squared = np.corrcoef(qualified["elo"], qualified["win_rate"])[0, 1] ** 2
     ax.set_xlabel("ELO Rating")
     ax.set_ylabel("Win Rate")
-    ax.set_title(f"ELO vs Win Rate\n(R² = {r_squared:.3f})")
+    ax.set_title(f"ELO vs Win Rate\n(R^2 = {r_squared:.3f})")
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0.5, color="gray", linestyle="--", alpha=0.5)
     plt.colorbar(scatter, ax=ax, label="Games Played")
@@ -798,7 +798,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     r2 = np.corrcoef(qualified["civ_diversity"], qualified["win_rate"])[0, 1] ** 2
     ax.set_xlabel("Civilization Diversity (Unique/Total)")
     ax.set_ylabel("Win Rate")
-    ax.set_title(f"Civ Diversity vs Win Rate\n(R² = {r2:.3f})")
+    ax.set_title(f"Civ Diversity vs Win Rate\n(R^2 = {r2:.3f})")
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0.5, color="gray", linestyle="--", alpha=0.5)
 
@@ -829,7 +829,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     )
     ax.set_xlabel("Duration Coefficient of Variation")
     ax.set_ylabel("Win Rate")
-    ax.set_title(f"Duration Variance vs Win Rate\n(R² = {r2:.3f})")
+    ax.set_title(f"Duration Variance vs Win Rate\n(R^2 = {r2:.3f})")
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0.5, color="gray", linestyle="--", alpha=0.5)
 
@@ -875,7 +875,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     r2 = np.corrcoef(qualified["unique_maps"], qualified["win_rate"])[0, 1] ** 2
     ax.set_xlabel("Unique Maps Played")
     ax.set_ylabel("Win Rate")
-    ax.set_title(f"Map Diversity vs Win Rate\n(R² = {r2:.3f})")
+    ax.set_title(f"Map Diversity vs Win Rate\n(R^2 = {r2:.3f})")
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0.5, color="gray", linestyle="--", alpha=0.5)
 
@@ -898,7 +898,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     r2 = np.corrcoef(consistency_clean, qualified["win_rate"])[0, 1] ** 2
     ax.set_xlabel("Consistency Score")
     ax.set_ylabel("Win Rate")
-    ax.set_title(f"Consistency vs Win Rate\n(R² = {r2:.3f})")
+    ax.set_title(f"Consistency vs Win Rate\n(R^2 = {r2:.3f})")
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0.5, color="gray", linestyle="--", alpha=0.5)
 
@@ -919,7 +919,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
         ax=ax,
     )
     ax.set_title(
-        "Civilization-Map Pick Frequency Heatmap\n(Top 20 Civilizations × Top 15 Maps)",
+        "Civilization-Map Pick Frequency Heatmap\n(Top 20 Civilizations x Top 15 Maps)",
         fontsize=14,
         fontweight="bold",
         pad=20,
@@ -1181,7 +1181,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     r2 = np.corrcoef(qualified["elo"], qualified["win_rate"])[0, 1] ** 2
     ax3.set_xlabel("ELO")
     ax3.set_ylabel("Win Rate")
-    ax3.set_title(f"ELO vs Win Rate (R²={r2:.3f})")
+    ax3.set_title(f"ELO vs Win Rate (R^2={r2:.3f})")
     ax3.grid(True, alpha=0.3)
 
     # 4. Game Duration Distribution
@@ -1292,7 +1292,7 @@ def create_advanced_visualizations(df, player_metrics, civ_map_table, correlatio
     
     * Dataset: {len(df)} games across {df["match_id"].nunique()} matches | {len(qualified)} qualified players (10+ games)
     * ELO-Performance: Weak correlation (Pearson r={correlations.get("elo_win_rate", {}).get("pearson", 0):.3f}, p={correlations.get("elo_win_rate", {}).get("pearson_p", 0):.3f})
-    * Civ-Map Association: {"Significant" if correlations.get("civ_map", {}).get("p", 1) < 0.05 else "Not significant"} (chi-square={correlations.get("civ_map", {}).get("chi2", 0):.1f}, Cramér's V={correlations.get("civ_map", {}).get("cramers_v", 0):.3f})
+    * Civ-Map Association: {"Significant" if correlations.get("civ_map", {}).get("p", 1) < 0.05 else "Not significant"} (chi-square={correlations.get("civ_map", {}).get("chi2", 0):.1f}, Cramer's V={correlations.get("civ_map", {}).get("cramers_v", 0):.3f})
     * Top Performer: {qualified.loc[qualified["win_rate"].idxmax(), "player"]} ({qualified["win_rate"].max():.1%} win rate)
     * Most Consistent: {qualified.loc[qualified["consistency"].idxmax(), "player"]} (consistency score: {qualified["consistency"].max():.3f})
     * Highest Variance: {qualified.loc[qualified["duration_cv"].idxmax(), "player"]} (CV: {qualified["duration_cv"].max():.3f})
@@ -1368,11 +1368,11 @@ DATASET OVERVIEW:
 KEY STATISTICAL FINDINGS:
 1. ELO-Performance Relationship: Weak correlation (r={correlations["elo_win_rate"]["pearson"]:.3f}, p={correlations["elo_win_rate"]["pearson_p"]:.3f})
    - Spearman rho={correlations["elo_win_rate"]["spearman"]:.3f} suggests {"monotonic" if correlations["elo_win_rate"]["spearman_p"] < 0.05 else "no monotonic"} relationship
-   - R² = {correlations["elo_win_rate"]["pearson"] ** 2:.3f} indicates ELO explains only {(correlations["elo_win_rate"]["pearson"] ** 2) * 100:.1f}% of win rate variance
+   - R^2 = {correlations["elo_win_rate"]["pearson"] ** 2:.3f} indicates ELO explains only {(correlations["elo_win_rate"]["pearson"] ** 2) * 100:.1f}% of win rate variance
 
 2. Civilization-Map Association: {"SIGNIFICANT" if correlations["civ_map"]["p"] < 0.05 else "NOT SIGNIFICANT"} strategic association
    - Chi-square: {correlations["civ_map"]["chi2"]:.2f} (df={correlations["civ_map"]["dof"]})
-   - Cramér's V: {correlations["civ_map"]["cramers_v"]:.3f} ({"strong" if correlations["civ_map"]["cramers_v"] > 0.5 else "moderate" if correlations["civ_map"]["cramers_v"] > 0.3 else "weak"} association)
+   - Cramer's V: {correlations["civ_map"]["cramers_v"]:.3f} ({"strong" if correlations["civ_map"]["cramers_v"] > 0.5 else "moderate" if correlations["civ_map"]["cramers_v"] > 0.3 else "weak"} association)
    - Interpretation: Players {"do" if correlations["civ_map"]["p"] < 0.05 else "do not"} strategically adapt civilizations to maps
 
 3. Performance Diversity Correlations:
@@ -1560,7 +1560,7 @@ DESCRIPTIVE STATISTICS:
 * Distribution shape: Skewness, kurtosis via Jarque-Bera test
 
 INFERENTIAL STATISTICS:
-* Correlation analysis: Pearson (linear), Spearman (monotonic), Cramér's V (categorical)
+* Correlation analysis: Pearson (linear), Spearman (monotonic), Cramer's V (categorical)
 * Association tests: Chi-square test of independence
 * Variance tests: Levene's test for homogeneity of variance
 * Normality tests: Jarque-Bera test
@@ -1568,7 +1568,7 @@ INFERENTIAL STATISTICS:
 OUTLIER DETECTION:
 * Z-score method: |z| > 1.96 for 95% confidence interval
 * Modified Z-score: Based on Median Absolute Deviation (MAD)
-* IQR method: Values outside [Q1 - 1.5×IQR, Q3 + 1.5×IQR]
+* IQR method: Values outside [Q1 - 1.5*IQR, Q3 + 1.5*IQR]
 * Residual analysis: Linear regression residuals
 
 SIGNIFICANCE LEVELS:
@@ -1592,7 +1592,7 @@ LIMITATIONS:
     # Save report
     report_text = "\n".join(report)
 
-    with open("STATS_REPORT_DETAILED.md", "w") as f:
+    with open("STATS_REPORT_DETAILED.md", "w", encoding="utf-8") as f:
         f.write(report_text)
 
     print("\n" + "=" * 80)

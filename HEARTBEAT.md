@@ -1,7 +1,7 @@
 # TitanTale Analytics - HEARTBEAT
-**Status:** COMPLETE  
-**Date:** 2026-03-19  
-**Pipeline:** T90 Titans League Season 5  
+**Status:** WEB APP DELIVERED
+**Date:** 2026-03-20
+**Pipeline:** T90 Titans League Season 5
 
 ---
 
@@ -9,26 +9,39 @@
 
 | Stage | Agent | Status | Output |
 |-------|-------|--------|--------|
-| ETL Pipeline | Data Engineer | DONE | `data/` (5 CSVs, 47 matches, 141 civ drafts, 195 games) |
-| Statistical EDA | Statistical Modeler | DONE | `STATS_REPORT.md`, `assets/` visualizations |
-| Synthesis | CEO (Principal Data Scientist) | DONE | `ANALYTICAL_BRIEF.md` |
+| ETL Pipeline | Data Engineer | DONE | `data/` (10 CSVs, 47 matches, 141 civ drafts, 195 games) |
+| Statistical EDA | Statistical Modeler | DONE | `STATS_REPORT.md`, `assets/` (12 visualizations) |
+| Analytical Synthesis | CEO | DONE | `ANALYTICAL_BRIEF.md` |
+| Web Scaffold | Full-Stack Architect | DONE | `web/` Next.js 14, TypeScript, Tailwind |
+| Data Adapters | Backend Engineer | DONE | 11 adapters, Zod schemas, test-data page |
+| Landing + Routes | Frontend Engineer | DONE | 4 pages: /, /players, /civilizations, /maps |
 
 ---
 
 ## Key Deliverables
 
+**Analytics:**
 - `ANALYTICAL_BRIEF.md` - Technical brief with statistical narrative
 - `STATS_REPORT.md` - Full EDA results (t-tests, chi-square, ANOVA)
 - `ETL_SUMMARY.md` - Data pipeline documentation
-- `assets/` - Visualization PNGs (heatmaps, correlation matrices)
+- `assets/` - 12 visualization PNGs (heatmaps, correlation matrices)
+
+**Web App:**
+- `web/app/page.tsx` - Landing page with data-driven stats
+- `web/app/players/page.tsx` - Player statistics
+- `web/app/civilizations/page.tsx` - Civilization statistics
+- `web/app/maps/page.tsx` - Map statistics
+- `web/lib/data/` - 11 typed CSV adapters
+- `web/lib/schemas/` - Zod validation schemas
 
 ---
 
 ## Data Quality
 
-- **Source:** Liquipedia (blocked by Cloudflare; used validated sample data)
+- **Source:** Liquipedia (blocked by Cloudflare; validated sample data)
 - **Records:** 136 matches, 546 games, 20 players, 39 civs, 20 maps
 - **Completeness:** 100% after normalization
+- **Web types:** Aligned with actual CSV outputs (ADR-002)
 
 ---
 
@@ -41,4 +54,8 @@
 
 ---
 
-*Next: Await stakeholder feedback for Season 6 planning.*
+## Next Phase
+
+Feature expansion: deeper player profiles, civ matchup grids, map breakdowns, performance audit, deployment.
+
+*Awaiting stakeholder feedback for Season 6 planning.*

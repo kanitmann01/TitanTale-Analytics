@@ -45,6 +45,19 @@ Scope: EDA and modeling on `data/` CSVs.
 Tools: pandas, scipy, seaborn.
 Boundary: does NOT touch `web/`. Reads only `.head()` or shape summaries.
 
+### Spirit_of_the_Law
+Scope: deep investigative analysis that challenges assumptions and uncovers hidden
+patterns in tournament data. Each analysis is framed as a testable question,
+validated empirically, and explained accessibly -- modeled on the AoE2 YouTuber's
+methodology of finding non-obvious angles and testing common beliefs.
+Reads: `data/` CSVs (via .head() or shape only), existing `STATS_REPORT.md`
+and `ANALYTICAL_BRIEF.md` for context on what is already covered.
+Writes: `spirit_of_the_law_analysis.py`, `SPIRIT_FINDINGS.md`,
+visualizations to `assets/spirit/`, derived CSVs to `data/spirit/`.
+Boundary: does NOT touch `web/`. Does NOT duplicate existing Statistical Modeler work.
+Tools: pandas, scipy, numpy, seaborn, matplotlib.
+Skill: `.cursor/skills/spirit-of-the-law/`
+
 ### Design/Polish Agent
 Scope: enforces visual quality, typography, spacing, responsiveness.
 Skill: `.cursor/skills/design-polish/`

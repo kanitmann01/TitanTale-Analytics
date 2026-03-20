@@ -5,66 +5,141 @@ This document defines the data schema for T90 Titans League Season 5 analytics. 
 
 ## Data Files
 
-### 1. matches.csv
-Match results from tournament bracket.
+### 1. ttl_s5_matches.csv
+Game-by-game match results with ELO and civilization data.
 
 | Column | Type | Description |
 |--------|------|-------------|
-| match_id | string | Unique match identifier |
-| round | string | Tournament round (Group Stage, Quarterfinals, etc.) |
-| player1 | string | Player 1 normalized name |
-| player2 | string | Player2 normalized name |
-| score | string | Match score (e.g., "3-2") |
+| match_id | integer | Match group identifier |
+| game_number | integer | Game number within match |
+| player1 | string | Player 1 name |
+| player2 | string | Player 2 name |
 | winner | string | Winner player name |
-| date | date | Match date (YYYY-MM-DD) |
-| best_of | integer | Best of X games |
-| vod_url | string | Link to VOD (if available) |
+| loser | string | Loser player name |
+| player1_civ | string | Player 1's civilization |
+| player2_civ | string | Player 2's civilization |
+| map | string | Map name |
+| duration_minutes | float | Game duration in minutes |
+| stage | string | Tournament stage (Group Stage, etc.) |
+| player1_elo | float | Player 1 ELO rating |
+| player2_elo | float | Player 2 ELO rating |
 
-### 2. civ_drafts.csv
+### 2. matches.csv
+Group standings snapshot by league tier.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| league | string | League tier (Platinum, Gold, etc.) |
+| group | string | Group identifier (Group A, Group B, etc.) |
+| player | string | Player name |
+| standings_snapshot | string | Win-loss record string |
+
+### 3. civ_drafts.csv
 Civilization draft picks for each game.
 
 | Column | Type | Description |
 |--------|------|-------------|
-| match_id | string | Foreign key to matches.match_id |
-| game_number |integer | Game number within match (1, 2, 3, etc.) |
+| match_id | string | Match identifier |
+| game_number | integer | Game number within match |
 | map | string | Map name |
-| player1_civ | string |Player 1's civilization |
+| player1_civ | string | Player 1's civilization |
 | player2_civ | string | Player 2's civilization |
 | player1_civ_draft_order | integer | Draft position for player 1's civ |
 | player2_civ_draft_order | integer | Draft position for player 2's civ |
-| winner_civ | string | Civilization that won|
+| winner_civ | string | Civilization that won |
 | winner | string | Winner player name |
 
-### 3. map_results.csv
+### 4. map_results.csv
 Individual game results by map.
 
 | Column | Type | Description |
 |--------|------|-------------|
-| match_id | string | Foreign key to matches.match_id |
+| match_id | string | Match identifier |
 | game_number | integer | Game number within match |
 | map | string | Map name |
 | player1 | string | Player 1 name |
-| player2 | string | Player 2 name|
+| player2 | string | Player 2 name |
 | player1_civ | string | Player 1's civilization |
 | player2_civ | string | Player 2's civilization |
 | winner | string | Winner player name |
 | duration | string | Game duration (mm:ss) |
-| player1_score | integer | Player 1 final score (kills, resources) |
+| player1_score | integer | Player 1 final score |
 | player2_score | integer | Player 2 final score |
 
-### 4. players.csv
+### 5. players.csv
 Normalized player information.
 
 | Column | Type | Description |
 |--------|------|-------------|
 | player_id | string | Unique player identifier |
 | player_name | string | Normalized player name |
-| player_name_variants | array | Alternative names/spellings |
+| player_name_variants | string | Alternative names/spellings |
 | team | string | Team name (if applicable) |
 | country | string | Country code (ISO 3166-1 alpha-3) |
 | seed | integer | Tournament seed/qualification |
 
-### 5. tournament_info.json
+### 6. player_statistics.csv
+Aggregated player performance statistics.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| player | string | Player name |
+| total_games | integer | Total games played |
+| wins | integer | Total wins |
+| losses | integer | Total losses |
+| win_rate | float | Win rate (0-1) |
+| elo | float | ELO rating |
+| avg_game_duration | float | Average game duration in minutes |
+| unique_civs | integer | Number of unique civilizations played |
+| unique_maps | integer | Number of unique maps played |
+
+### 7. player_civs.csv
+Civilization performance by player and league tier.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| league | string | League tier (Platinum, Gold, etc.) |
+| civilization | string | Civilization name |
+| wins | integer | Wins with this civ in this league |
+| losses | integer | Losses with this civ in this league |
+| winrate | string | Win rate as percentage string |
+| total_games | integer | Total games with this civ |
+
+### 8. civilization_statistics.csv
+Aggregated civilization performance across tournament.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| civilization | string | Civilization name |
+| games_played | integer | Total games played |
+| wins | integer | Total wins |
+| losses | integer | Total losses |
+| win_rate | float | Win rate (0-1) |
+| pick_rate | float | Pick rate (0-1) |
+| avg_duration | float | Average game duration in minutes |
+
+### 9. map_statistics.csv
+Map performance statistics.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| map | string | Map name |
+| total_games | integer | Total games on this map |
+| avg_duration | float | Average game duration in minutes |
+| most_common_civ | string | Most played civilization |
+| balance_std | float | Win rate balance standard deviation |
+
+### 10. map_outcomes.csv
+Map play rates by league tier.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| league | string | League tier (Platinum, Gold, etc.) |
+| map | string | Map name |
+| num_games | integer | Number of games played |
+| play_rate | string | Play rate as percentage string |
+
+### 11. tournament_info.json
 Tournament metadata.
 
 ```json
@@ -108,17 +183,6 @@ Tournament metadata.
 - Use official map pool names
 - Standardize variants: `Arabia` not `arabia` or `Arabia_v2`
 
-## Extracted Data Sources
+## TypeScript Types
 
-1. **Liquipedia Tournament Page**
-   - URL Pattern: `https://liquipedia.net/ageofempires/T90_Titans_League/Season_5`
-   - Contains: Bracket results, prize pool, player list
-
-2. **Liquipedia Match Pages**
-   - Individual match details
-   - Civ drafts, maps, VODs
-
-3. **Additional Sources** (if available):
-   - Challonge bracket
-   - T90 YouTube VODs
-   - AoE2.net match history
+Type definitions are maintained in `web/lib/types.ts` and mirror this schema. Useexact CSV column names (snake_case) in types; adapters should map to camelCase for UI consumption.

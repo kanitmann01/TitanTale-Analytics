@@ -269,7 +269,7 @@ def save_data(data, output_dir):
         df_maps.to_csv(output_dir / "map_results.csv", index=False)
         print(f"Saved {len(df_maps)} map results to map_results.csv")
     if data["tournament_info"]:
-        with open(output_dir / "tournament_info.json", "w") as f:
+        with open(output_dir / "tournament_info.json", "w", encoding="utf-8") as f:
             json.dump(data["tournament_info"], f, indent=2)
         print(f"Saved tournament info to tournament_info.json")
 

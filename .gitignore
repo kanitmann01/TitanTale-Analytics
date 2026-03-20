@@ -39,3 +39,6 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 nul
+
+# Local vendor copy (not part of TTL Stats deliverables)
+impeccable-style-universal/

@@ -1,0 +1,14 @@
+---
+description: Core project boundaries, naming, encoding, and token discipline for all agents.
+alwaysApply: true
+---
+
+# Core Project Rules
+
+- Output ASCII only. No emojis in markdown, commits, or terminal.
+- Type-hint all Python function signatures.
+- Catch specific exceptions; no bare `except:`.
+- Data outputs go to `data/`. Visual outputs go to `assets/`.
+- Read `ops/CURRENT.md` before starting work. Open only the files needed for the active task.
+- Prefer `.head()`, `.shape`, or schema summaries over reading full data files into context.
+- Do not modify `AGENTS.md` unless explicitly instructed.

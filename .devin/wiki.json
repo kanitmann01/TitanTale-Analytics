@@ -1,0 +1,44 @@
+{
+  "repo_notes": [
+    {
+      "content": "This repo has two distinct layers: (1) a Python analytics pipeline at the repo root that scrapes Liquipedia, cleans data, and produces CSV/JSON files in data/, and (2) a planned Next.js App Router web app in web/ that consumes that data via typed TypeScript adapters. The agents/ folder contains AI agent instruction files for a 12-agent Paperclip multi-agent system. The ops/ folder tracks tasks, changelog, and architecture decisions. Both layers should be documented separately. See AGENTS.md for full project context and DATA_SCHEMA.md for data contracts.",
+      "author": "maintainer"
+    }
+  ],
+  "pages": [
+    {
+      "title": "Architecture Overview",
+      "purpose": "High-level two-layer architecture: Python analytics pipeline produces data in data/, Next.js web app in web/ consumes it. Cover the boundary defined in ops/decisions/ADR-001-web-boundary.md and the decoupling strategy."
+    },
+    {
+      "title": "ETL Pipeline",
+      "purpose": "Document scraper.py and the data extraction flow from Liquipedia to structured CSVs in data/. Cover HTML parsing, player name normalization, civilization standardization, and output file generation.",
+      "parent": "Architecture Overview"
+    },
+    {
+      "title": "Statistical Analysis",
+      "purpose": "Document analyze_ttl_s5.py, analyze_real_data.py, and advanced_statistical_analysis.py. Cover EDA methodology, player win rate analysis, civilization meta analysis, map duration statistics, and outlier detection.",
+      "parent": "Architecture Overview"
+    },
+    {
+      "title": "Data Schema",
+      "purpose": "Document the CSV and JSON files in data/ as defined in DATA_SCHEMA.md: matches.csv, civ_drafts.csv, map_results.csv, players.csv, and tournament_info.json. Cover columns, types, relationships, and data quality rules.",
+      "parent": "Architecture Overview"
+    },
+    {
+      "title": "Web Application",
+      "purpose": "Document the planned Next.js App Router app in web/, including data adapters in web/lib/data/, shared types in web/lib/types.ts, and the design quality bar. Reference ADR-001 for the web boundary.",
+      "parent": "Architecture Overview"
+    },
+    {
+      "title": "Multi-Agent System",
+      "purpose": "Document the Paperclip agent orchestration: 12 agents defined in agents/, their roles and org chart (ROLES.md, agents/PAPERCLIP_SETUP.md), Cursor rules in .cursor/rules/, and skills in .cursor/skills/. Cover the CEO-Architect-Engineer hierarchy and heartbeat policy.",
+      "parent": "Architecture Overview"
+    },
+    {
+      "title": "Ops Workflow",
+      "purpose": "Document the ops/ task tracking system: one-file-per-task in backlog/in-progress/done, monthly changelog in ops/changes/, ADRs in ops/decisions/, and the CURRENT.md project snapshot. Cover the Definition of Done.",
+      "parent": "Architecture Overview"
+    }
+  ]
+}

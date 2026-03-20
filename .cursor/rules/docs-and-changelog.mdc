@@ -1,0 +1,32 @@
+---
+description: How agents read and update the ops task/changelog system.
+globs: "ops/**"
+alwaysApply: false
+---
+
+# Ops Docs and Changelog
+
+## Reading
+1. Start with `ops/CURRENT.md` for the active snapshot.
+2. Open only the single task file relevant to your current work.
+3. Do not read completed tasks or old change logs unless explicitly asked.
+
+## Writing
+- When starting a task: move its file from `ops/tasks/backlog/` to `ops/tasks/in-progress/`.
+- When finishing a task: move its file to `ops/tasks/done/` and append a summary line to `ops/CURRENT.md`.
+- Append change entries to the current month file in `ops/changes/YYYY-MM/`.
+- Keep entries concise: one line per change, prefixed with the date and agent role.
+
+## Task File Format
+```
+# TASK-NNN: Short title
+Owner: <role>
+Status: backlog | in-progress | done
+Created: YYYY-MM-DD
+---
+Acceptance criteria (bullet list).
+```
+
+## Architecture Decisions
+- Record significant choices in `ops/decisions/ADR-NNN.md`.
+- Format: Title, Context, Decision, Consequences.

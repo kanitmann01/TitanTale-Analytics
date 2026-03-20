@@ -1,0 +1,17 @@
+---
+description: Next.js App Router conventions for the web/ directory.
+globs: web/**
+alwaysApply: false
+---
+
+# Next.js App Router Conventions
+
+- All web code lives in `web/`. Never place Next.js files at the repo root.
+- Use the App Router (`app/` directory). No Pages Router.
+- Prefer Server Components by default. Add `"use client"` only when client interactivity is required.
+- Co-locate styles with components. Use CSS Modules or Tailwind utility classes.
+- API routes go in `web/app/api/`. Server Actions live next to the form or page that uses them.
+- Shared types go in `web/lib/types.ts`.
+- Data adapters that read from `data/` CSVs or JSON go in `web/lib/data/`.
+- Use `loading.tsx` and `error.tsx` for route-level feedback.
+- Keep bundle size small: dynamic-import heavy components, tree-shake unused deps.

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Ruff
+.ruff_cache/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+
+# Node / Next.js (for web/ layer)
+node_modules/
+.next/
+.turbo/
+out/
+
+# Debug artifacts
+debug_*.json
+
+# Archives / binary artifacts
+*.zip
+*.tar.gz
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+nul

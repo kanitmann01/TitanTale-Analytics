@@ -1,0 +1,196 @@
+match_id,game_number,map,player1,player2,player1_civ,player2_civ,winner,duration,player1_score,player2_score
+T90S5_R01_M01,1,Black Forest,Edie,slam,Mayans,Byzantines,Edie,42:06,2734,1562
+T90S5_R01_M01,2,Mongolia,Edie,slam,Mongols,Portuguese,Edie,43:35,1787,2807
+T90S5_R01_M01,3,Acropolis,Edie,slam,Portuguese,Spanish,Edie,32:11,3878,1477
+T90S5_R01_M01,4,African Clearing,Edie,slam,Celts,Bulgarians,slam,27:47,4414,4398
+T90S5_R01_M02,1,Baltic,MbL,Yo,Vietnamese,Italians,MbL,39:48,2686,3223
+T90S5_R01_M02,2,Hill Fort,MbL,Yo,Cumans,Britons,MbL,42:05,1618,2490
+T90S5_R01_M02,3,Fortress,MbL,Yo,Goths,Poles,MbL,37:46,2095,1536
+T90S5_R01_M02,4,African Clearing,MbL,Yo,Vikings,Ethiopians,Yo,29:47,4098,1327
+T90S5_R01_M03,1,Black Forest,Capoch,Hearttt,Malians,Chinese,Capoch,37:03,1949,1900
+T90S5_R01_M03,2,Mongolia,Capoch,Hearttt,Magyars,Franks,Capoch,23:11,1741,3583
+T90S5_R01_M03,3,Gold Rush,Capoch,Hearttt,Indians,Malay,Hearttt,38:25,3756,3198
+T90S5_R01_M04,1,Runestones,Nicov,Sebastian,Vikings,Magyars,Nicov,25:12,2894,4690
+T90S5_R01_M04,2,Baltic,Nicov,Sebastian,Celts,Koreans,Nicov,30:13,4684,3726
+T90S5_R01_M04,3,Fortress,Nicov,Sebastian,Britons,Vikings,Nicov,30:15,2618,2202
+T90S5_R01_M04,4,Gold Rush,Nicov,Sebastian,Incas,Cumans,Sebastian,23:11,2962,3956
+T90S5_R01_M05,1,Nomad,Daut,JorDan,Goths,Celts,Daut,34:27,2620,3295
+T90S5_R01_M05,2,Arabia,Daut,JorDan,Koreans,Spanish,Daut,20:59,3611,2033
+T90S5_R01_M05,3,Arena,Daut,JorDan,Bulgarians,Mayans,JorDan,44:12,4582,4208
+T90S5_R01_M06,1,Mongolia,BL4CKHAWK,Erik,Malians,Mongols,BL4CKHAWK,23:20,3113,3552
+T90S5_R01_M06,2,Acropolis,BL4CKHAWK,Erik,Italians,Lithuanians,Erik,26:15,2630,2717
+T90S5_R01_M06,3,Fortress,BL4CKHAWK,Erik,Incas,Aztecs,Erik,33:44,3322,1512
+T90S5_R01_M06,4,Mongolia,BL4CKHAWK,Erik,Saracens,Poles,Erik,36:20,2935,2004
+T90S5_R01_M07,1,Black Forest,BL4CKHAWK,MrGreed,Aztecs,Teutons,BL4CKHAWK,43:22,3335,1109
+T90S5_R01_M07,2,Islands,BL4CKHAWK,MrGreed,Goths,Khmer,BL4CKHAWK,21:22,1040,4473
+T90S5_R01_M07,3,Nomad,BL4CKHAWK,MrGreed,Spanish,Italians,BL4CKHAWK,39:46,3683,2829
+T90S5_R01_M07,4,Crater Lake,BL4CKHAWK,MrGreed,Lithuanians,Franks,MrGreed,21:52,4627,1914
+T90S5_R01_M08,1,Mongolia,LaaaN,MrGreed,Aztecs,Poles,LaaaN,42:35,1211,1291
+T90S5_R01_M08,2,Atacama,LaaaN,MrGreed,Italians,Japanese,LaaaN,35:28,4464,4364
+T90S5_R01_M08,3,Black Forest,LaaaN,MrGreed,Chinese,Khmer,MrGreed,40:24,1732,2567
+T90S5_R01_M08,4,Steppe,LaaaN,MrGreed,Bulgarians,Huns,MrGreed,24:29,4824,3913
+T90S5_R01_M08,5,Valley,LaaaN,MrGreed,Aztecs,Mongols,MrGreed,43:45,3495,4685
+T90S5_R02_M01,1,Steppe,Nicov,slam,Portuguese,Bohemians,Nicov,35:57,3752,4172
+T90S5_R02_M01,2,Hideout,Nicov,slam,Saracens,Celts,Nicov,26:24,1946,4119
+T90S5_R02_M01,3,Hill Fort,Nicov,slam,Magyars,Malay,slam,26:56,4010,3708
+T90S5_R02_M02,1,Steppe,Nicov,TheViper,Koreans,Khmer,Nicov,33:50,4932,3839
+T90S5_R02_M02,2,Fortress,Nicov,TheViper,Vikings,Goths,Nicov,27:50,1739,3788
+T90S5_R02_M02,3,Arabia,Nicov,TheViper,Aztecs,Magyars,Nicov,40:19,3331,2398
+T90S5_R02_M02,4,Hideout,Nicov,TheViper,Ethiopians,Incas,TheViper,44:33,1754,3835
+T90S5_R02_M03,1,Baltic,Erik,MbL,Japanese,Magyars,Erik,28:45,1372,1169
+T90S5_R02_M03,2,Islands,Erik,MbL,Berbers,Poles,Erik,43:07,2329,3123
+T90S5_R02_M03,3,Atacama,Erik,MbL,Vikings,Cumans,Erik,30:45,4162,1592
+T90S5_R02_M03,4,Continental,Erik,MbL,Lithuanians,Ethiopians,MbL,29:27,1876,1025
+T90S5_R02_M04,1,Islands,JorDan,Liereyy,Poles,Portuguese,JorDan,22:40,3086,4932
+T90S5_R02_M04,2,Crater Lake,JorDan,Liereyy,Sicilians,Teutons,Liereyy,45:55,2423,2660
+T90S5_R02_M04,3,Hideout,JorDan,Liereyy,Magyars,Berbers,Liereyy,27:38,2440,3069
+T90S5_R02_M04,4,Steppe,JorDan,Liereyy,Teutons,Italians,Liereyy,26:04,1560,4162
+T90S5_R02_M05,1,African Clearing,Barles,slam,Ethiopians,Malians,Barles,36:52,1682,2692
+T90S5_R02_M05,2,African Clearing,Barles,slam,Burgundians,Incas,Barles,42:29,4757,2723
+T90S5_R02_M05,3,Hideout,Barles,slam,Mongols,Lithuanians,Barles,35:32,4010,4587
+T90S5_R02_M05,4,Coastal,Barles,slam,Vietnamese,Malians,slam,25:20,1278,1538
+T90S5_R02_M05,5,Coastal,Barles,slam,Burgundians,Saracens,slam,20:43,1853,2335
+T90S5_R02_M06,1,Nomad,BL4CKHAWK,Sebastian,Goths,Slavs,BL4CKHAWK,34:49,1550,1613
+T90S5_R02_M06,2,Arabia,BL4CKHAWK,Sebastian,Franks,Malians,BL4CKHAWK,24:31,2990,4220
+T90S5_R02_M06,3,African Clearing,BL4CKHAWK,Sebastian,Burgundians,Celts,BL4CKHAWK,35:12,3890,1972
+T90S5_R02_M06,4,Steppe,BL4CKHAWK,Sebastian,Poles,Cumans,Sebastian,30:20,3297,4414
+T90S5_R02_M06,5,Mongolia,BL4CKHAWK,Sebastian,Italians,Ethiopians,Sebastian,41:52,1813,2017
+T90S5_R02_M07,1,Fortress,TheViper,slam,Bulgarians,Goths,TheViper,45:21,4560,3404
+T90S5_R02_M07,2,Valley,TheViper,slam,Franks,Berbers,TheViper,22:41,1944,2094
+T90S5_R02_M07,3,Arabia,TheViper,slam,Bulgarians,Khmer,slam,21:57,3502,1477
+T90S5_R02_M07,4,Coastal,TheViper,slam,Franks,Aztecs,slam,22:38,2081,1916
+T90S5_R02_M07,5,Acropolis,TheViper,slam,Huns,Slavs,slam,32:09,2737,1330
+T90S5_R02_M08,1,Baltic,LaaaN,TheViper,Portuguese,Turks,LaaaN,23:21,3605,1929
+T90S5_R02_M08,2,Coastal,LaaaN,TheViper,Portuguese,Indians,LaaaN,36:02,2235,2896
+T90S5_R02_M08,3,Islands,LaaaN,TheViper,Ethiopians,Sicilians,TheViper,45:28,3458,4240
+T90S5_R03_M01,1,Gold Rush,Erik,Sebastian,Cumans,Bohemians,Erik,30:46,1133,3366
+T90S5_R03_M01,2,Continental,Erik,Sebastian,Chinese,Portuguese,Sebastian,42:22,3806,2717
+T90S5_R03_M01,3,Steppe,Erik,Sebastian,Goths,Ethiopians,Sebastian,40:13,1903,2889
+T90S5_R03_M01,4,Steppe,Erik,Sebastian,Byzantines,Mayans,Sebastian,32:31,3464,2864
+T90S5_R03_M02,1,Hill Fort,Hearttt,Nicov,Goths,Italians,Hearttt,32:18,4093,4379
+T90S5_R03_M02,2,Fortress,Hearttt,Nicov,Berbers,Goths,Hearttt,32:21,1307,2906
+T90S5_R03_M02,3,Hideout,Hearttt,Nicov,Berbers,Lithuanians,Hearttt,29:42,2464,2885
+T90S5_R03_M02,4,Black Forest,Hearttt,Nicov,Khmer,Poles,Nicov,41:54,2706,3153
+T90S5_R03_M03,1,Steppe,Capoch,Hearttt,Chinese,Aztecs,Capoch,35:19,2471,3808
+T90S5_R03_M03,2,Coastal,Capoch,Hearttt,Turks,Goths,Capoch,27:18,3838,1654
+T90S5_R03_M03,3,Crater Lake,Capoch,Hearttt,Incas,Bohemians,Hearttt,40:18,1317,4535
+T90S5_R03_M03,4,Steppe,Capoch,Hearttt,Burgundians,Ethiopians,Hearttt,45:28,4836,1066
+T90S5_R03_M03,5,Hideout,Capoch,Hearttt,Burgundians,Sicilians,Hearttt,35:22,4485,4042
+T90S5_R03_M04,1,Coastal,Barles,Daut,Byzantines,Cumans,Barles,34:33,4025,1882
+T90S5_R03_M04,2,Hideout,Barles,Daut,Slavs,Spanish,Barles,25:51,3917,4780
+T90S5_R03_M04,3,Islands,Barles,Daut,Mongols,Burgundians,Daut,29:56,4087,2606
+T90S5_R03_M04,4,African Clearing,Barles,Daut,Italians,Malians,Daut,40:53,4278,1787
+T90S5_R03_M04,5,Islands,Barles,Daut,Mayans,Teutons,Daut,43:03,2334,3452
+T90S5_R03_M05,1,Runestones,Nicov,TheViper,Lithuanians,Burgundians,Nicov,44:58,1532,2856
+T90S5_R03_M05,2,Coastal,Nicov,TheViper,Goths,Khmer,TheViper,45:12,1138,4937
+T90S5_R03_M05,3,Hideout,Nicov,TheViper,Aztecs,Goths,TheViper,23:29,3336,3039
+T90S5_R03_M05,4,African Clearing,Nicov,TheViper,Portuguese,Persians,TheViper,34:57,4149,2778
+T90S5_R03_M06,1,Arena,Barles,MrGreed,Malians,Portuguese,Barles,42:58,1677,2969
+T90S5_R03_M06,2,Runestones,Barles,MrGreed,Bulgarians,Magyars,Barles,35:00,2908,4821
+T90S5_R03_M06,3,Atacama,Barles,MrGreed,Japanese,Britons,Barles,25:15,1402,1196
+T90S5_R03_M06,4,Gold Rush,Barles,MrGreed,Portuguese,Lithuanians,MrGreed,36:30,1420,1897
+T90S5_R03_M07,1,Arabia,JorDan,slam,Bohemians,Britons,JorDan,22:13,4247,1810
+T90S5_R03_M07,2,Islands,JorDan,slam,Slavs,Ethiopians,JorDan,30:26,1939,1668
+T90S5_R03_M07,3,Coastal,JorDan,slam,Bohemians,Indians,JorDan,26:21,1986,3816
+T90S5_R03_M07,4,Islands,JorDan,slam,Burgundians,Japanese,slam,26:53,2210,3436
+T90S5_R03_M07,5,Islands,JorDan,slam,Italians,Chinese,slam,28:39,1493,4428
+T90S5_R03_M08,1,Runestones,Barles,Hearttt,Huns,Indians,Barles,33:11,1431,3150
+T90S5_R03_M08,2,Arabia,Barles,Hearttt,Saracens,Byzantines,Barles,23:50,1819,1165
+T90S5_R03_M08,3,Valley,Barles,Hearttt,Bohemians,Byzantines,Hearttt,33:24,4380,4015
+T90S5_R04_M01,1,Runestones,BL4CKHAWK,Tatoh,Japanese,Aztecs,BL4CKHAWK,39:10,4109,4165
+T90S5_R04_M01,2,Hill Fort,BL4CKHAWK,Tatoh,Malay,Britons,BL4CKHAWK,31:46,1465,1005
+T90S5_R04_M01,3,Gold Rush,BL4CKHAWK,Tatoh,Celts,Japanese,BL4CKHAWK,32:35,3250,4152
+T90S5_R04_M01,4,Baltic,BL4CKHAWK,Tatoh,Berbers,Chinese,Tatoh,35:17,4023,3539
+T90S5_R04_M02,1,Steppe,MrGreed,TheViper,Magyars,Spanish,MrGreed,36:46,3545,3512
+T90S5_R04_M02,2,Hideout,MrGreed,TheViper,Franks,Italians,MrGreed,23:07,3743,2530
+T90S5_R04_M02,3,Coastal,MrGreed,TheViper,Aztecs,Bohemians,TheViper,25:28,3543,3550
+T90S5_R04_M03,1,Atacama,Liereyy,slam,Byzantines,Burgundians,Liereyy,21:05,3323,4725
+T90S5_R04_M03,2,Mongolia,Liereyy,slam,Goths,Celts,Liereyy,32:22,1163,4393
+T90S5_R04_M03,3,Steppe,Liereyy,slam,Huns,Persians,slam,23:36,1351,2599
+T90S5_R04_M04,1,Coastal,Capoch,Liereyy,Poles,Khmer,Capoch,25:51,4424,4096
+T90S5_R04_M04,2,Acropolis,Capoch,Liereyy,Slavs,Khmer,Capoch,43:52,1174,2469
+T90S5_R04_M04,3,Acropolis,Capoch,Liereyy,Slavs,Berbers,Capoch,36:53,1681,1905
+T90S5_R04_M04,4,Black Forest,Capoch,Liereyy,Berbers,Incas,Liereyy,33:04,1236,2950
+T90S5_R04_M05,1,African Clearing,LaaaN,TheViper,Slavs,Huns,LaaaN,23:15,3365,1136
+T90S5_R04_M05,2,Arabia,LaaaN,TheViper,Celts,Byzantines,LaaaN,38:43,2778,4151
+T90S5_R04_M05,3,Steppe,LaaaN,TheViper,Malians,Huns,LaaaN,24:58,2515,2808
+T90S5_R04_M05,4,Hideout,LaaaN,TheViper,Koreans,Franks,TheViper,26:21,3880,3752
+T90S5_R04_M06,1,Arena,Sebastian,TheViper,Franks,Slavs,Sebastian,39:43,1883,1036
+T90S5_R04_M06,2,Crater Lake,Sebastian,TheViper,Khmer,Huns,Sebastian,29:38,4054,3922
+T90S5_R04_M06,3,Islands,Sebastian,TheViper,Chinese,Slavs,TheViper,43:12,1336,1726
+T90S5_R04_M06,4,African Clearing,Sebastian,TheViper,Chinese,Magyars,TheViper,33:28,3751,4278
+T90S5_R04_M06,5,Coastal,Sebastian,TheViper,Byzantines,Indians,TheViper,42:20,3856,1120
+T90S5_R04_M07,1,Baltic,Sebastian,slam,Khmer,Britons,Sebastian,33:18,1195,4201
+T90S5_R04_M07,2,Baltic,Sebastian,slam,Aztecs,Ethiopians,Sebastian,28:40,3732,1536
+T90S5_R04_M07,3,Baltic,Sebastian,slam,Spanish,Bulgarians,slam,22:25,3650,1511
+T90S5_R04_M08,1,Coastal,MrGreed,Villese,Berbers,Magyars,MrGreed,22:59,2584,3745
+T90S5_R04_M08,2,Runestones,MrGreed,Villese,Celts,Goths,MrGreed,36:25,3123,4870
+T90S5_R04_M08,3,Islands,MrGreed,Villese,Bohemians,Vietnamese,Villese,32:02,3318,1931
+T90S5_R04_M08,4,Runestones,MrGreed,Villese,Slavs,Bohemians,Villese,40:23,3169,2028
+T90S5_R04_M08,5,Runestones,MrGreed,Villese,Britons,Malay,Villese,21:26,3568,3103
+T90S5_R05_M01,1,Hill Fort,Capoch,Erik,Lithuanians,Aztecs,Capoch,21:10,4724,1518
+T90S5_R05_M01,2,Valley,Capoch,Erik,Indians,Goths,Capoch,40:31,4543,1133
+T90S5_R05_M01,3,Arabia,Capoch,Erik,Vietnamese,Italians,Capoch,28:24,3478,2688
+T90S5_R05_M01,4,Arena,Capoch,Erik,Vietnamese,Teutons,Erik,22:27,1970,4413
+T90S5_R05_M02,1,Nomad,Edie,Tatoh,Sicilians,Ethiopians,Edie,45:21,3710,3373
+T90S5_R05_M02,2,Mongolia,Edie,Tatoh,Slavs,Mongols,Edie,37:29,2788,2226
+T90S5_R05_M02,3,Hill Fort,Edie,Tatoh,Indians,Celts,Edie,31:42,3503,2472
+T90S5_R05_M02,4,Gold Rush,Edie,Tatoh,Poles,Slavs,Tatoh,33:37,4775,2463
+T90S5_R05_M02,5,Coastal,Edie,Tatoh,Khmer,Berbers,Tatoh,27:50,1820,2899
+T90S5_R05_M03,1,African Clearing,JorDan,Liereyy,Magyars,Celts,JorDan,34:13,1153,1088
+T90S5_R05_M03,2,Arabia,JorDan,Liereyy,Berbers,Malians,JorDan,24:20,4682,2488
+T90S5_R05_M03,3,Nomad,JorDan,Liereyy,Sicilians,Italians,JorDan,40:56,2722,2552
+T90S5_R05_M03,4,Acropolis,JorDan,Liereyy,Vikings,Ethiopians,Liereyy,33:03,3244,3611
+T90S5_R05_M04,1,Baltic,Hera,MrGreed,Mongols,Malay,Hera,35:20,1756,2903
+T90S5_R05_M04,2,African Clearing,Hera,MrGreed,Magyars,Italians,Hera,25:50,4909,4379
+T90S5_R05_M04,3,Black Forest,Hera,MrGreed,Vikings,Cumans,Hera,30:20,2651,2511
+T90S5_R05_M04,4,Atacama,Hera,MrGreed,Magyars,Berbers,MrGreed,21:57,2750,4077
+T90S5_R05_M04,5,Mongolia,Hera,MrGreed,Mayans,Franks,MrGreed,43:23,4022,2851
+T90S5_R05_M05,1,Steppe,LaaaN,slam,Portuguese,Aztecs,LaaaN,25:36,3232,3952
+T90S5_R05_M05,2,Baltic,LaaaN,slam,Magyars,Lithuanians,LaaaN,21:22,2366,2620
+T90S5_R05_M05,3,Baltic,LaaaN,slam,Slavs,Berbers,LaaaN,35:54,1737,4604
+T90S5_R05_M05,4,Steppe,LaaaN,slam,Turks,Persians,slam,45:17,1076,3419
+T90S5_R05_M05,5,Coastal,LaaaN,slam,Japanese,Spanish,slam,28:11,4798,1133
+T90S5_R05_M06,1,Baltic,Sebastian,TheViper,Vietnamese,Celts,Sebastian,39:01,2699,1165
+T90S5_R05_M06,2,Arabia,Sebastian,TheViper,Franks,Slavs,Sebastian,34:03,2954,2141
+T90S5_R05_M06,3,Gold Rush,Sebastian,TheViper,Saracens,Teutons,TheViper,37:57,4819,2009
+T90S5_R05_M06,4,Coastal,Sebastian,TheViper,Portuguese,Bulgarians,TheViper,25:57,1843,1474
+T90S5_R05_M06,5,Crater Lake,Sebastian,TheViper,Malians,Cumans,TheViper,22:11,4872,4066
+T90S5_R05_M07,1,Acropolis,Sebastian,Villese,Celts,Vikings,Sebastian,25:00,4537,3030
+T90S5_R05_M07,2,Mongolia,Sebastian,Villese,Berbers,Persians,Sebastian,37:52,2718,2190
+T90S5_R05_M07,3,Continental,Sebastian,Villese,Mayans,Bulgarians,Villese,30:02,4798,1903
+T90S5_R05_M08,1,Black Forest,Capoch,MbL,Lithuanians,Bohemians,Capoch,26:32,2623,1013
+T90S5_R05_M08,2,Mongolia,Capoch,MbL,Vikings,Britons,Capoch,27:58,4187,4857
+T90S5_R05_M08,3,Steppe,Capoch,MbL,Bohemians,Portuguese,MbL,36:29,2010,4371
+T90S5_R05_M08,4,Atacama,Capoch,MbL,Koreans,Celts,MbL,37:28,2040,1422
+T90S5_R05_M08,5,Steppe,Capoch,MbL,Teutons,Bohemians,MbL,31:21,1265,4170
+T90S5_R06_M01,1,Continental,Villese,slam,Mongols,Koreans,Villese,45:19,2083,4353
+T90S5_R06_M01,2,Hill Fort,Villese,slam,Burgundians,Japanese,Villese,40:20,4208,4048
+T90S5_R06_M01,3,Atacama,Villese,slam,Huns,Spanish,Villese,30:46,4404,4732
+T90S5_R06_M01,4,Gold Rush,Villese,slam,Lithuanians,Byzantines,slam,43:58,2025,4569
+T90S5_R06_M02,1,Nomad,Capoch,Liereyy,Lithuanians,Magyars,Capoch,39:27,4681,4587
+T90S5_R06_M02,2,Crater Lake,Capoch,Liereyy,Franks,Poles,Capoch,21:15,3687,4760
+T90S5_R06_M02,3,Crater Lake,Capoch,Liereyy,Slavs,Goths,Liereyy,24:47,1049,4360
+T90S5_R06_M02,4,Nomad,Capoch,Liereyy,Malay,Burgundians,Liereyy,41:38,1284,3662
+T90S5_R06_M02,5,African Clearing,Capoch,Liereyy,Malay,Teutons,Liereyy,36:11,2902,3513
+T90S5_R06_M03,1,Hill Fort,Capoch,Tatoh,Vikings,Celts,Capoch,39:59,1537,2010
+T90S5_R06_M03,2,Valley,Capoch,Tatoh,Vietnamese,Spanish,Capoch,39:57,4872,4908
+T90S5_R06_M03,3,Baltic,Capoch,Tatoh,Turks,Aztecs,Capoch,24:28,3434,2467
+T90S5_R06_M03,4,Arabia,Capoch,Tatoh,Britons,Goths,Tatoh,41:21,4912,4263
+T90S5_R06_M04,1,African Clearing,MrGreed,Villese,Portuguese,Poles,MrGreed,39:38,4732,3641
+T90S5_R06_M04,2,African Clearing,MrGreed,Villese,Incas,Indians,MrGreed,35:51,2543,4509
+T90S5_R06_M04,3,Mongolia,MrGreed,Villese,Malians,Burgundians,Villese,43:19,3461,2680
+T90S5_R07_M01,1,Islands,Barles,Edie,Burgundians,Lithuanians,Barles,38:05,1266,4131
+T90S5_R07_M01,2,African Clearing,Barles,Edie,Khmer,Portuguese,Barles,45:50,3577,4441
+T90S5_R07_M01,3,Steppe,Barles,Edie,Japanese,Franks,Edie,42:10,3891,3356
+T90S5_R07_M01,4,Fortress,Barles,Edie,Saracens,Spanish,Edie,40:25,1125,1483
+T90S5_R07_M01,5,African Clearing,Barles,Edie,Burgundians,Incas,Edie,44:41,3558,1804
+T90S5_R07_M02,1,Coastal,Daut,Tatoh,Sicilians,Slavs,Daut,31:32,2182,2847
+T90S5_R07_M02,2,Atacama,Daut,Tatoh,Bohemians,Aztecs,Tatoh,22:38,1463,3118
+T90S5_R07_M02,3,Islands,Daut,Tatoh,Vietnamese,Cumans,Tatoh,44:26,1368,3877
+T90S5_R07_M02,4,Coastal,Daut,Tatoh,Chinese,Celts,Tatoh,39:11,3630,4546
+T90S5_R08_M01,1,Steppe,Sebastian,Villese,Lithuanians,Vikings,Sebastian,42:01,3002,4546
+T90S5_R08_M01,2,Black Forest,Sebastian,Villese,Incas,Koreans,Sebastian,35:03,3429,3408
+T90S5_R08_M01,3,Valley,Sebastian,Villese,Lithuanians,Franks,Villese,27:49,1550,3301
+T90S5_R08_M01,4,Islands,Sebastian,Villese,Turks,Incas,Villese,34:50,1183,1342
+T90S5_R08_M01,5,Crater Lake,Sebastian,Villese,Persians,Celts,Villese,21:38,1283,1648

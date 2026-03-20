@@ -1,0 +1,142 @@
+match_id,game_number,map,player1_civ,player2_civ,player1_civ_draft_order,player2_civ_draft_order,winner_civ,winner
+T90S5_R01_M01,4,Hideout,Malay,Huns,1,1,Edie,Edie
+T90S5_R01_M01,4,Hideout,Spanish,Cumans,2,2,Edie,Edie
+T90S5_R01_M01,2,Acropolis,Cumans,Bulgarians,3,3,Edie,Edie
+T90S5_R01_M02,1,Valley,Teutons,Chinese,1,1,MbL,MbL
+T90S5_R01_M02,2,Arena,Malians,Malians,2,2,MbL,MbL
+T90S5_R01_M02,4,Gold Rush,Incas,Ethiopians,3,3,Yo,MbL
+T90S5_R01_M03,3,Baltic,Incas,Lithuanians,1,1,Hearttt,Capoch
+T90S5_R01_M03,2,Crater Lake,Chinese,Portuguese,2,2,Hearttt,Capoch
+T90S5_R01_M03,2,Gold Rush,Mayans,Burgundians,3,3,Hearttt,Capoch
+T90S5_R01_M04,3,Valley,Indians,Burgundians,1,1,Sebastian,Nicov
+T90S5_R01_M04,3,Fortress,Slavs,Saracens,2,2,Sebastian,Nicov
+T90S5_R01_M04,2,Hill Fort,Persians,Cumans,3,3,Nicov,Nicov
+T90S5_R01_M05,2,Gold Rush,Byzantines,Saracens,1,1,JorDan,Daut
+T90S5_R01_M05,1,Acropolis,Franks,Cumans,2,2,Daut,Daut
+T90S5_R01_M05,1,Steppe,Poles,Ethiopians,3,3,Daut,Daut
+T90S5_R01_M06,2,Black Forest,Lithuanians,Teutons,1,1,BL4CKHAWK,Erik
+T90S5_R01_M06,2,African Clearing,Berbers,Burgundians,2,2,Erik,Erik
+T90S5_R01_M06,4,Acropolis,Cumans,Saracens,3,3,BL4CKHAWK,Erik
+T90S5_R01_M07,1,African Clearing,Burgundians,Vikings,1,1,MrGreed,BL4CKHAWK
+T90S5_R01_M07,1,Acropolis,Burgundians,Bohemians,2,2,MrGreed,BL4CKHAWK
+T90S5_R01_M07,1,Coastal,Slavs,Bulgarians,3,3,BL4CKHAWK,BL4CKHAWK
+T90S5_R01_M08,4,Hill Fort,Saracens,Magyars,1,1,LaaaN,MrGreed
+T90S5_R01_M08,5,Atacama,Koreans,Cumans,2,2,MrGreed,MrGreed
+T90S5_R01_M08,1,Coastal,Koreans,Teutons,3,3,MrGreed,MrGreed
+T90S5_R02_M01,3,Valley,Slavs,Indians,1,1,Nicov,Nicov
+T90S5_R02_M01,1,Nomad,Japanese,Slavs,2,2,slam,Nicov
+T90S5_R02_M01,1,African Clearing,Sicilians,Italians,3,3,slam,Nicov
+T90S5_R02_M02,1,Acropolis,Italians,Khmer,1,1,Nicov,Nicov
+T90S5_R02_M02,4,Coastal,Aztecs,Malians,2,2,TheViper,Nicov
+T90S5_R02_M02,3,Atacama,Mayans,Slavs,3,3,Nicov,Nicov
+T90S5_R02_M03,2,Black Forest,Khmer,Ethiopians,1,1,MbL,Erik
+T90S5_R02_M03,4,Arabia,Chinese,Chinese,2,2,Erik,Erik
+T90S5_R02_M03,1,Crater Lake,Malay,Franks,3,3,Erik,Erik
+T90S5_R02_M04,4,Steppe,Khmer,Ethiopians,1,1,Liereyy,Liereyy
+T90S5_R02_M04,1,Runestones,Portuguese,Magyars,2,2,JorDan,Liereyy
+T90S5_R02_M04,4,Hill Fort,Byzantines,Portuguese,3,3,Liereyy,Liereyy
+T90S5_R02_M05,2,Steppe,Khmer,Byzantines,1,1,slam,Barles
+T90S5_R02_M05,1,Arena,Malay,Indians,2,2,Barles,Barles
+T90S5_R02_M05,3,Hill Fort,Teutons,Bohemians,3,3,slam,Barles
+T90S5_R02_M06,2,Crater Lake,Bulgarians,Indians,1,1,BL4CKHAWK,BL4CKHAWK
+T90S5_R02_M06,5,Crater Lake,Burgundians,Britons,2,2,BL4CKHAWK,BL4CKHAWK
+T90S5_R02_M06,1,Valley,Goths,Aztecs,3,3,BL4CKHAWK,BL4CKHAWK
+T90S5_R02_M07,3,African Clearing,Japanese,Bohemians,1,1,TheViper,slam
+T90S5_R02_M07,4,Hill Fort,Franks,Britons,2,2,slam,slam
+T90S5_R02_M07,3,Hideout,Lithuanians,Cumans,3,3,slam,slam
+T90S5_R02_M08,1,Atacama,Magyars,Burgundians,1,1,LaaaN,LaaaN
+T90S5_R02_M08,1,Hill Fort,Burgundians,Portuguese,2,2,LaaaN,LaaaN
+T90S5_R02_M08,1,Coastal,Malay,Portuguese,3,3,LaaaN,LaaaN
+T90S5_R03_M01,1,Steppe,Incas,Sicilians,1,1,Sebastian,Sebastian
+T90S5_R03_M01,4,Nomad,Khmer,Saracens,2,2,Sebastian,Sebastian
+T90S5_R03_M01,1,Hideout,Cumans,Franks,3,3,Erik,Sebastian
+T90S5_R03_M02,2,Mongolia,Ethiopians,Bohemians,1,1,Nicov,Hearttt
+T90S5_R03_M02,1,Acropolis,Spanish,Slavs,2,2,Nicov,Hearttt
+T90S5_R03_M02,3,Arena,Chinese,Ethiopians,3,3,Nicov,Hearttt
+T90S5_R03_M03,2,Arena,Malians,Malians,1,1,Capoch,Hearttt
+T90S5_R03_M03,3,Continental,Spanish,Turks,2,2,Hearttt,Hearttt
+T90S5_R03_M03,2,Atacama,Celts,Byzantines,3,3,Capoch,Hearttt
+T90S5_R03_M04,5,Coastal,Slavs,Malay,1,1,Daut,Daut
+T90S5_R03_M04,1,Baltic,Bulgarians,Khmer,2,2,Barles,Daut
+T90S5_R03_M04,5,Gold Rush,Malians,Franks,3,3,Barles,Daut
+T90S5_R03_M05,2,Coastal,Sicilians,Berbers,1,1,Nicov,TheViper
+T90S5_R03_M05,3,Gold Rush,Turks,Koreans,2,2,Nicov,TheViper
+T90S5_R03_M05,4,Nomad,Slavs,Lithuanians,3,3,Nicov,TheViper
+T90S5_R03_M06,2,Coastal,Aztecs,Aztecs,1,1,Barles,Barles
+T90S5_R03_M06,4,Steppe,Cumans,Huns,2,2,Barles,Barles
+T90S5_R03_M06,1,Gold Rush,Sicilians,Portuguese,3,3,MrGreed,Barles
+T90S5_R03_M07,5,Gold Rush,Franks,Incas,1,1,slam,JorDan
+T90S5_R03_M07,1,Arena,Huns,Franks,2,2,JorDan,JorDan
+T90S5_R03_M07,4,Steppe,Khmer,Huns,3,3,slam,JorDan
+T90S5_R03_M08,1,Atacama,Mongols,Teutons,1,1,Barles,Barles
+T90S5_R03_M08,3,Arena,Vietnamese,Britons,2,2,Barles,Barles
+T90S5_R03_M08,3,Valley,Poles,Slavs,3,3,Hearttt,Barles
+T90S5_R04_M01,4,Mongolia,Aztecs,Japanese,1,1,Tatoh,BL4CKHAWK
+T90S5_R04_M01,2,Steppe,Vietnamese,Burgundians,2,2,BL4CKHAWK,BL4CKHAWK
+T90S5_R04_M01,4,Atacama,Celts,Goths,3,3,Tatoh,BL4CKHAWK
+T90S5_R04_M02,3,Acropolis,Burgundians,Persians,1,1,MrGreed,MrGreed
+T90S5_R04_M02,1,Continental,Persians,Magyars,2,2,MrGreed,MrGreed
+T90S5_R04_M02,3,Black Forest,Sicilians,Indians,3,3,TheViper,MrGreed
+T90S5_R04_M03,2,Nomad,Franks,Malians,1,1,slam,Liereyy
+T90S5_R04_M03,2,Hill Fort,Persians,Bohemians,2,2,Liereyy,Liereyy
+T90S5_R04_M03,3,Acropolis,Incas,Khmer,3,3,Liereyy,Liereyy
+T90S5_R04_M04,1,Islands,Bulgarians,Bulgarians,1,1,Liereyy,Capoch
+T90S5_R04_M04,3,Arena,Teutons,Bohemians,2,2,Liereyy,Capoch
+T90S5_R04_M04,4,Steppe,Malay,Cumans,3,3,Capoch,Capoch
+T90S5_R04_M05,3,Valley,Byzantines,Bulgarians,1,1,TheViper,LaaaN
+T90S5_R04_M05,4,Atacama,Spanish,Turks,2,2,TheViper,LaaaN
+T90S5_R04_M05,1,Hill Fort,Portuguese,Vikings,3,3,LaaaN,LaaaN
+T90S5_R04_M06,2,African Clearing,Italians,Teutons,1,1,Sebastian,TheViper
+T90S5_R04_M06,3,Continental,Incas,Celts,2,2,TheViper,TheViper
+T90S5_R04_M06,5,Islands,Malians,Burgundians,3,3,Sebastian,TheViper
+T90S5_R04_M07,2,Valley,Teutons,Malians,1,1,Sebastian,Sebastian
+T90S5_R04_M07,1,Hill Fort,Koreans,Persians,2,2,Sebastian,Sebastian
+T90S5_R04_M07,2,Runestones,Bulgarians,Slavs,3,3,Sebastian,Sebastian
+T90S5_R04_M08,3,Crater Lake,Poles,Turks,1,1,Villese,Villese
+T90S5_R04_M08,2,Arabia,Incas,Japanese,2,2,MrGreed,Villese
+T90S5_R04_M08,4,Crater Lake,Slavs,Koreans,3,3,Villese,Villese
+T90S5_R05_M01,4,African Clearing,Goths,Italians,1,1,Capoch,Capoch
+T90S5_R05_M01,2,Runestones,Celts,Berbers,2,2,Erik,Capoch
+T90S5_R05_M01,3,Coastal,Mayans,Berbers,3,3,Erik,Capoch
+T90S5_R05_M02,4,Baltic,Spanish,Cumans,1,1,Tatoh,Edie
+T90S5_R05_M02,5,Arabia,Slavs,Aztecs,2,2,Tatoh,Edie
+T90S5_R05_M02,3,African Clearing,Magyars,Ethiopians,3,3,Tatoh,Edie
+T90S5_R05_M03,3,Arena,Poles,Berbers,1,1,JorDan,JorDan
+T90S5_R05_M03,1,Acropolis,Mayans,Berbers,2,2,JorDan,JorDan
+T90S5_R05_M03,2,Mongolia,Khmer,Koreans,3,3,Liereyy,JorDan
+T90S5_R05_M04,4,Baltic,Poles,Franks,1,1,MrGreed,Hera
+T90S5_R05_M04,3,Runestones,Britons,Bohemians,2,2,MrGreed,Hera
+T90S5_R05_M04,2,Black Forest,Portuguese,Vikings,3,3,Hera,Hera
+T90S5_R05_M05,4,Steppe,Ethiopians,Britons,1,1,LaaaN,LaaaN
+T90S5_R05_M05,4,Crater Lake,Franks,Goths,2,2,slam,LaaaN
+T90S5_R05_M05,3,Acropolis,Persians,Bohemians,3,3,LaaaN,LaaaN
+T90S5_R05_M06,4,Arena,Koreans,Berbers,1,1,TheViper,TheViper
+T90S5_R05_M06,1,Mongolia,Byzantines,Ethiopians,2,2,Sebastian,TheViper
+T90S5_R05_M06,5,Coastal,Goths,Lithuanians,3,3,TheViper,TheViper
+T90S5_R05_M07,1,Hideout,Persians,Mayans,1,1,Villese,Sebastian
+T90S5_R05_M07,2,Coastal,Bohemians,Goths,2,2,Villese,Sebastian
+T90S5_R05_M07,3,Acropolis,Aztecs,Magyars,3,3,Sebastian,Sebastian
+T90S5_R05_M08,1,Arena,Cumans,Spanish,1,1,MbL,MbL
+T90S5_R05_M08,4,Gold Rush,Vikings,Sicilians,2,2,Capoch,MbL
+T90S5_R05_M08,1,Black Forest,Celts,Turks,3,3,Capoch,MbL
+T90S5_R06_M01,2,Hill Fort,Japanese,Byzantines,1,1,slam,Villese
+T90S5_R06_M01,2,Crater Lake,Berbers,Britons,2,2,slam,Villese
+T90S5_R06_M01,1,Hill Fort,Malians,Huns,3,3,slam,Villese
+T90S5_R06_M02,5,Valley,Slavs,Koreans,1,1,Liereyy,Liereyy
+T90S5_R06_M02,5,Crater Lake,Turks,Huns,2,2,Liereyy,Liereyy
+T90S5_R06_M02,1,Black Forest,Saracens,Britons,3,3,Capoch,Liereyy
+T90S5_R06_M03,1,African Clearing,Sicilians,Khmer,1,1,Tatoh,Capoch
+T90S5_R06_M03,4,Continental,Burgundians,Mongols,2,2,Capoch,Capoch
+T90S5_R06_M03,4,Nomad,Persians,Vikings,3,3,Capoch,Capoch
+T90S5_R06_M04,3,Continental,Mongols,Incas,1,1,MrGreed,MrGreed
+T90S5_R06_M04,2,Islands,Berbers,Malay,2,2,Villese,MrGreed
+T90S5_R06_M04,3,Steppe,Sicilians,Celts,3,3,MrGreed,MrGreed
+T90S5_R07_M01,3,Continental,Slavs,Byzantines,1,1,Barles,Edie
+T90S5_R07_M01,1,Baltic,Mayans,Ethiopians,2,2,Barles,Edie
+T90S5_R07_M01,2,Fortress,Mayans,Malians,3,3,Edie,Edie
+T90S5_R07_M02,1,Gold Rush,Lithuanians,Byzantines,1,1,Tatoh,Tatoh
+T90S5_R07_M02,2,Crater Lake,Lithuanians,Britons,2,2,Tatoh,Tatoh
+T90S5_R07_M02,4,Arena,Chinese,Ethiopians,3,3,Tatoh,Tatoh
+T90S5_R08_M01,2,Valley,Koreans,Turks,1,1,Sebastian,Villese
+T90S5_R08_M01,5,Hideout,Poles,Saracens,2,2,Sebastian,Villese
+T90S5_R08_M01,3,Hill Fort,Celts,Celts,3,3,Sebastian,Villese

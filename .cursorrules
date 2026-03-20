@@ -1,0 +1,17 @@
+# TTL Stats -- Global Rules
+
+## Identity
+Multi-agent analytics + full-stack web project for Age of Empires II (T90 Titans League).
+
+## Entrypoints
+- Project context for all agents: `AGENTS.md`
+- Role scopes and skill pointers: `ROLES.md`
+- Active work snapshot: `ops/CURRENT.md`
+- Detailed role workflows: `.cursor/skills/`
+- Persistent conventions: `.cursor/rules/`
+
+## Universal Constraints
+- ASCII only in markdown and terminal output. No emojis.
+- Minimal token reads: prefer `.head()`, shape, schema over full-file dumps.
+- Do not modify `AGENTS.md` or `ROLES.md` unless explicitly instructed.
+- Catch specific exceptions; no bare `except:`.

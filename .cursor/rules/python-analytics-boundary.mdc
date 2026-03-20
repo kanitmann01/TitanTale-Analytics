@@ -1,0 +1,14 @@
+---
+description: Preserve the existing Python analytics pipeline and prevent accidental coupling with the web layer.
+globs: "*.py"
+alwaysApply: false
+---
+
+# Python Analytics Boundary
+
+- Python scripts at the repo root (`scraper.py`, `analyze_*.py`, etc.) are the analytics pipeline.
+- These scripts produce structured output in `data/` and `assets/`. They are NOT part of the web app.
+- Do not import from or depend on `web/` from Python scripts.
+- Do not move or rename existing data pipeline files without explicit instruction.
+- The web layer reads from `data/` as a consumer; it does not write back.
+- Libraries: requests, beautifulsoup4, pandas, scipy, seaborn, matplotlib.

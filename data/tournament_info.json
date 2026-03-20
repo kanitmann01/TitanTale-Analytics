@@ -1,0 +1,17 @@
+{
+  "tournament_name": "T90 Titans League Season 5",
+  "start_date": "2024-01-01",
+  "end_date": "2024-03-31",
+  "prize_pool": 50000,
+  "currency": "USD",
+  "location": "Online",
+  "game": "Age of Empires II: Definitive Edition",
+  "format": "Double elimination bracket with group stage",
+  "total_players": 20,
+  "organizer": "T90Official",
+  "links": {
+    "liquipedia": "https://liquipedia.net/ageofempires/T90_Titans_League/Season_5",
+    "challonge": "",
+    "youtube": "https://youtube.com/@T90Official"
+  }
+}

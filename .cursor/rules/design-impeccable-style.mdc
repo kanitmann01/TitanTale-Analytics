@@ -1,0 +1,34 @@
+---
+description: Visual quality bar for UI -- typography, color, layout, motion, and responsiveness.
+globs: "web/**/*.{tsx,css,scss}"
+alwaysApply: false
+---
+
+# Impeccable Style
+
+## Typography
+- Import distinctive Google Fonts. Never default to Inter, Roboto, Arial, or system fonts.
+- Pair a characterful display font with a refined body font.
+- Use a modular type scale with fluid sizing (`clamp()`).
+
+## Color
+- Use CSS custom properties for a cohesive palette. Tint neutrals toward the brand hue.
+- No pure black (#000) or pure white (#fff). Avoid the "AI palette" (cyan-on-dark, purple gradients, neon glow).
+- Use `oklch` or `color-mix` for perceptually uniform tones when practical.
+
+## Layout
+- Embrace asymmetry, varied spacing, and intentional grid-breaking for emphasis.
+- Not everything needs a card. Avoid card-in-card nesting.
+- Use container queries (`@container`) for component-level responsiveness.
+
+## Motion
+- Staggered entrance reveals on page load; smooth ease-out transitions.
+- Animate only `transform` and `opacity`. Respect `prefers-reduced-motion`.
+
+## UX
+- Progressive disclosure: start simple, reveal depth through interaction.
+- Design meaningful empty states. Make every interactive surface responsive.
+- Mobile layouts adapt the interface, not amputate it.
+
+## Quality Gate
+If someone would immediately say "AI made this," redesign. The goal is work that prompts "how was this made?"
